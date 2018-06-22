@@ -27,7 +27,8 @@ npm run build-production
 
 ## TODO: 
  * monaco editor and 100% client side typescript experience
- * move out typescript.js from compilation chain so its faster
+ * specs / test - would be interesting to have the plugin development experience in the browser. seems to be fast.
+ * when we implement js API for plugins like proactive we will lcan apply it to monaco web no matter if it supports tls plugins or not
  * Langauge service ? 
  * typechecker? 
  * plugins ? 
@@ -46,3 +47,6 @@ npm run build-production
   "separate typecript.js fil from the rest since is too big(20mb)
   * using tsc and browserify only (no tsify)
   browsersync - watchify and tsc -w for development is great.
+
+
+ * move out typescript.js from compilation chain so its faster

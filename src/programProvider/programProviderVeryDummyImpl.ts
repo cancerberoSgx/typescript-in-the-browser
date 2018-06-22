@@ -12,7 +12,6 @@ import { join } from 'path';
  * one instance of me manages one instance of compiler host and program 
  */
 export class ProgramProviderVeryDummyImpl implements ProgramProvider {
-  // files: ProgramFile[]= [];
   private program: ts.Program;
   private compilerHost: ts.CompilerHost;
   tsConfigJson: any;

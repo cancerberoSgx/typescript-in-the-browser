@@ -4,11 +4,7 @@
 
 // WIP
 
-
-
 import * as ts from "typescript";
-
-
 
 /** very simple type representing data files - previously to any parsing for now just a fileName and content */
 export interface ProgramFile {
