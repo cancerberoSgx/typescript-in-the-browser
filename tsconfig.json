@@ -3,6 +3,8 @@
     "target": "es6",   
     "module": "commonjs", 
     "moduleResolution": "node",
+    "jsx": "react",
+    "jsxFactory": "React.createElement",
     "lib": ["es2018", "dom"],  
     "outDir": "./dist", 
     "rootDir": ".",

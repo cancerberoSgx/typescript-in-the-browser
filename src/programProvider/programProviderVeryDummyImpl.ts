@@ -11,7 +11,13 @@ import { join } from 'path';
 export class ProgramProviderVeryDummyImpl implements ProgramProvider {
   // files: ProgramFile[]= [];
   program: ts.Program;
-  defaultCompilerOptions/*: ts.CompilerOptions*/ = {compilerOptions: {target: 'es2018', module: 'commonjs'}}; // TDO: put type
+  defaultCompilerOptions: {compilerOptions: ts.CompilerOptions} = {
+    compilerOptions: {
+      // target: ts.ScriptTarget.ES2018, 
+      // module: ts.ModuleKind.CommonJS,
+      lib: ["es2018", "dom"]
+    }
+  };
   compilerHost: ts.CompilerHost;
   tsConfigJson: any; 
 
@@ -50,10 +56,9 @@ class CompilerHostVeryDummy extends ModuleResolutionHostVeryDummy implements ts.
     super(files)
   }
   getSourceFile(fileName: string, languageVersion: ts.ScriptTarget, onError?: (message: string) => void) {
-    const sourceText = this.readFile(fileName); //TODO
-    console.log(fileName , sourceText);
-    
-    return sourceText !== undefined ? ts.createSourceFile(fileName, sourceText, languageVersion) : undefined;
+    const sourceText = this.readFile(fileName); //TODO    
+    const sourceFIle = sourceText !== undefined ? ts.createSourceFile(fileName, sourceText, languageVersion, true) : undefined;
+    return sourceFIle
   }
   getDefaultLibFileName() {return "lib.d.ts"}
   writeFile (fileName, content)  { this.files[0].content = content }

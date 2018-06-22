@@ -20,7 +20,9 @@ npm run build-production
 
  * with that we oad a couple of files and query the source doucments fine
 
-  * have a dummy very basic implementation of compiler host in memory. will work on improve it but first want to make sure is viable to run compiler and limiations
+  * have a dummy very basic implementation of compiler host in memory. will work on improve it but first want to make sure is viable to run compiler and limitation
+  
+  * loading the big typescript.js file, perhaps it could be more suitable distro ?
 
 
 ## TODO: 

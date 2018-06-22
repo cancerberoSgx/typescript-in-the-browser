@@ -1,6 +1,5 @@
 import * as ts from "typescript";
 import { ProgramFile } from './programProvider';
-// const path = require('path')
 
 // interfaces that define basic File types, createProgram() ad createCompilerHost to isolate this part allowing execution in the browser. 
 // initial IDEA / design
@@ -15,6 +14,5 @@ export interface ProgramFile {
 
 
 export interface ProgramProvider{
-  // createCompilerHost(options: ts.CompilerOptions, moduleSearchLocations: string[]): ts.CompilerHost
    createProgram(files?:ProgramFile [], compilerOptions?: ts.CompilerOptions): ts.Program
 }
