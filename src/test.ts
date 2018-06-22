@@ -1,25 +1,39 @@
-import { test } from './examples/tsSimple1'
-import { toEditorSettings } from 'typescript';
-import { list33 } from './ui/test';
-import { log } from './ui/log';
-import React from 'react';
+import tsSimple1 from './examples/tsSimple1'
+import * as ts from 'typescript'
+import { getDefaultBrowserProgramProvider } from './programProvider/programProviderFactory'
+import { ProgramFile } from '../dist/src/programProvider/programProvider';
+
+
+
+export interface ExampleExecutionOptions {
+  program: ts.Program
+}
+export interface ExampleExecutionResult {
+}
+export type ExampleExecute = (config: ExampleExecutionOptions) => ExampleExecutionResult
+export interface Example {
+  name: string
+  id: string
+  description: string
+  execute: ExampleExecute
+  files: ProgramFile[]
+}
+
+export function getExamples(): Example[] {
+  return examples
+}
 
 const defaultTest = 'tsTest1'
-export const examples = [
-  { id: 'tsTest1', name: 'tsSimple1', description: 'My first TypeScript API Test in the browser -  so far so good', execute: test }
+const examples = [
+  new tsSimple1()
 ]
-
 const exampleId = new URL(location.href).searchParams.get("example") || defaultTest
 const found = examples.find(e => e.id === exampleId)
-import ReactDOM from 'react-dom'
 if (found) {
-  found.execute()
+  const provider = getDefaultBrowserProgramProvider()
+  const program = provider.createProgram(found.files)
+  found.execute({ program })
 }
 else {
-  alert('cannot execute test '+ exampleId)
+  alert('cannot execute test ' + exampleId)
 }
-
-log(list33(['asdasdd', 'fasdasd']).toString())
-
-const container = document.body.appendChild(document.createElement('div'))
-ReactDOM.render(list33(['asdasdd', 'fasdasd']),  container);  

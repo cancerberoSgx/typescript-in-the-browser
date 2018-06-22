@@ -1,4 +1,4 @@
-import { ProgramProviderVeryDummyImpl } from './programProvider/programProviderVeryDummyImpl';
+import { ProgramProviderVeryDummyImpl } from './programProviderVeryDummyImpl';
 
 export function getDefaultBrowserProgramProvider() {
   return new ProgramProviderVeryDummyImpl()

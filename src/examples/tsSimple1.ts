@@ -1,39 +1,42 @@
-import { getDefaultBrowserProgramProvider } from '..';
+
 import { log } from '../ui/log';
 import * as ts from 'typescript'
+import { ProgramFile } from '../programProvider/index';
+import { ExampleExecutionOptions, ExampleExecutionResult, Example } from '../test';
 
 
-export function test() {
+export default class implements Example {
+  id= 'tsTest1'
+   name= 'tsSimple1'
+    description= 'My first TypeScript API Test in the browser -  so far so good'
+    execute= (options: ExampleExecutionOptions): ExampleExecutionResult=>{
+     
+      printAllSourceFileAst(options.program)
+      return null
+    } 
   // Build a program using the set of root file names in fileNames
-  const files = [
+  files = [
     {
-      fileName: 'file1.ts', content: `
-class C {
-  constructor(a: string, b: C) { }
-}
-  `},
-    {
-      fileName: 'file2.ts', content: `
-class Dsd extends C {
-constructor(a: string, b: Date[]) { 
-  super(a, this)
-}
-}`}, 
-
-{
   fileName: 'list66.tsx', content: `
 import React from 'react';
 export const list33 = (arr: string[]) => 
 (<ul>
   <li>{arr.map(i=>i)}</li>
-</ul>)  
-  `
-}
+</ul>)  `
+    },
+    {
+      fileName: 'file1.ts', content: `
+class C {
+  constructor(a: string, b: C) { }
+} `},
+    {
+      fileName: 'file2.ts', content: `
+class Dsd extends C {
+constructor(a: string, b: Date[]) { 
+  super(a, this)
+}}`}, 
   ]
 
-  const provider = getDefaultBrowserProgramProvider()
-  const program = provider.createProgram(files)
-  printAllSourceFileAst(program)
 }
 
 

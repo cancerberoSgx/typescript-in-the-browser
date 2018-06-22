@@ -8,7 +8,8 @@
     "lib": ["es2018", "dom"],  
     "outDir": "./dist", 
     "rootDir": ".",
-    "strict": false, 
+    "strict": true, 
+    "strictNullChecks": false,
     "sourceMap": true,
     "esModuleInterop": true,
     "declaration": true
