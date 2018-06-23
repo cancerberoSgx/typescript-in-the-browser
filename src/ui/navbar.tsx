@@ -16,9 +16,6 @@ export default ()=>
         <a className={"nav-link dropdown-toggle"} href="https://example.com" id="dropdown08" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Examples</a>
         <div className={"dropdown-menu"} aria-labelledby="dropdown08">
           {getExamples().map(ex=><a className={"dropdown-item"} href={"#example="+ex.id} key={ex.id}>{ex.name}</a>)}
-          <a className={"dropdown-item"} href="#">Action</a>
-          <a className={"dropdown-item"} href="#">Another action</a>
-          <a className={"dropdown-item"} href="#">Something else here</a>
         </div>
       </li>
     </ul>

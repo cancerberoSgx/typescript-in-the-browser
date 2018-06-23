@@ -21,7 +21,7 @@
     "dev": "concurrently --kill-others \"npm run watchify\" \"npm run tsc-watch\" \"npm run browser-sync\" \"npm run watch-static\"",
     "browser-sync": "node_modules/.bin/browser-sync start -s static -w -f \"static/*\"",
     "clean": "rm -rf dist static",
-    "all": "npm run clean; npm run tsc && npm run cp-static && npm run all-typescript && npm run all-src"
+    "all": "npm run clean; npm run tsc && npm run cp-static && npm run all-typescript && npm run all-src && mv static docs"
   },
   "keywords": [
     "TypeScript",
