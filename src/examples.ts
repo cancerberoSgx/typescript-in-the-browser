@@ -4,10 +4,12 @@ import tsTranspilingProject1 from './examples/tsTranspilingProject1';
 import { getDefaultBrowserProgramProvider } from './programProvider/programProviderFactory';
 import { Example } from './types';
 import { log, resetLog } from './ui/log';
+import transformation1 from './examples/transformation1';
 
 const examples = [
   new tsSimple1(),
-  new tsTranspilingProject1()
+  new tsTranspilingProject1(), 
+  new transformation1()
 ]
 export function getExamples(): Example[] {
   return examples

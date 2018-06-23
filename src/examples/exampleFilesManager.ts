@@ -28,6 +28,18 @@ const files = [
     fileName: resolve('.') + '/dist/../src/examples/tsSimple1.ts',
     content: readFileSync(resolve('.') + '/dist/../src/examples/tsSimple1.ts').toString()
   },
+
+
+  {
+    fileName: resolve('.') + '/dist/../src/examples/transformation1.ts',
+    content: readFileSync(resolve('.') + '/dist/../src/examples/transformation1.ts').toString()
+  },
+  {
+    fileName: resolve('.') + '/dist/../src/examples/files/transformation1/test1.ts',
+    content: readFileSync(resolve('.') + '/dist/../src/examples/files/transformation1/test1.ts').toString()
+  },
+
+
 ]
   .map(f => Object.assign(f, { fileName: f.fileName.replace('//dist/../src/', '') }))
 

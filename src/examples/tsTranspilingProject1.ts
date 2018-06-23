@@ -1,10 +1,10 @@
 
-import { ExampleExecutionOptions, ExampleExecutionResult, Example/* , AbstractExample */ } from '../types';
-import { printAllSourceFileAst, defaultFormatDiagnosticHost } from './exampleUtil'
+import { basename, extname } from 'path';
 import * as ts from 'typescript';
+import { Example, ExampleExecutionOptions } from '../types';
 import { log } from '../ui/log';
 import { getFiles } from './exampleFilesManager';
-import { basename, extname } from 'path';
+import { defaultFormatDiagnosticHost } from './exampleUtil';
 
 
 export default class implements Example {
@@ -12,12 +12,12 @@ export default class implements Example {
   name = 'Transpile Project'
   description = "Transpile projects using TypeScript compiler API including a .tsx"
   files = getFiles().filter(f => f.fileName.includes(`files/${this.id}`))
-  exampleSource = getFiles().find(f => f.fileName.includes('examples/tsTranspilingProject1'))
+  exampleSource = getFiles().find(f => f.fileName.includes(`examples/${this.id}`))
   execute = (options: ExampleExecutionOptions) => {
     const transpileOptions: ts.TranspileOptions = {
       reportDiagnostics: true,
       compilerOptions: {
-        target: ts.ScriptTarget.ES5, 
+        target: ts.ScriptTarget.ES5,
         module: ts.ModuleKind.AMD,
         jsx: ts.JsxEmit.React,
         jsxFactory: "React.createElement"
@@ -28,7 +28,7 @@ export default class implements Example {
       try {
         result = {
           fileName: f.fileName,
-          transpiled: ts.transpileModule(f.getText(), {...transpileOptions, ... {moduleName: basename(f.fileName, extname(f.fileName))}})
+          transpiled: ts.transpileModule(f.getText(), { ...transpileOptions, ... { moduleName: basename(f.fileName, extname(f.fileName)) } })
         }
       } catch (error) {
         log(`Error transpiling file ${f.fileName}: ` + error.toString())
