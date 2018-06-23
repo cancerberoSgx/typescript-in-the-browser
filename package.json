@@ -8,15 +8,19 @@
     "tsc": "tsc",
     "tsc-watch": "tsc -w  --preserveWatchOutput ",
     "cp-static": "node scripts/copy-static",
-    "bundle-src": "npm run tsc && browserify dist/src/test.js -p sourcemapify --debug -x typescript -t brfs -o static/src.js",
+    "bundle-src": "npm run tsc && browserify dist/src/main.js -p sourcemapify --debug -x typescript -t brfs -o static/src.js",
     "bundle-typescript": "cd node_modules/typescript/lib/ ; browserify -r typescript -o ../../../static/typescript.js ; cd ../../..",
     "minify-typescript": "google-closure-compiler --js=static/typescript.js --js_output_file=static/typescript.ts",
+    "minify-src": "google-closure-compiler --js=static/src.js --js_output_file=static/src.ts",
     "all-typescript": "npm run bundle-typescript; npm run minify-typescript",
-    "watchify": "watchify dist/src/test.js -p sourcemapify --debug -x typescript -t brfs -o static/src.js ",
+    "all-src": "npm run bundle-src && npm run minify-src",
+    "watchify": "watchify dist/src/main.js -p sourcemapify --debug -x typescript -t brfs -o static/src.js ",
     "build-production": "rm -rf static dist ; tsc ; npm run cp-static ; npm run bundle-typescript ; npm run bundle-src; npm run minify-typescript",
     "dev-prepare": "rm -rf static dist ; tsc ; npm run cp-static ; npm run bundle-typescript ; npm run bundle-src",
     "dev": "concurrently --kill-others \"npm run watchify\" \"npm run tsc-watch\" \"npm run browser-sync\"",
-    "browser-sync": "node_modules/.bin/browser-sync start -s static -w -f \"static/*\""
+    "browser-sync": "node_modules/.bin/browser-sync start -s static -w -f \"static/*\"",
+    "clean": "rm -rf dist static",
+    "all": "npm run clean; npm run tsc && npm run cp-static && npm run all-typescript && npm run all-src"
   },
   "keywords": [
     "TypeScript",

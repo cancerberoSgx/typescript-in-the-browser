@@ -1,5 +1,5 @@
 
-import { Example, ExampleExecutionOptions, ExampleExecutionResult } from '../test';
+import { Example, ExampleExecutionOptions, ExampleExecutionResult } from '../types';
 import { printAllSourceFileAst } from './exampleUtil';
 import { getFiles } from './exampleFilesManager';
 

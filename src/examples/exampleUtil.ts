@@ -24,3 +24,9 @@ export function printAllSourceFileAst(program: ts.Program, l: typeof log = log) 
     visit(sourceFile, (n, level) => l(printNode(n, level)))
   })
 }
+
+export const defaultFormatDiagnosticHost: ts.FormatDiagnosticsHost = {
+  getCanonicalFileName(fileName: string) { return fileName },
+  getCurrentDirectory() { return '.' },
+  getNewLine() { return '\n' }
+}

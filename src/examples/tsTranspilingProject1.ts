@@ -1,12 +1,12 @@
 
-import { ExampleExecutionOptions, ExampleExecutionResult, Example/* , AbstractExample */ } from '../test';
-import { printAllSourceFileAst } from './exampleUtil'
+import { ExampleExecutionOptions, ExampleExecutionResult, Example/* , AbstractExample */ } from '../types';
+import { printAllSourceFileAst, defaultFormatDiagnosticHost } from './exampleUtil'
 import * as ts from 'typescript';
 import { log } from '../ui/log';
 import { getFiles } from './exampleFilesManager';
 
 
-export default class/*  extends AbstractExample  */ implements Example {
+export default class implements Example {
   id = 'tsTranspilingProject1'
   name = 'transpile project'
   description = "Transpile projects using TypeScript compiler API including a .tsx"
@@ -39,14 +39,9 @@ export default class/*  extends AbstractExample  */ implements Example {
 ${res.transpiled.outputText}
 
 -- Diagnostics for ${res.fileName} transpile: --
-${res.transpiled.diagnostics && ts.formatDiagnostics(res.transpiled.diagnostics, host)}
+${res.transpiled.diagnostics && ts.formatDiagnostics(res.transpiled.diagnostics, defaultFormatDiagnosticHost)}
     `).join('\n')
 
     log(text);
   }
-}
-const host: ts.FormatDiagnosticsHost = {
-  getCanonicalFileName(fileName: string) { return fileName },
-  getCurrentDirectory() { return '.' },
-  getNewLine() { return '\n' }
 }

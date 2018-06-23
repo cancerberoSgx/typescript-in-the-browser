@@ -1,14 +1,9 @@
 import * as ts from "typescript";
-import {  ProgramProvider, ProgramFile } from './index';
+import { ProgramProvider, ProgramFile } from './index';
 import { join } from 'path';
 
-
-
-//TDO: declare compilerHost in a separate class
-// make it extend ModuleResolutionHost that we also implement in another class
-
 /**
- * an in memory filesystem-based program provider. Very simple not ready for production just to see if we can run typescricp tin the browsers
+ * an in memory filesystem-based program provider. Very simple not ready for production just to see if we can run typescript tin the browsers
  * one instance of me manages one instance of compiler host and program 
  */
 export class ProgramProviderVeryDummyImpl implements ProgramProvider {
@@ -18,19 +13,15 @@ export class ProgramProviderVeryDummyImpl implements ProgramProvider {
 
   defaultCompilerOptions: { compilerOptions: ts.CompilerOptions } = {
     compilerOptions: {
-      // target: ts.ScriptTarget.ES2018, 
-      // module: ts.ModuleKind.CommonJS,
       lib: ["es2018", "dom"]
     }
   }
   /** creates a dummy ts.Program in memory with given source files inside */
   createProgram(files: ProgramFile[], compilerOptions?: ts.CompilerOptions): ts.Program {
-    // debugger;
     this.tsConfigJson = ts.parseConfigFileTextToJson('tsconfig.json',
       compilerOptions ? JSON.stringify(compilerOptions) : JSON.stringify(this.defaultCompilerOptions))
     let { options, errors } = ts.convertCompilerOptionsFromJson(this.tsConfigJson.config.compilerOptions, '.')
-    //TODO. better errors
-    if (errors.length) {
+    if (errors.length) {    //TODO. better errors
       throw errors
     }
     this.compilerHost = new CompilerHostVeryDummy(options, files)
@@ -39,6 +30,7 @@ export class ProgramProviderVeryDummyImpl implements ProgramProvider {
   }
 }
 
+// TODO: move to separate file
 class ModuleResolutionHostVeryDummy implements ts.ModuleResolutionHost {
   constructor(protected files: ProgramFile[]) {
   }
@@ -47,11 +39,11 @@ class ModuleResolutionHostVeryDummy implements ts.ModuleResolutionHost {
     this.files = this.files.concat(arg0).filter((f, i, arr) => arr.indexOf(f) === i)
   }
   fileExists(fileName: string): boolean {
-    return !!this.files.find(f=>f.fileName===fileName)
+    return !!this.files.find(f => f.fileName === fileName)
   }
   readFile(fileName: string): string | undefined {
-    const file = this.files.find(f=>f.fileName===fileName)
-    return !!file ? file.content :undefined
+    const file = this.files.find(f => f.fileName === fileName)
+    return !!file ? file.content : undefined
   }
   trace?(s: string): void {
     console.trace(s)
@@ -70,10 +62,12 @@ class ModuleResolutionHostVeryDummy implements ts.ModuleResolutionHost {
     return '.' // TODO
   }
 
-  getDirectories(path: string) : string[]{
+  getDirectories(path: string): string[] {
     return [] //TODO
   }
 }
+
+// TODO:  most to a separate file
 class CompilerHostVeryDummy extends ModuleResolutionHostVeryDummy implements ts.CompilerHost {
   constructor(protected options: ts.CompilerOptions, files: ProgramFile[]) {
     super(files)
@@ -84,27 +78,27 @@ class CompilerHostVeryDummy extends ModuleResolutionHostVeryDummy implements ts.
     return sourceFIle
   }
 
-  getDefaultLibFileName() { 
+  getDefaultLibFileName() {
     return "lib.d.ts" //TODO
   }
 
-  writeFile(fileName: string, content: string) { 
-    const file = this.files.find(f=>f.fileName===fileName)
-    if(file){
+  writeFile(fileName: string, content: string) {
+    const file = this.files.find(f => f.fileName === fileName)
+    if (file) {
       file.content = content
     }
   }
 
   getCanonicalFileName(fileName: string) {//TODO
-     return fileName 
+    return fileName
   }
 
-  getNewLine() { 
+  getNewLine() {
     return '\n'//TODO
-   }
+  }
 
   useCaseSensitiveFileNames() { //TODO
-    return true 
+    return true
   }
 
   readFileresolveModuleNames(moduleNames: string[], containingFile: string, moduleSearchLocations: string[]): ts.ResolvedModule[] {
