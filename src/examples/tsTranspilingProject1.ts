@@ -4,16 +4,18 @@ import { printAllSourceFileAst, defaultFormatDiagnosticHost } from './exampleUti
 import * as ts from 'typescript';
 import { log } from '../ui/log';
 import { getFiles } from './exampleFilesManager';
+import { basename, extname } from 'path';
 
 
 export default class implements Example {
   id = 'tsTranspilingProject1'
-  name = 'transpile project'
+  name = 'Transpile Project'
   description = "Transpile projects using TypeScript compiler API including a .tsx"
-  files = getFiles().filter(f => f.fileName.includes(this.id))
+  files = getFiles().filter(f => f.fileName.includes(`files/${this.id}`))
+  exampleSource = getFiles().find(f => f.fileName.includes('examples/tsTranspilingProject1'))
   execute = (options: ExampleExecutionOptions) => {
     const transpileOptions: ts.TranspileOptions = {
-      reportDiagnostics: true, moduleName: "tsTranspilingProject1",
+      reportDiagnostics: true,
       compilerOptions: {
         target: ts.ScriptTarget.ES5, 
         module: ts.ModuleKind.AMD,
@@ -26,7 +28,7 @@ export default class implements Example {
       try {
         result = {
           fileName: f.fileName,
-          transpiled: ts.transpileModule(f.getText(), transpileOptions)
+          transpiled: ts.transpileModule(f.getText(), {...transpileOptions, ... {moduleName: basename(f.fileName, extname(f.fileName))}})
         }
       } catch (error) {
         log(`Error transpiling file ${f.fileName}: ` + error.toString())

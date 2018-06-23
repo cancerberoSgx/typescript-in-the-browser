@@ -1,14 +1,11 @@
-import { getExamples } from './examples';
-import { getDefaultBrowserProgramProvider } from './programProvider/programProviderFactory';
+import { dispatchExamples } from './examples';
 
-const defaultTest = 'tsTest1'
-const exampleId = new URL(location.href).searchParams.get("example") || defaultTest
-const found = getExamples().find(e => e.id === exampleId)
-if (found) {
-  const provider = getDefaultBrowserProgramProvider()
-  const program = provider.createProgram(found.files)
-  found.execute({ program })
+import ReactDOM from 'react-dom'
+import layout from './ui/layout';
+
+export function render(){
+  dispatchExamples()
+  ReactDOM.render(layout(), document.getElementById('typescript-in-the-browser-main'))
 }
-else {
-  alert('cannot execute test ' + exampleId)
-}
+render()
+window.onhashchange=()=>{  render()}

@@ -1,15 +1,28 @@
 # Running TypeScript compiler in the Browser
 
-Objectives: Bring TypeScript compiler to the browser in the smoothest and straightforward way I can. un the compiler, TypeScript Language Service
-Plugins, transformations and related tools 100% in the browser, can you imagine?
+# Objectives
 
-## Getting started: 
+ * Bring TypeScript compiler to the browser in the smoothest and straightforward way I can. un the compiler, TypeScript Language Service
+ * Plugins, transformations and related tools 100% in the browser, can you imagine?
+ * Find out TypeScript limitations while running in other environments than node.js - particularly in the browser. Is it too large ? is it too slow ?  is it too difficult / impossible to support something in the browser ? something
+ * can we run third party tools around TypeScript compiler like ts-simple-ast or tsquery ? 
+
+## Use
+
 ```sh
 npm install
+```
+
+Development environment: 
+
+```sh
 npm run dev-prepare # just once
 npm run dev
+```
 
-npm run build-production
+Production build: 
+```sh
+npm run all
 ```
 
 ## Status

@@ -13,4 +13,5 @@ export interface Example {
   description: string
   execute: ExampleExecute
   files: ProgramFile[]
+  exampleSource: ProgramFile
 }
