@@ -25,6 +25,7 @@ export class ProgramProviderVeryDummyImpl implements ProgramProvider {
   }
   /** creates a dummy ts.Program in memory with given source files inside */
   createProgram(files: ProgramFile[], compilerOptions?: ts.CompilerOptions): ts.Program {
+    // debugger;
     this.tsConfigJson = ts.parseConfigFileTextToJson('tsconfig.json',
       compilerOptions ? JSON.stringify(compilerOptions) : JSON.stringify(this.defaultCompilerOptions))
     let { options, errors } = ts.convertCompilerOptionsFromJson(this.tsConfigJson.config.compilerOptions, '.')

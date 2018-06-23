@@ -5,4 +5,4 @@ tmp
 .yamat
 *.tgz
 .idea
-static
+/static

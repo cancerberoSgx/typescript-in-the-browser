@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
-    "target": "es6",   
+    "target": "es2018",   
     "module": "commonjs", 
     "moduleResolution": "node",
     "jsx": "react",
     "jsxFactory": "React.createElement",
-    "lib": ["es2018", "dom"],  
+    "lib": ["es2018", "dom"],
     "outDir": "./dist", 
     "rootDir": ".",
     "strict": true, 
@@ -13,7 +13,6 @@
     "sourceMap": true,
     "esModuleInterop": true,
     "declaration": true
-    
   }, 
   "exclude": ["assets", "test", "static", "dist", "scripts"]
 }
