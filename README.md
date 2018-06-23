@@ -1,5 +1,9 @@
 # Running TypeScript compiler in the Browser
 
+# See it in action
+
+[Using TypeScript Compiler in the browser demo](https://cancerberosgx.github.io/typescript-in-the-browser/)
+
 # Objectives
 
  * Bring TypeScript compiler to the browser in the smoothest and straightforward way I can. un the compiler, TypeScript Language Service
@@ -24,6 +28,9 @@ Production build:
 ```sh
 npm run all
 ```
+
+That last one will generate a production ready distribution in ./docs
+
 
 ## Status
 
