@@ -2,8 +2,10 @@ import tsSimple1 from './examples/tsSimple1'
 import * as ts from 'typescript'
 import { getDefaultBrowserProgramProvider } from './programProvider/programProviderFactory'
 import { ProgramFile } from '../dist/src/programProvider/programProvider';
+import { log } from './ui/log';
+import { getFileContent } from './examples/exampleFilesManager';
 
-
+getFileContent()
 
 export interface ExampleExecutionOptions {
   program: ts.Program
@@ -32,8 +34,10 @@ const found = examples.find(e => e.id === exampleId)
 if (found) {
   const provider = getDefaultBrowserProgramProvider()
   const program = provider.createProgram(found.files)
-  found.execute({ program })
+  // found.execute({ program })
 }
 else {
   alert('cannot execute test ' + exampleId)
 }
+
+// log('FILEEEE: '+getFileContent('tsTranspilingProject1.ts'))

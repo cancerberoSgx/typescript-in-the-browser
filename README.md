@@ -38,7 +38,7 @@ npm run build-production
  * large projects ?
  * since this is not a plugin maybe we want to move it to a separate project or put it toguether with typescript-compiler-playground both in the same repo
  * first implementation in memory but then implement it using browserfs both using a fast/synch techology and then using  a slow / request-based one.
-
+ * OOT: small framework around monaco with * tree view at the right side and a "comsole / webtools" in the bottom - that wl lhelp us to present these kind of examples. 
 
 ## Dones
 
