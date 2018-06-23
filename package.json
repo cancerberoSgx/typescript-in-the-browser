@@ -7,11 +7,11 @@
   "scripts": {
     "tsc": "tsc",
     "tsc-watch": "tsc -w  --preserveWatchOutput ",
-    "cp-static": "node scripts/copy-static",
+    "cp-static": "ts-node scripts/copy-static",
     "bundle-src": "npm run tsc && browserify dist/src/main.js -p sourcemapify --debug -x typescript -t brfs -o static/src.js",
     "bundle-typescript": "cd node_modules/typescript/lib/ ; browserify -r typescript -o ../../../static/typescript.js ; cd ../../..",
-    "minify-typescript": "google-closure-compiler --js=static/typescript.js --js_output_file=static/typescript.ts",
-    "minify-src": "google-closure-compiler --js=static/src.js --js_output_file=static/src.ts",
+    "minify-typescript": "google-closure-compiler --js=static/typescript.js --js_output_file=static/typescript.min.js && mv static/typescript.min.js static/typescript.js",
+    "minify-src": "google-closure-compiler --js=static/src.js --js_output_file=static/src.min.js && mv static/src.min.js static/src.js",
     "all-typescript": "npm run bundle-typescript; npm run minify-typescript",
     "all-src": "npm run bundle-src && npm run minify-src",
     "watchify": "watchify dist/src/main.js -p sourcemapify --debug -x typescript -t brfs -o static/src.js ",
@@ -39,6 +39,7 @@
   "devDependencies": {
     "@types/node": "^10.3.4",
     "@types/react": "^16.4.1",
+    "@types/shelljs": "^0.8.0",
     "brfs": "^2.0.0",
     "browser-sync": "^2.24.4",
     "browserify": "^16.2.2",
