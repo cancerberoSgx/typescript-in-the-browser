@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>TypeScript Compiler API very simple example - transpiling code</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+  <p>In this example we just load typescript.js as it is, creating a Program fails because it tries to access the native filesystem (ts.sys is undefined in the browser). So we need to provide a custom CompilerHost and LanguageServiceHost and that's what this project is all about. 
+  </p>
+
+
+  <h3>TypeScript Program:</h3>
+  <pre>
+log = function (s) { document.getElementById('output').innerText += s + '\n' }
+const program = ts.createProgram(['test1.ts'], {})
+const sourceFile = ts.getSourceFile('test1.ts')
+log(sourceFile.getText())
+  </pre>
+  <h3>Output: </h3>
+  <pre id="output"></pre>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typescript/2.9.2/typescript.min.js"></script>
+
+  <script>
+try {
+  log = function (s) { document.getElementById('output').innerText += s + '\n' }
+  const program = ts.createProgram(['test1.ts'], {})
+  const sourceFile = ts.getSourceFile('test1.ts')
+  log(sourceFile.getText())
+}catch(ex){
+  log(ex+' - '+ex.stack)
+}
+  </script>
+
+</body>
+
+</html>

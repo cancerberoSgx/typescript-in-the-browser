@@ -28,7 +28,6 @@ export class LanguageServiceProviderDummy1 implements LanguageServiceProvider {
 export class LanguageServiceHostDummy1 implements ts.LanguageServiceHost {
   constructor(private compilerOptions: ts.CompilerOptions) {
   }
-  directoryExists(directoryName: string): boolean { return true } // TODO
   getCompilationSettings(): ts.CompilerOptions {
     return this.compilerOptions
   }
@@ -51,7 +50,7 @@ export class LanguageServiceHostDummy1 implements ts.LanguageServiceHost {
     return ts.ScriptSnapshot.fromString(this.readFile(fileName));
   }
   getCurrentDirectory(): string {
-    return '.'
+    return ''
   }
   getDefaultLibFileName(options: ts.CompilerOptions): string {
     return CompilerHostVeryDummy.prototype.getDefaultLibFileName.apply(this, arguments)
@@ -74,6 +73,7 @@ export class LanguageServiceHostDummy1 implements ts.LanguageServiceHost {
     return files[path] ? files[path].content : undefined
   }
   realpath(path: string): string {
+      //  ts.ser
     debug('realpath: ' + path);
     return path
   }
@@ -81,7 +81,11 @@ export class LanguageServiceHostDummy1 implements ts.LanguageServiceHost {
     debug('fileExists: ' + path);
     return !!files[path]
   }
-
+  directoryExists(path: string): boolean { 
+    debug('directoryExists: ' + path);
+    return true 
+  } // TODO
+// normalizePath
   resolveModuleNames?(moduleNames: string[], containingFile: string, reusedNames?: string[]): ts.ResolvedModule[] {
     debug(`resolveModuleNames moduleNames: ${moduleNames && moduleNames.join(',')} containingFile: ${containingFile}, moduleSearchLocations: ${reusedNames && reusedNames.join(',')}`)
     const resolvedModules: ts.ResolvedModule[] = [];

@@ -27,7 +27,6 @@ export class Editor extends React.Component<Props> {
     this.installMonaco()
   }
   private installMonaco(){
-
     if (getUIConfig().editorKind === 'monaco') {
       this.editor = monaco().editor.create(document.getElementById(this.props.id), {
         value: this.props.file.content,

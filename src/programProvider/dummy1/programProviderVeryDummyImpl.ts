@@ -57,7 +57,7 @@ export class ModuleResolutionHostVeryDummy implements ts.ModuleResolutionHost {
   }
   getCurrentDirectory() {
     debug(`getCurrentDirectory `)
-    return '.' // TODO
+    return '' // TODO
   }
 
   getDirectories(path: string): string[] {
@@ -78,10 +78,14 @@ export class CompilerHostVeryDummy extends ModuleResolutionHostVeryDummy impleme
     const sourceFIle = sourceText !== undefined ? ts.createSourceFile(fileName, sourceText, languageVersion, true) : undefined;
     return sourceFIle
   }
+  // getSourceFileByPath?(fileName: string, path: ts.Path, languageVersion: ts.ScriptTarget, onError?: (message: string) => void, shouldCreateNewSourceFile?: boolean): ts.SourceFile | undefined{
+  // }
 
   getDefaultLibFileName() {
     return "lib.d.ts" //TODO
   }
+  // getDefaultLibLocation?(): string{
+  // }
 
   writeFile(fileName: string, content: string) {
     debug(`writeFile ${fileName}`)
@@ -93,9 +97,9 @@ export class CompilerHostVeryDummy extends ModuleResolutionHostVeryDummy impleme
     }
   }
 
-  getCanonicalFileName(fileName: string) {//TODO
-    debug(`getCanonicalFileName ${fileName}`)
-    return fileName
+  getCanonicalFileName(fileName: string) {
+    debug(`getCanonicalFileName ${fileName}`) 
+    return this.useCaseSensitiveFileNames() ? fileName : fileName.toLowerCase()
   }
 
   getNewLine() {
@@ -128,5 +132,11 @@ export class CompilerHostVeryDummy extends ModuleResolutionHostVeryDummy impleme
     debug(`resolveModuleNames result: ${resolvedModules && JSON.stringify(resolvedModules)}`)
     return resolvedModules;
   }
+  // /**
+  //  * This method is a companion for 'resolveModuleNames' and is used to resolve 'types' references to actual type declaration files
+  //  */
+  // resolveTypeReferenceDirectives?(typeReferenceDirectiveNames: string[], containingFile: string): (ts.ResolvedTypeReferenceDirective | undefined)[];
+  // getEnvironmentVariable?(name: string): string
+  // createHash?(data: string): string;
 
 }

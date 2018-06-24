@@ -1,4 +1,4 @@
-const DEBUG = false
+const DEBUG = true
 export function debugFactory(componentName: string): Debug {
   return function debug(m: string) {
     if (DEBUG) {
@@ -12,7 +12,6 @@ export type Debug = (m: string) => void
 
 
 import * as ts from "typescript";
-import { join } from 'path';
 export function buildCompilerOptions(compilerOptions: ts.CompilerOptions|string) {
   let finalCompilerOptions: ts.CompilerOptions|undefined
   if(typeof compilerOptions==='string'){      
@@ -41,24 +40,3 @@ export const defaultFormatDiagnosticHost: ts.FormatDiagnosticsHost = {
 
 
 
-
-
-// export function resolveModuleNames(opts: {moduleNames: string[], containingFile: string, moduleSearchLocations: string[], fileExists: (fileName: string)=> boolean, readFile : (fileName: string)=>( string | undefined ), compilerOptions: ts.CompilerOptions}):  ts.ResolvedModule[]  {
-//   const resolvedModules: ts.ResolvedModule[] = [];
-//   for (const moduleName of opts.moduleNames) { 
-//     // try to use standard resolution
-//     let result = ts.resolveModuleName(moduleName, opts.containingFile, opts.compilerOptions, { fileExists: , readFile });
-//     if (result.resolvedModule) {
-//       resolvedModules.push(result.resolvedModule);
-//     }
-//     else {
-//       for (const location of moduleSearchLocations) {
-//         const modulePath = join(location, moduleName + ".d.ts");
-//         if (fileExists(modulePath)) {
-//           resolvedModules.push({ resolvedFileName: modulePath });
-//         }
-//       }
-//     }
-//   }
-//   return resolvedModules;
-// }

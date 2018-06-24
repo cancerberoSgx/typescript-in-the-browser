@@ -7,7 +7,7 @@ import typeChecker1 from './examples/typeChecker1';
 import { getDefaultLanguageServiceProvider } from './languageServiceProvider/languageServiceProviderFactory';
 import { getDefaultProgramProvider } from './programProvider/programProviderFactory';
 import { Example } from './types';
-import { log, resetLog } from './ui/uiUtil';
+import { log, resetLog, configureMonacoTypeScriptDefaults } from './ui/uiUtil';
 import loadProjectJsonTest1 from './examples/loadProjectJsonTest1';
 import * as ts from 'typescript';
 import { ProgramFile } from './programProvider';
@@ -77,6 +77,7 @@ function executeExample(example: Example) {
     const t0 = performance.now()
     example.execute({ program: currentExampleProgram, languageService })
     lastExampleExecutionTime = performance.now() - t0
+    configureMonacoTypeScriptDefaults(currentExample, currentExampleProgram)
   } catch (error) {
     log('error on execute: ' + error + '\n' + error.stack)
     throw error
