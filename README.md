@@ -35,7 +35,9 @@ That last one will generate a production ready distribution in ./docs
 
 These are self contained examples that uses typescript without processing or changing it, just loading the original typescript.ts and perform stuff: 
 
- * [TypeScript Compiler API very simple example - transpiling code](https://cancerberosgx.github.io/typescript-in-the-browser/examples/ts-browser-transpile.html)
+ * [TypeScript Compiler API very simple example - transpiling code](https://cancerberosgx.github.io/typescript-in-the-browser/examples/ts-browser-transpile-works.html)
+ * [I can create individual SourceFile and visit its Nodes](https://cancerberosgx.github.io/typescript-in-the-browser/examples/ts-browser-create-sourcefile-works.html)
+ * [Cannot work with ts.Program](https://cancerberosgx.github.io/typescript-in-the-browser/examples/ts-browser-create-program-fails.html)
 
 ## Status
 
@@ -43,7 +45,7 @@ These are self contained examples that uses typescript without processing or cha
 
  * ts.createProjectHost doesn't work in the browser because there is no ts.sys - we need to create the host manually. See src/dummyUtils.ts#createDummyCompilerHost.ts
 
- * with that we oad a couple of files and query the source doucments fine
+ * with that we oad a couple of files and query the source documents fine
 
  * have a dummy very basic implementation of compiler host in memory. will work on improve it but first want to make sure is viable to run compiler and limitation
   
@@ -54,6 +56,7 @@ These are self contained examples that uses typescript without processing or cha
 
 ## TODO: 
 
+ * this file https://cdnjs.cloudflare.com/ajax/libs/typescript/2.9.2/typescript.min.js works when transpiling and weight only 400kb. Let's try with that one instead of with the big one we are currently using 
  * monaco editor and 100% client side typescript experience
  * JS api so I can easily use this "project" in my own - for example, I want to compile typescript in my project that runs in the browser and easily require this one using browserify. - I think is already done we should test if it works
  * development - sourcemaps

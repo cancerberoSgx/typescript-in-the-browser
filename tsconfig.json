@@ -14,5 +14,5 @@
     "esModuleInterop": true,
     "declaration": true
   }, 
-  "exclude": ["assets", "test", "static", "dist", "scripts"]
+  "exclude": ["assets", "test", "static", "dist", "scripts", "doc"]
 }
