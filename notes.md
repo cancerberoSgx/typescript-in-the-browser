@@ -1,4 +1,4 @@
-
+ts-simple-ast - not possible to run in the browser - is to tight to filesystem - gracefulfs etc - ... report issue and ask if it's possible to decouple from fs - at least the compiler part.
 
 
 issue to ts:

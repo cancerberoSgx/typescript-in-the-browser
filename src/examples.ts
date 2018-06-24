@@ -5,11 +5,13 @@ import { getDefaultBrowserProgramProvider } from './programProvider/programProvi
 import { Example } from './types';
 import { log, resetLog } from './ui/log';
 import transformation1 from './examples/transformation1';
+import tsSimpleAst1 from './examples/tsSimpleAst1';
 
 const examples = [
   new tsSimple1(),
   new tsTranspilingProject1(), 
-  new transformation1()
+  new transformation1(), 
+  // new tsSimpleAst1()
 ]
 export function getExamples(): Example[] {
   return examples

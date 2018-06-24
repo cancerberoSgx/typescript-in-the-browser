@@ -38,6 +38,16 @@ const files = [
     fileName: resolve('.') + '/dist/../src/examples/files/transformation1/test1.ts',
     content: readFileSync(resolve('.') + '/dist/../src/examples/files/transformation1/test1.ts').toString()
   },
+  
+  //   {
+  //     fileName: resolve('.') + '/dist/../src/examples/tsSimpleAst1.ts',
+  //     content: readFileSync(resolve('.') + '/dist/../src/examples/tsSimpleAst1.ts').toString()
+  //   },
+  //   {
+  //     fileName: resolve('.') + '/dist/../src/examples/files/tsSimpleAst1/toRename.ts',
+  //     content: readFileSync(resolve('.') + '/dist/../src/examples/files/tsSimpleAst1/toRename.ts').toString()
+  //   },
+  
 
 
 ]

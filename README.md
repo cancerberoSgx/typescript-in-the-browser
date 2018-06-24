@@ -40,21 +40,25 @@ That last one will generate a production ready distribution in ./docs
 
  * with that we oad a couple of files and query the source doucments fine
 
-  * have a dummy very basic implementation of compiler host in memory. will work on improve it but first want to make sure is viable to run compiler and limitation
+ * have a dummy very basic implementation of compiler host in memory. will work on improve it but first want to make sure is viable to run compiler and limitation
   
-  * loading the big typescript.js file, perhaps it could be more suitable distro ?
+ * loading the big typescript.js file, perhaps it could be more suitable distro ?
+
+ * ts-simple-ast - not possible to run in the browser - is to tight to filesystem - gracefulfs etc - ... report issue and ask if it's possible to decouple from fs - at least the compiler part.
 
 
 ## TODO: 
+
  * monaco editor and 100% client side typescript experience
+ * JS api so I can easily use this "project" in my own - for example, I want to compile typescript in my project that runs in the browser and easily require this one using browserify. - I think is already done we should test if it works
+ * development - sourcemaps
  * idea: for each project in example files add a tsconfig.json and show all files as a project and use that tsconfig when creating the ts.Program
  * specs / test - would be interesting to have the plugin development experience in the browser. seems to be fast.
  * when we implement js API for plugins like proactive we will lcan apply it to monaco web no matter if it supports tls plugins or not
  * Langauge service ? 
  * typechecker? 
  * plugins ? 
- * ts-simple-ast ? 
- * qstypes
+ * tsquery
  * monaco + plugins + compiler 100% in client would be awesome
  * large projects ?
  * since this is not a plugin maybe we want to move it to a separate project or put it toguether with typescript-compiler-playground both in the same repo
@@ -63,11 +67,6 @@ That last one will generate a production ready distribution in ./docs
 
 ## Dones
 
- *  "optimized typescript.js and development experience - Uses : 
-
-  "separate typecript.js fil from the rest since is too big(20mb)
-  * using tsc and browserify only (no tsify)
-  browsersync - watchify and tsc -w for development is great.
-
-
  * move out typescript.js from compilation chain so its faster
+ * browsersync - watchify and tsc -w for development is great.
+ * ts-simple-ast ?  - not possible to run in the browser. 
