@@ -1,5 +1,5 @@
 import * as ts from "typescript";
-import { ProgramProvider, ProgramFile } from './index';
+import { ProgramProvider, ProgramFile } from '../index';
 import { join } from 'path';
 
 /**
@@ -34,9 +34,9 @@ export class ProgramProviderVeryDummyImpl implements ProgramProvider {
 class ModuleResolutionHostVeryDummy implements ts.ModuleResolutionHost {
   constructor(protected files: ProgramFile[]) {
   }
-  addFiles(arg0: ProgramFile[]): any {
+  addFiles(files: ProgramFile[]): any {
     //TODO
-    this.files = this.files.concat(arg0).filter((f, i, arr) => arr.indexOf(f) === i)
+    this.files = this.files.concat(files).filter((f, i, arr) => arr.indexOf(f) === i)
   }
   fileExists(fileName: string): boolean {
     return !!this.files.find(f => f.fileName === fileName)

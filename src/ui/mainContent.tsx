@@ -1,5 +1,5 @@
 import React from 'react';
-import log from './logConsole'
+import log from './exampleOutput'
 import currentExample from './currentExample';
 export default ()=>
 <div className={"container-fluid"}>

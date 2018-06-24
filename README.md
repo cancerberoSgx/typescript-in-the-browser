@@ -55,7 +55,7 @@ That last one will generate a production ready distribution in ./docs
  * idea: for each project in example files add a tsconfig.json and show all files as a project and use that tsconfig when creating the ts.Program
  * specs / test - would be interesting to have the plugin development experience in the browser. seems to be fast.
  * when we implement js API for plugins like proactive we will lcan apply it to monaco web no matter if it supports tls plugins or not
- * Langauge service ? 
+ * Language service ? 
  * typechecker? 
  * plugins ? 
  * tsquery
