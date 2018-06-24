@@ -15,7 +15,7 @@ const b = a+1+2+3`}]
   execute = (options: ExampleExecutionOptions) => {
    
     // function createLanguageService(host: LanguageServiceHost, documentRegistry?: DocumentRegistry, syntaxOnly?: boolean): LanguageService;
-    options.program.getSourceFile('file1.ts').la
+    // options.program.getSourceFile('file1.ts').la
   }
   
 }
