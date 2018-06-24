@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>TypeScript Compiler API very simple example - transpiling code</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+  <p>In this example we just load typescript.js as it is, and execute the following snippet to transpile a single file taken
+    from
+    <a href="https://github.com/Microsoft/TypeScript/wiki/Using-the-Compiler-API#transpiling-a-single-file">TypeScript Compiler API docs</a>
+  </p>
+
+
+  <h3>TypeScript Program:</h3>
+  <pre>
+log = function (s) { document.getElementById('output').innerText += s + '\n' }
+var content =
+  "import {f} from \"foo\"\n" +
+  "export var x = f()";
+log('\n=========Input code=========\n')
+log(content)
+var res1 = ts.transpileModule(content, { compilerOptions: { module: ts.ModuleKind.System }, moduleName: "myModule2" });
+log('\n=========Transpile output 1=========\n')
+log(res1.outputText);
+log('\n=========Transpile output 2=========\n')
+var res2 = ts.transpile(content, { module: ts.ModuleKind.AMD }, /*fileName*/ undefined, /*diagnostics*/ undefined, /*moduleName*/ "myModule1");
+log(res2);
+  </pre>
+  <h3>Output: </h3>
+  <pre id="output"></pre>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typescript/2.9.2/typescript.min.js"></script>
+
+  <script>
+    log = function (s) { document.getElementById('output').innerText += s + '\n' }
+    var content =
+      "import {f} from \"foo\"\n" +
+      "export var x = f()";
+    log('\n=========Input code=========\n')
+    log(content)
+    var res1 = ts.transpileModule(content, { compilerOptions: { module: ts.ModuleKind.System }, moduleName: "myModule2" });
+    log('\n=========Transpile output 1=========\n')
+    log(res1.outputText);
+    log('\n=========Transpile output 2=========\n')
+    var res2 = ts.transpile(content, { module: ts.ModuleKind.AMD }, /*fileName*/ undefined, /*diagnostics*/ undefined, /*moduleName*/ "myModule1");
+    log(res2);
+  </script>
+
+
+  <p>As you can see we don't need to do anything special to transpile code. But for other APIs, like working with SourceFiles, AST Nodes, TypeChecker, LanguageService, Transformations, etc ewe do need to implent a CompilerHost, LanguageServiceHost, etc that supports the browser. This is what this library is all about.</p>
+</body>
+
+</html>

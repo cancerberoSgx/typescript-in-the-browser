@@ -31,6 +31,11 @@ npm run all
 
 That last one will generate a production ready distribution in ./docs
 
+# Independent examples
+
+These are self contained examples that uses typescript without processing or changing it, just loading the original typescript.ts and perform stuff: 
+
+ * [TypeScript Compiler API very simple example - transpiling code](https://cancerberosgx.github.io/typescript-in-the-browser/examples/ts-browser-transpile.html)
 
 ## Status
 
