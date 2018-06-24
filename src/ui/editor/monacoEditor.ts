@@ -1,4 +1,8 @@
 
 import * as monacoEditor from 'monaco-editor'
-export default (window as any).monaco as typeof monacoEditor
-// export const monaco = (window as any).__Monaco
+
+export function monaco(): typeof monacoEditor {
+  return (window as any).monaco
+}
+
+export const requireMonaco = (window as any).RequireMonaco as (fn: () => void) => void

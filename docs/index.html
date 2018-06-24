@@ -5,15 +5,37 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>TypeScript Compiler in the browser</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="bootstrap.min.css" />
-  <link rel="stylesheet" type="text/css" media="screen" href="index.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/index.css" />
 </head>
 <body>
   <div id="typescript-in-the-browser-main"></div>
-  <script src="typescript.js"></script>
-  <script src="src.js"></script>
-  <script src="jquery.slim.min.js"></script>
-  <script src="bootstrap.min.js"></script>
+
+
+  <script src="/jquery.slim.min.js"></script>
+  <script src="/bootstrap.min.js"></script>
   
+<script>require = {paths: { 'vs': '/monaco-editor/min/vs' }} </script>
+<script src="/monaco-editor/min/vs/loader.js"></script>
+<script src="/monaco-editor/min/vs/editor/editor.main.nls.js"></script>
+<script src="/monaco-editor/min/vs/editor/editor.main.js"></script>
+
+
+<script>
+  var __monacoRequire = require
+  RequireMonaco = function(fn){
+    if(window.monaco){
+      fn(monaco)
+    }
+    else{
+      __monacoRequire(["vs/editor/editor.main"], function(){fn()})
+    }
+  }
+  RequireMonaco(function(monaco){
+    __Monaco = monaco
+  })
+  </script>
+  <script src="/typescript.js"></script>
+  <script src="/src.js"></script>
 </body>
 </html>

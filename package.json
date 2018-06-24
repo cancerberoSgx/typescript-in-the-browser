@@ -10,7 +10,7 @@
     "cp-static": "ts-node scripts/copy-static",
     "watch-static": "ts-node scripts/watch-static",
     "bundle-src": "npm run tsc && browserify dist/src/main.js --debug -x typescript -t brfs -o static/src.js",
-    "bundle-typescript": "cd node_modules/typescript/lib/ ; browserify -r typescript -u monaco-editor -o ../../../static/typescript.js ; cd ../../..",
+    "bundle-typescript": "cd node_modules/typescript/lib/ ; browserify -r typescript -o ../../../static/typescript.js ; cd ../../..",
     "minify-typescript": "google-closure-compiler --js=static/typescript.js --js_output_file=static/typescript.min.js && mv static/typescript.min.js static/typescript.js",
     "minify-src": "google-closure-compiler --js=static/src.js --js_output_file=static/src.min.js && mv static/src.min.js static/src.js",
     "all-typescript": "npm run bundle-typescript; npm run minify-typescript",
@@ -20,8 +20,7 @@
     "dev-prepare": "rm -rf static dist ; tsc ; npm run cp-static ; npm run bundle-typescript ; npm run bundle-src",
     "dev": "concurrently --kill-others \"npm run watchify\" \"npm run tsc-watch\" \"npm run browser-sync\" \"npm run watch-static\"",
     "browser-sync": "node_modules/.bin/browser-sync start -s static -w -f \"static/*\"",
-    "clean": "rm -rf dist static",
-    "all": "npm run clean; npm run tsc && npm run cp-static && npm run all-typescript && npm run all-src && mv static/* docs"
+    "all": "rm -rf dist static docs; npm run tsc && npm run cp-static && npm run all-typescript && npm run all-src && mv static docs"
   },
   "keywords": [
     "TypeScript",
