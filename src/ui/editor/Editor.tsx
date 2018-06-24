@@ -1,15 +1,16 @@
 import React from 'react';
-import { monaco } from '../uiUtil';
+// import { monaco } from '../uiUtil';
 import { editor } from 'monaco-editor'
 import { getUIConfig } from '../iuSettingsState';
 import { ProgramFile } from '../../programProvider';
+import {  getMonaco } from './monaco';
+import { getMonacoModelFor, registerEditor } from '../uiUtil';
 
 type Props = { id: string, file: ProgramFile, width: string, height: string }
 
 export class Editor extends React.Component<Props> {
   editor: editor.IStandaloneCodeEditor;
   render() {
-
     if (getUIConfig().editorKind === 'monaco') {
       return (
         <div className="editor" id={this.props.id} style={{ width: this.props.width, height: this.props.height }}></div>
@@ -28,11 +29,12 @@ export class Editor extends React.Component<Props> {
   }
   private installMonaco(){
     if (getUIConfig().editorKind === 'monaco') {
-      this.editor = monaco().editor.create(document.getElementById(this.props.id), {
-        value: this.props.file.content,
-        language: 'typescript',
+      const model = getMonacoModelFor(this.props.file)
+      this.editor = getMonaco().editor.create(document.getElementById(this.props.id), {
+        model ,
         automaticLayout: true
       })
+      setTimeout(()=>registerEditor(this.editor, model), 1000)
     }
   }
   private uninstallMonaco(){
@@ -50,3 +52,5 @@ export class Editor extends React.Component<Props> {
     this.uninstallMonaco()
   }
 }
+
+

@@ -58,24 +58,24 @@ These are self contained examples that uses typescript without processing or cha
 ## TODO: 
 
  * this file https://cdnjs.cloudflare.com/ajax/libs/typescript/2.9.2/typescript.min.js works when transpiling and weight only 400kb. Let's try with that one instead of with the big one we are currently using 
- * monaco editor and 100% client side typescript experience
  * JS api so I can easily use this "project" in my own - for example, I want to compile typescript in my project that runs in the browser and easily require this one using browserify. - I think is already done we should test if it works
  * development - sourcemaps
- * idea: for each project in example files add a tsconfig.json and show all files as a project and use that tsconfig when creating the ts.Program
  * specs / test - would be interesting to have the plugin development experience in the browser. seems to be fast.
  * when we implement js API for plugins like proactive we will lcan apply it to monaco web no matter if it supports tls plugins or not
- * Language service ? 
- * typechecker? 
  * plugins ? 
- * tsquery
  * monaco + plugins + compiler 100% in client would be awesome
- * large projects ?
- * since this is not a plugin maybe we want to move it to a separate project or put it toguether with typescript-compiler-playground both in the same repo
+ * large projects ? support .zip file with ts project drag and drop
+ * since this is not a plugin maybe we want to move it to a separate project or put it together with typescript-compiler-playground both in the same repo
  * first implementation in memory but then implement it using browserfs both using a fast/synch techology and then using  a slow / request-based one.
- * OOT: small framework around monaco with * tree view at the right side and a "comsole / webtools" in the bottom - that wl lhelp us to present these kind of examples. 
+ * OOT: small framework around monaco with * tree view at the right side and a "comsole / webtools" in the bottom - that wl help us to present these kind of examples. 
 
 ## Dones
 
+ * idea: for each project in example files add a tsconfig.json and show all files as a project and use that tsconfig when creating the ts.Program
+ * monaco editor and 100% client side typescript experience
  * move out typescript.js from compilation chain so its faster
  * browsersync - watchify and tsc -w for development is great.
  * ts-simple-ast ?  - not possible to run in the browser. 
+ * Language service ? 
+ * typechecker? 
+ * tsquery

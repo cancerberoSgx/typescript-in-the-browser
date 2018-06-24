@@ -7,11 +7,12 @@ import typeChecker1 from './examples/typeChecker1';
 import { getDefaultLanguageServiceProvider } from './languageServiceProvider/languageServiceProviderFactory';
 import { getDefaultProgramProvider } from './programProvider/programProviderFactory';
 import { Example } from './types';
-import { log, resetLog, configureMonacoTypeScriptDefaults } from './ui/uiUtil';
+import { log, resetLog, resetMonacoModelsAndEditors, setMonacoTypeScriptDefaults, createAllMonacoModelsFor } from './ui/uiUtil';
 import loadProjectJsonTest1 from './examples/loadProjectJsonTest1';
 import * as ts from 'typescript';
 import { ProgramFile } from './programProvider';
 import { debugFactory } from './util';
+import { getMonaco } from './ui/editor/monaco';
 
 
 const debug = debugFactory('examples')
@@ -34,22 +35,20 @@ let currentExample: Example
 
 let currentExampleTsSourceFilesOnly: ProgramFile[] = []
 export let lastExampleExecutionTime: number
-// let currentExampleCompilerOptions: ts.CompilerOptions | undefined 
-// export function getCurrentExampleCompilerOptions():  ts.CompilerOptions | undefined {
-//   return currentExampleCompilerOptions
-// }
 export function getCurrentExampleTsFilesOnly(): ProgramFile[] {
   return currentExampleTsSourceFilesOnly
 }
-
-
 export function getCurrentExample(): Example {
   return currentExample
 }
 export function dispatchExamples() {
   const defaultTest = examples[0].id
   const exampleId = window.location.hash.split('example=')[1] || defaultTest
-  currentExample = getExamples().find(e => e.id === exampleId)
+  const targetExample = getExamples().find(e => e.id === exampleId)
+  if(targetExample===currentExample){
+    return
+  }
+  currentExample = targetExample
   if (!currentExample) {
     alert('cannot execute test ' + exampleId + '. Executing default one ' + defaultTest)
     currentExample = getExamples().find(e => e.id === defaultTest)
@@ -60,24 +59,18 @@ export function dispatchExamples() {
 function executeExample(example: Example) {
   try {
     resetLog()
+    resetMonacoModelsAndEditors()
     currentExampleTsSourceFilesOnly = example.files.filter(f => ['.ts', '.tsx'].find(ends => f.fileName.endsWith(ends))) || []
     const tsConfigFile = example.files.find(f => f.fileName === 'tsconfig.json')
-    // currentExampleCompilerOptions = undefined
-    // if (tsConfigFile) {
-    // try {
-    // currentExampleCompilerOptions = JSON.parse(tsConfigFile.content).compilerOptions || undefined
-    // debug('Using project provided tsconfig.json: \n' + tsConfigFile.content)//JSON.stringify(currentExampleCompilerOptions))
-    // } catch (error) {
-    //   alert('Error parsing project tsconfig.json file. json :\n' + tsConfigFile.content)
-    // }
-    // }
     const compilerOptionsValue = tsConfigFile ? tsConfigFile.content : ts.getDefaultCompilerOptions()
     currentExampleProgram = getDefaultProgramProvider().createProgram(currentExampleTsSourceFilesOnly, compilerOptionsValue)
     const languageService = getDefaultLanguageServiceProvider().createLanguageService(example.files, compilerOptionsValue)
     const t0 = performance.now()
+    setMonacoTypeScriptDefaults(currentExampleProgram)
+    createAllMonacoModelsFor(currentExample) // /heads up: we want to create all monaco models for all files always no matter if the will be displayed or not
     example.execute({ program: currentExampleProgram, languageService })
+    // refreshMonacoModelsAndEditors()
     lastExampleExecutionTime = performance.now() - t0
-    configureMonacoTypeScriptDefaults(currentExample, currentExampleProgram)
   } catch (error) {
     log('error on execute: ' + error + '\n' + error.stack)
     throw error
