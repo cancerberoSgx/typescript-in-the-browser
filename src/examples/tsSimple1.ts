@@ -1,7 +1,7 @@
 
 import * as ts from 'typescript';
 import { Example, ExampleExecutionOptions } from '../types';
-import { log } from '../ui/log';
+import { log } from '../ui/uiUtil';
 import { getFiles } from './exampleFilesManager';
 
 export default class implements Example {

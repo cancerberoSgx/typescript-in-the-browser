@@ -1,5 +1,5 @@
 import React from 'react';
-import { getLines } from './log';
+import { getLogLines } from './uiUtil';
 import { lastExampleExecutionTime } from '../examples';
 import { Editor } from './editor/Editor';
 
@@ -8,7 +8,7 @@ export default ()=>
       <h3>Example output</h3>
       (Execution time: {lastExampleExecutionTime.toLocaleString(undefined, {maximumFractionDigits: 0})}ms)
       <br/> <br/>
-      <pre>{getLines().join('')}</pre>
+      <pre>{getLogLines().join('')}</pre>
 
       {/* <Editor code={getLines().join('')} width="100%" height="300px" id="exampleOutput"/> */}
     </div>

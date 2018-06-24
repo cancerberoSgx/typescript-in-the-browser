@@ -7,7 +7,7 @@ import typeChecker1 from './examples/typeChecker1';
 import { getDefaultLanguageServiceProvider } from './languageServiceProvider/languageServiceProviderFactory';
 import { getDefaultProgramProvider } from './programProvider/programProviderFactory';
 import { Example } from './types';
-import { log, resetLog } from './ui/log';
+import { log, resetLog } from './ui/uiUtil';
 
 const examples = [
   new tsSimple1(),
