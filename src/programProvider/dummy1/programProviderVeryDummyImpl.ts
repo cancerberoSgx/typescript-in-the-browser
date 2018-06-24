@@ -2,6 +2,11 @@ import * as ts from "typescript";
 import { ProgramProvider, ProgramFile } from '../index';
 import { join } from 'path';
 
+export const defaultCompilerOptions: { compilerOptions: ts.CompilerOptions } = {
+  compilerOptions: {
+    lib: ["es2018", "dom"]
+  }
+}
 /**
  * an in memory filesystem-based program provider. Very simple not ready for production just to see if we can run typescript tin the browsers
  * one instance of me manages one instance of compiler host and program 
@@ -9,18 +14,15 @@ import { join } from 'path';
 export class ProgramProviderVeryDummyImpl implements ProgramProvider {
   private program: ts.Program;
   private compilerHost: ts.CompilerHost;
-  tsConfigJson: any;
+  // tsConfigJson: any;
 
-  defaultCompilerOptions: { compilerOptions: ts.CompilerOptions } = {
-    compilerOptions: {
-      lib: ["es2018", "dom"]
-    }
-  }
+  defaultCompilerOptions: { compilerOptions: ts.CompilerOptions } = defaultCompilerOptions
+
   /** creates a dummy ts.Program in memory with given source files inside */
   createProgram(files: ProgramFile[], compilerOptions?: ts.CompilerOptions): ts.Program {
-    this.tsConfigJson = ts.parseConfigFileTextToJson('tsconfig.json',
+    const tsConfigJson = ts.parseConfigFileTextToJson('tsconfig.json',
       compilerOptions ? JSON.stringify(compilerOptions) : JSON.stringify(this.defaultCompilerOptions))
-    let { options, errors } = ts.convertCompilerOptionsFromJson(this.tsConfigJson.config.compilerOptions, '.')
+    let { options, errors } = ts.convertCompilerOptionsFromJson(tsConfigJson.config.compilerOptions, '.')
     if (errors.length) {    //TODO. better errors
       throw errors
     }
@@ -31,7 +33,7 @@ export class ProgramProviderVeryDummyImpl implements ProgramProvider {
 }
 
 // TODO: move to separate file
-class ModuleResolutionHostVeryDummy implements ts.ModuleResolutionHost {
+export class ModuleResolutionHostVeryDummy implements ts.ModuleResolutionHost {
   constructor(protected files: ProgramFile[]) {
   }
   addFiles(files: ProgramFile[]): any {
@@ -68,10 +70,12 @@ class ModuleResolutionHostVeryDummy implements ts.ModuleResolutionHost {
 }
 
 // TODO:  most to a separate file
-class CompilerHostVeryDummy extends ModuleResolutionHostVeryDummy implements ts.CompilerHost {
+export class CompilerHostVeryDummy extends ModuleResolutionHostVeryDummy implements ts.CompilerHost {
+
   constructor(protected options: ts.CompilerOptions, files: ProgramFile[]) {
     super(files)
   }
+  
   getSourceFile(fileName: string, languageVersion: ts.ScriptTarget, onError?: (message: string) => void) {
     const sourceText = this.readFile(fileName); //TODO    
     const sourceFIle = sourceText !== undefined ? ts.createSourceFile(fileName, sourceText, languageVersion, true) : undefined;

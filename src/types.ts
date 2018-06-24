@@ -3,6 +3,7 @@ import { ProgramFile } from './programProvider';
 
 export interface ExampleExecutionOptions {
   program: ts.Program
+  languageService: ts.LanguageService
 }
 export interface ExampleExecutionResult {
 }

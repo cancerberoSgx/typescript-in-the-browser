@@ -52,6 +52,12 @@ const files = [
     fileName: resolve('.') + '/dist/../src/examples/typeChecker1.ts',
     content: readFileSync(resolve('.') + '/dist/../src/examples/typeChecker1.ts').toString()
   },
+
+  {
+    fileName: resolve('.') + '/dist/../src/examples/languageService1.ts',
+    content: readFileSync(resolve('.') + '/dist/../src/examples/languageService1.ts').toString()
+  },
+  
 ]
   .map(f => Object.assign(f, { fileName: f.fileName.replace('//dist/../src/', '') }))
 

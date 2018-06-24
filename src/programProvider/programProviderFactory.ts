@@ -1,5 +1,5 @@
 import { ProgramProviderVeryDummyImpl } from './dummy1/programProviderVeryDummyImpl';
 
-export function getDefaultBrowserProgramProvider() {
+export function getDefaultProgramProvider() {
   return new ProgramProviderVeryDummyImpl()
 }
