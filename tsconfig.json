@@ -10,6 +10,7 @@
     "rootDir": ".",
     "strict": true, 
     "strictNullChecks": false,
+    "noImplicitAny": false,
     "sourceMap": true,
     "esModuleInterop": true,
     "declaration": true

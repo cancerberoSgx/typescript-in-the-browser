@@ -45,5 +45,9 @@ export function dispatchExamples() {
     log('error on execute: ' + error + '\n' + error.stack)
   }
 }
-
 export let lastExampleExecutionTime:number
+
+
+// import {editor} from 'monaco-editor'
+
+// const ed = editor.create(document.getElementById('editor1'), {}, {})

@@ -13,14 +13,14 @@ export default ()=>
         <a className={"nav-link"} href="#">TypeScript compiler in the browser!</a>
       </li>
       <li className={"nav-item dropdown"}>
-        <a className={"nav-link dropdown-toggle"} href="https://example.com" id="dropdown08" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Examples</a>
+        <a className={"nav-link dropdown-toggle"} href="#" id="dropdown08" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Examples</a>
         <div className={"dropdown-menu"} aria-labelledby="dropdown08">
           {getExamples().map(ex=><a className={"dropdown-item"} href={"#example="+ex.id} key={ex.id}>{ex.name}</a>)}
         </div>
       </li>
 
       <li className={"nav-item dropdown"}>
-        <a className={"nav-link dropdown-toggle"} href="https://example.com" id="dropdown08" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+        <a className={"nav-link dropdown-toggle"} href="#" id="dropdown08" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
         <div className={"dropdown-menu"} aria-labelledby="dropdown09">
           <a className={"dropdown-item"} data-toggle="modal" data-target="#whatsThisModal">What's this?</a>
           <a className={"dropdown-item"} href="https://github.com/cancerberoSgx/typescript-in-the-browser">Project home</a>
