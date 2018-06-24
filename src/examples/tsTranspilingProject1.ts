@@ -4,7 +4,8 @@ import * as ts from 'typescript';
 import { Example, ExampleExecutionOptions } from '../types';
 import { log } from '../ui/uiUtil';
 import { getFiles } from './exampleFilesManager';
-import { defaultFormatDiagnosticHost } from './exampleUtil';
+import { defaultFormatDiagnosticHost } from '../util';
+// import { defaultFormatDiagnosticHost } from './exampleUtil';
 
 
 export default class implements Example {

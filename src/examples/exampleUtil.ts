@@ -25,8 +25,4 @@ export function printAllSourceFileAst(program: ts.Program, l: typeof log = log) 
   })
 }
 
-export const defaultFormatDiagnosticHost: ts.FormatDiagnosticsHost = {
-  getCanonicalFileName(fileName: string) { return fileName },
-  getCurrentDirectory() { return '.' },
-  getNewLine() { return '\n' }
-}
+// export const defaultFormatDiagnosticHost: ts.FormatDiagnosticsHost = defaultFormatDiagnosticHost

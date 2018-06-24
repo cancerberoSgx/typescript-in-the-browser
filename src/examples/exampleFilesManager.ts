@@ -68,6 +68,11 @@ const files = [
     content: readFileSync(resolve('.') + '/dist/../src/examples/files/tsquery1/sample1.ts').toString()
   },
   
+  {
+    fileName: resolve('.') + '/dist/../src/examples/loadProjectJsonTest1.ts',
+    content: readFileSync(resolve('.') + '/dist/../src/examples/loadProjectJsonTest1.ts').toString()
+  },
+
 ]
   .map(f => Object.assign(f, { fileName: f.fileName.replace('//dist/../src/', '') }))
 

@@ -1,6 +1,5 @@
 import React, { ChangeEvent } from 'react';
 import { getCurrentExample } from '../../examples';
-import { getFiles } from '../../examples/exampleFilesManager';
 import { render } from '../../main';
 import { getSelectedFile, setSelectedFile } from './projectState';
 
@@ -29,17 +28,9 @@ export default () => {
 
 
 function selectedFileChanged(e: ChangeEvent<HTMLInputElement>) {
-  const selectedFile = getFiles().find(f => e.currentTarget.getAttribute('data-file') === f.fileName) ||
+  const selectedFile = getCurrentExample().files.find(f => e.currentTarget.getAttribute('data-file') === f.fileName) ||
     getCurrentExample().exampleSource
   setSelectedFile(selectedFile)
   render()
 }
-
-// function selectedFileClicked(e: MouseEvent<HTMLInputElement>) {
-//   const selectedFile = getFiles().find(f=>e.currentTarget.getAttribute('data-file')===f.fileName)|| getCurrentExample().exampleSource
-//   setSelectedFile(selectedFile)
-//   render()
-// }
-
-
 

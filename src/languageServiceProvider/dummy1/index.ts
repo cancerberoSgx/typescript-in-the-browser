@@ -1,62 +1,42 @@
-import { LanguageServiceProvider } from '..';
+import { join } from 'path';
 import * as ts from "typescript";
-import { CompilerHostVeryDummy, defaultCompilerOptions } from '../../programProvider/dummy1/programProviderVeryDummyImpl';
+import { LanguageServiceProvider } from '..';
 import { ProgramFile } from '../../programProvider';
+import { CompilerHostVeryDummy } from '../../programProvider/dummy1/programProviderVeryDummyImpl';
+import { buildCompilerOptions, debugFactory } from '../../util';
 
 
+const debug = debugFactory('LanguageServiceProviderDummyImpl')
 const fileVersions: { [name: string]: { version: number } } = {};
 const files: { [name: string]: ProgramFile } = {};
 
 export class LanguageServiceProviderDummy1 implements LanguageServiceProvider {
 
-  defaultCompilerOptions:  {
-    lib: ["es2018", "dom"]
-  }
-
-  createLanguageService(programFiles: ProgramFile[], compilerOptions?: ts.CompilerOptions): ts.LanguageService {
-
+  createLanguageService(programFiles: ProgramFile[], compilerOptions: ts.CompilerOptions | string): ts.LanguageService {
     programFiles.forEach(f => {
       files[f.fileName] = f
       fileVersions[f.fileName] = { version: 0 }
     })
-
-    // const options = compilerOptions ? JSON.stringify({compilerOptions}) : JSON.stringify({compilerOptions: defaultCompilerOptions})
-    // ts.parseConfigFileTextToJson('tsconfig.json',
-      // compilerOptions ? JSON.stringify(compilerOptions) : JSON.stringify(this.defaultCompilerOptions))
-    // let { options, errors } = ts.convertCompilerOptionsFromJson(tsConfigJson.config.compilerOptions, '.')
-    // if (errors.length) {    //TODO. better errors
-    //   throw errors
-    // }
-    const servicesHost = new LanguageServiceHostDummy1(compilerOptions || this.defaultCompilerOptions)
+    const finalCompilerOptions = buildCompilerOptions(compilerOptions)
+    const servicesHost = new LanguageServiceHostDummy1(finalCompilerOptions) // || this.defaultCompilerOptions
     const services = ts.createLanguageService(servicesHost, ts.createDocumentRegistry())
     return services
   }
-
 }
 
 
-class GetEffectiveTypeRootsHostDummy1 implements ts.GetEffectiveTypeRootsHost {
-  directoryExists(directoryName: string): boolean { return true } // TODO
-  getCurrentDirectory(): string { return '.' } // TODO
-}
-
-
-export class LanguageServiceHostDummy1 extends GetEffectiveTypeRootsHostDummy1 implements ts.LanguageServiceHost {
+export class LanguageServiceHostDummy1 implements ts.LanguageServiceHost {
   constructor(private compilerOptions: ts.CompilerOptions) {
-    super()
   }
+  directoryExists(directoryName: string): boolean { return true } // TODO
   getCompilationSettings(): ts.CompilerOptions {
     return this.compilerOptions
   }
-  // getNewLine?(): string {
-  //   return '\n' // TODO
-  // }
-  // getProjectVersion?(): string {
-  //   return '1.0' //TODO
-  // }
+  getNewLine?(): string {
+    return '\n' // TODO
+  }
   getScriptFileNames(): string[] {
-    console.log('getScriptFileNames', Object.keys(files) );
-    
+    debug('getScriptFileNames ' + Object.keys(files).join(','));
     return Object.keys(files)
   }
   // getScriptKind?(fileName: string): ts.ScriptKind;
@@ -64,48 +44,69 @@ export class LanguageServiceHostDummy1 extends GetEffectiveTypeRootsHostDummy1 i
     return fileVersions[fileName] && fileVersions[fileName].version.toString()
   }
   getScriptSnapshot(fileName: string): ts.IScriptSnapshot | undefined {
-
-    console.log('getScriptSnapshot', fileName );
+    debug('getScriptSnapshot: ' + fileName);
     if (!this.fileExists(fileName)) {
       return undefined;
     }
     return ts.ScriptSnapshot.fromString(this.readFile(fileName));
   }
-  // getProjectReferences?(): ReadonlyArray<ts.ProjectReference> | undefined{
-  //   return undefined
-  // }
-  // getLocalizedDiagnosticMessages?(): any{
-  //   return null
-  // }
-  // getCancellationToken?(): ts.HostCancellationToken{
-  //   return {
-  //     isCancellationRequested: ()=>false}
-  //   }
-  // }
-  // getCurrentDirectory(): string {
-  //   return '.'
-  // }
+  getCurrentDirectory(): string {
+    return '.'
+  }
   getDefaultLibFileName(options: ts.CompilerOptions): string {
     return CompilerHostVeryDummy.prototype.getDefaultLibFileName.apply(this, arguments)
   }
-  // log(s: string): void{
-  //   console.log(s)
-  // }
-  // trace?(s: string): void;
-  // error?(s: string): void;
-  // useCaseSensitiveFileNames?(): boolean;
-  // readDirectory?(path: string, extensions?: ReadonlyArray<string>, exclude?: ReadonlyArray<string>, include?: ReadonlyArray<string>, depth?: number): string[];
+  log(s: string): void {
+    debug('LanguageServiceDummy1' + s)
+  }
+  trace?(s: string): void {
+    console.trace('LanguageServiceDummy1' + s)
+  }
+  error?(s: string): void {
+
+    console.error('LanguageServiceDummy1' + s)
+  }
+  useCaseSensitiveFileNames?(): boolean {
+    return true
+  }
   readFile(path: string, encoding?: string): string | undefined {
-    console.log('readFile', path );
+    debug('readFile: ' + path);
     return files[path] ? files[path].content : undefined
   }
-  // realpath?(path: string): string;
+  realpath(path: string): string {
+    debug('realpath: ' + path);
+    return path
+  }
   fileExists(path: string): boolean {
-    console.log('fileExists', path );
+    debug('fileExists: ' + path);
     return !!files[path]
   }
+
+  resolveModuleNames?(moduleNames: string[], containingFile: string, reusedNames?: string[]): ts.ResolvedModule[] {
+    debug(`resolveModuleNames moduleNames: ${moduleNames && moduleNames.join(',')} containingFile: ${containingFile}, moduleSearchLocations: ${reusedNames && reusedNames.join(',')}`)
+    const resolvedModules: ts.ResolvedModule[] = [];
+    for (const moduleName of moduleNames) {
+      // try to use standard resolution
+      let result = ts.resolveModuleName(moduleName, containingFile, this.compilerOptions, { fileExists: this.fileExists.bind(this), readFile: this.readFile.bind(this) });
+      if (result.resolvedModule) {
+        resolvedModules.push(result.resolvedModule);
+      }
+      else {
+        const moduleSearchLocations = [this.getCurrentDirectory()]
+        for (const location of moduleSearchLocations) {
+          const modulePath = join(location, moduleName + ".d.ts");
+          if (this.fileExists(modulePath)) {
+            resolvedModules.push({ resolvedFileName: modulePath });
+          }
+        }
+      }
+    }
+    debug(`resolveModuleNames result: ${resolvedModules && JSON.stringify(resolvedModules)}`)
+    return resolvedModules;
+  }
+
+  // readDirectory?(path: string, extensions?: ReadonlyArray<string>, exclude?: ReadonlyArray<string>, include?: ReadonlyArray<string>, depth?: number): string[];
   // getTypeRootsVersion?(): number;
-  // resolveModuleNames?(moduleNames: string[], containingFile: string, reusedNames?: string[]): ts.ResolvedModule[];
   // getResolvedModuleWithFailedLookupLocationsFromCache?(modulename: string, containingFile: string): ts.ResolvedModuleWithFailedLookupLocations;
   // resolveTypeReferenceDirectives?(typeDirectiveNames: string[], containingFile: string): ts.ResolvedTypeReferenceDirective[];
   // getDirectories?(directoryName: string): string[];
@@ -115,6 +116,21 @@ export class LanguageServiceHostDummy1 extends GetEffectiveTypeRootsHostDummy1 i
   // getCustomTransformers?(): ts.CustomTransformers | undefined;
   // isKnownTypesPackageName?(name: string): boolean;
   // installPackage?(options: ts.InstallPackageOptions): Promise<ts.ApplyCodeActionCommandResult>;
+  // getProjectReferences?(): ReadonlyArray<ts.ProjectReference> | undefined{
+  //   return undefined
+  // }
+  // getLocalizedDiagnosticMessages?(): any{
+  //   return null
+  // }
+  // getProjectVersion?(): string {
+  //   return '1.0' //TODO
+  // }
+  getCancellationToken?(): ts.HostCancellationToken { // TODO
+    return {
+      isCancellationRequested: () => false
+    }
+  }
+
 }
 
 

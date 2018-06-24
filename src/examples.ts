@@ -8,6 +8,13 @@ import { getDefaultLanguageServiceProvider } from './languageServiceProvider/lan
 import { getDefaultProgramProvider } from './programProvider/programProviderFactory';
 import { Example } from './types';
 import { log, resetLog } from './ui/uiUtil';
+import loadProjectJsonTest1 from './examples/loadProjectJsonTest1';
+import * as ts from 'typescript';
+import { ProgramFile } from './programProvider';
+import { debugFactory } from './util';
+
+
+const debug = debugFactory('examples')
 
 const examples = [
   new tsSimple1(),
@@ -16,38 +23,67 @@ const examples = [
   // new tsSimpleAst1()
   new typeChecker1(),
   new languageService1(),
-  new tsquery1()
+  new tsquery1(),
+  new loadProjectJsonTest1()
 ]
 export function getExamples(): Example[] {
   return examples
 }
 
-let example: Example
+let currentExample: Example
+
+let currentExampleTsSourceFilesOnly: ProgramFile[] = []
+export let lastExampleExecutionTime: number
+// let currentExampleCompilerOptions: ts.CompilerOptions | undefined 
+// export function getCurrentExampleCompilerOptions():  ts.CompilerOptions | undefined {
+//   return currentExampleCompilerOptions
+// }
+export function getCurrentExampleTsFilesOnly(): ProgramFile[] {
+  return currentExampleTsSourceFilesOnly
+}
+
+
 export function getCurrentExample(): Example {
-  return example
+  return currentExample
 }
 export function dispatchExamples() {
   const defaultTest = examples[0].id
   const exampleId = window.location.hash.split('example=')[1] || defaultTest
-  example = getExamples().find(e => e.id === exampleId)
-  if (!example) {
+  currentExample = getExamples().find(e => e.id === exampleId)
+  if (!currentExample) {
     alert('cannot execute test ' + exampleId + '. Executing default one ' + defaultTest)
-    example = getExamples().find(e => e.id === defaultTest)
+    currentExample = getExamples().find(e => e.id === defaultTest)
   }
+  executeExample(currentExample)
+}
+
+function executeExample(example: Example) {
   try {
     resetLog()
-    const program = getDefaultProgramProvider().createProgram(example.files) // TODO: pass example project's ts-config in options
-    const languageService = getDefaultLanguageServiceProvider().createLanguageService(example.files, { lib: [] })
+    currentExampleTsSourceFilesOnly = example.files.filter(f => ['.ts', '.tsx'].find(ends => f.fileName.endsWith(ends))) || []
+    const tsConfigFile = example.files.find(f => f.fileName === 'tsconfig.json')
+    // currentExampleCompilerOptions = undefined
+    // if (tsConfigFile) {
+    // try {
+    // currentExampleCompilerOptions = JSON.parse(tsConfigFile.content).compilerOptions || undefined
+    // debug('Using project provided tsconfig.json: \n' + tsConfigFile.content)//JSON.stringify(currentExampleCompilerOptions))
+    // } catch (error) {
+    //   alert('Error parsing project tsconfig.json file. json :\n' + tsConfigFile.content)
+    // }
+    // }
+    const compilerOptionsValue = tsConfigFile ? tsConfigFile.content : ts.getDefaultCompilerOptions()
+    currentExampleProgram = getDefaultProgramProvider().createProgram(currentExampleTsSourceFilesOnly, compilerOptionsValue)
+    const languageService = getDefaultLanguageServiceProvider().createLanguageService(example.files, compilerOptionsValue)
     const t0 = performance.now()
-    example.execute({ program, languageService })
+    example.execute({ program: currentExampleProgram, languageService })
     lastExampleExecutionTime = performance.now() - t0
   } catch (error) {
     log('error on execute: ' + error + '\n' + error.stack)
+    throw error
   }
 }
-export let lastExampleExecutionTime: number
 
-
-// import {editor} from 'monaco-editor'
-
-// const ed = editor.create(document.getElementById('editor1'), {}, {})
+let currentExampleProgram: ts.Program | undefined
+export function getCurrentExampleProgram(): ts.Program | undefined {
+  return currentExampleProgram
+}

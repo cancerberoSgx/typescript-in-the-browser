@@ -4,9 +4,12 @@ import { getSelectedFile } from './projectState';
 
 export default () => {
   const f = getSelectedFile()
-    return (
-      <div>
-        <Editor code={f ? f.content : ''} width="100%" height="300px" id={'selected-file-'} />
-      </div>
-    )
+  if(!f){
+    return (<div>No file selected</div>)
+  }
+  return (
+    <div>
+      <Editor file={f} width="100%" height="300px" id={'selected-file-'} />
+    </div>
+  )
 }
