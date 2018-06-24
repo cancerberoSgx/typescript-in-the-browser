@@ -1,5 +1,5 @@
 import React from 'react';
-import log from './exampleOutput'
+import exampleOutput from './exampleOutput'
 import currentExample from './currentExample';
 export default ()=>
 <div className={"container-fluid"}>
@@ -8,7 +8,7 @@ export default ()=>
     {currentExample()}
     </div>
     <div className={"col-6"}>
-      {log()}
+      {exampleOutput()}
     </div>
   </div>
 </div>
