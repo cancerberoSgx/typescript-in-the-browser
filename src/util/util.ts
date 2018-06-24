@@ -6,8 +6,9 @@ export function debugFactory(componentName: string): Debug {
     }
   }
 }
-
 export type Debug = (m: string) => void
+
+
 
 
 import * as ts from "typescript";
@@ -39,7 +40,7 @@ export const defaultFormatDiagnosticHost: ts.FormatDiagnosticsHost = {
 
 
 
-import { ProgramFile } from './programProvider';
+import { ProgramFile } from '../programProvider';
 export interface TreeNode {
   isDirectory: boolean
   children: TreeNode[]

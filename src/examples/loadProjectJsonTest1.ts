@@ -1,6 +1,6 @@
 
 import { Example , ExampleExecutionOptions } from '../types';
-import { log } from '../ui/uiUtil';
+import { log } from '../util/uiUtil';
 import { getFiles } from './exampleFilesManager';
 import * as tsSampleProjectFiles from './projectsJson/ts-sample-project.json'
 

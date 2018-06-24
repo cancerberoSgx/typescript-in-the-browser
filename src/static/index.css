@@ -3,10 +3,14 @@
   overflow: auto;
 }
 
-.node {
-  min-width: 100%;
-  position: relative;
+
+#tsProjectFolderDropArea {
+  width: 300px; 
+  height: 150px; 
+  border: 3px solid pink; 
+  background-color: darkolivegreen
 }
-/* rst__tree .rstcustom__node {
-    left: -10px;
-} */
+
+#saveProjectJsonTextarea{
+  width: 100%
+}

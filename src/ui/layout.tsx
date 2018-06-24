@@ -5,6 +5,9 @@ import forkRibbon from './forkRibbon';
 import whatsThisModal from './navbar/whatsThisModal';
 import mainContentProjectEditor from './mainContentProjectEditor/mainContentProjectEditor';
 import {getUIConfig} from './iuSettingsState'
+import dropTsProjectFolder from './navbar/dropTsProjectFolderModal';
+import saveProjectModal from './navbar/saveProjectModal';
+import loadProjectModal from './navbar/loadProjectModal';
 
 export default ()=>
   <div>
@@ -12,4 +15,8 @@ export default ()=>
   {getUIConfig().mainContentKind==='project' ? mainContentProjectEditor() : mainContentSimple1()}
   {forkRibbon()}
   {whatsThisModal()}
+  {dropTsProjectFolder()}
+  {saveProjectModal()}
+  {loadProjectModal()}
+  
   </div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SortableTree, { ExtendedNodeData } from 'react-sortable-tree';
 import FileExplorerTheme from 'react-sortable-tree-theme-file-explorer';
-import { filesToTreeNodes } from '../../util';
+import { filesToTreeNodes } from '../../util/util';
 import { Example } from '../../types';
 import { setSelectedFile } from '../mainContentProjectEditor/projectState';
 import { render } from '../../main';

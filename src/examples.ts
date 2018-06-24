@@ -7,12 +7,12 @@ import typeChecker1 from './examples/typeChecker1';
 import { getDefaultLanguageServiceProvider } from './languageServiceProvider/languageServiceProviderFactory';
 import { getDefaultProgramProvider } from './programProvider/programProviderFactory';
 import { Example } from './types';
-import { log, resetLog, resetMonacoModelsAndEditors, setMonacoTypeScriptDefaults, createAllMonacoModelsFor } from './ui/uiUtil';
+import { log, resetLog, resetMonacoModelsAndEditors, setMonacoTypeScriptDefaults, createAllMonacoModelsFor } from './util/uiUtil';
 import loadProjectJsonTest1 from './examples/loadProjectJsonTest1';
 import * as ts from 'typescript';
 import { ProgramFile } from './programProvider';
-import { debugFactory } from './util';
-import { getMonaco } from './ui/monacoFacade';
+import { debugFactory } from './util/util';
+import { getMonaco } from './util/monacoFacade';
 
 
 const debug = debugFactory('examples')
@@ -55,8 +55,8 @@ export function dispatchExamples() {
   }
   executeExample(currentExample)
 }
-
-function executeExample(example: Example) {
+let currentLanguageService: ts.LanguageService
+export function executeExample(example: Example) {
   try {
     resetLog()
     resetMonacoModelsAndEditors()
@@ -64,11 +64,11 @@ function executeExample(example: Example) {
     const tsConfigFile = example.files.find(f => f.fileName === 'tsconfig.json')
     const compilerOptionsValue = tsConfigFile ? tsConfigFile.content : ts.getDefaultCompilerOptions()
     currentExampleProgram = getDefaultProgramProvider().createProgram(currentExampleTsSourceFilesOnly, compilerOptionsValue)
-    const languageService = getDefaultLanguageServiceProvider().createLanguageService(example.files, compilerOptionsValue)
+    currentLanguageService = getDefaultLanguageServiceProvider().createLanguageService(example.files, compilerOptionsValue)
     const t0 = performance.now()
     setMonacoTypeScriptDefaults(currentExampleProgram)
     createAllMonacoModelsFor(currentExample) // /heads up: we want to create all monaco models for all files always no matter if the will be displayed or not
-    example.execute({ program: currentExampleProgram, languageService })
+    example.execute({ program: currentExampleProgram, languageService: currentLanguageService })
     // refreshMonacoModelsAndEditors()
     lastExampleExecutionTime = performance.now() - t0
   } catch (error) {

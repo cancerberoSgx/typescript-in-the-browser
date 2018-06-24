@@ -1,6 +1,6 @@
 import React from 'react';
 import { lastExampleExecutionTime } from '../../examples';
-import { getLogLines } from '../uiUtil';
+import { getLogLines } from '../../util/uiUtil';
 
 export default () =>
   <div>

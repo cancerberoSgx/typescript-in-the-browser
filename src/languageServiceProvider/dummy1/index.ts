@@ -3,7 +3,7 @@ import * as ts from "typescript";
 import { LanguageServiceProvider } from '..';
 import { ProgramFile } from '../../programProvider';
 import { CompilerHostVeryDummy } from '../../programProvider/dummy1/programProviderVeryDummyImpl';
-import { buildCompilerOptions, debugFactory } from '../../util';
+import { buildCompilerOptions, debugFactory } from '../../util/util';
 
 
 const debug = debugFactory('LanguageServiceProviderDummyImpl')
@@ -87,7 +87,10 @@ export class LanguageServiceHostDummy1 implements ts.LanguageServiceHost {
   } // TODO
 // normalizePath
   resolveModuleNames?(moduleNames: string[], containingFile: string, reusedNames?: string[]): ts.ResolvedModule[] {
-    debug(`resolveModuleNames moduleNames: ${moduleNames && moduleNames.join(',')} containingFile: ${containingFile}, moduleSearchLocations: ${reusedNames && reusedNames.join(',')}`)
+    try {
+      
+  
+    debug(`resolveModuleNames moduleNames: ${moduleNames && moduleNames.join(',')} containingFile: ${containingFile}, reusedNames: ${reusedNames && reusedNames.join(',')}`)
     const resolvedModules: ts.ResolvedModule[] = [];
     for (const moduleName of moduleNames) {
       // try to use standard resolution
@@ -96,6 +99,7 @@ export class LanguageServiceHostDummy1 implements ts.LanguageServiceHost {
         resolvedModules.push(result.resolvedModule);
       }
       else {
+        debugger;
         const moduleSearchLocations = [this.getCurrentDirectory()]
         for (const location of moduleSearchLocations) {
           const modulePath = join(location, moduleName + ".d.ts");
@@ -107,6 +111,9 @@ export class LanguageServiceHostDummy1 implements ts.LanguageServiceHost {
     }
     debug(`resolveModuleNames result: ${resolvedModules && JSON.stringify(resolvedModules)}`)
     return resolvedModules;
+  } catch (error) {
+    debugger
+  }
   }
 
   // readDirectory?(path: string, extensions?: ReadonlyArray<string>, exclude?: ReadonlyArray<string>, include?: ReadonlyArray<string>, depth?: number): string[];

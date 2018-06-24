@@ -2,9 +2,9 @@
 import { basename, extname } from 'path';
 import * as ts from 'typescript';
 import { Example, ExampleExecutionOptions } from '../types';
-import { log } from '../ui/uiUtil';
+import { log } from '../util/uiUtil';
 import { getFiles } from './exampleFilesManager';
-import { defaultFormatDiagnosticHost } from '../util';
+import { defaultFormatDiagnosticHost } from '../util/util';
 // import { defaultFormatDiagnosticHost } from './exampleUtil';
 
 

@@ -1,6 +1,6 @@
 import { join } from 'path';
 import * as ts from "typescript";
-import { buildCompilerOptions, debugFactory } from '../../util';
+import { buildCompilerOptions, debugFactory } from '../../util/util';
 import { ProgramFile, ProgramProvider } from '../index';
 
 
