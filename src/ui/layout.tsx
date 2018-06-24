@@ -1,16 +1,13 @@
 import React from 'react';
-import navbar from './navbar';
-import mainContentSimple1 from './mainContentSimple1';
+import navbar from './navbar/navbar';
+import mainContentSimple1 from './mainContentSimple1/mainContentSimple1';
 import forkRibbon from './forkRibbon';
-import whatsThisModal from './whatsThisModal';
-// import mainContentEditors from './mainContentEditors';
-// import { Editor } from './Editor';
+import whatsThisModal from './navbar/whatsThisModal';
 
 export default ()=>
-<div>
-{navbar()}
-{/* {mainContentEditors()} */}
-{mainContentSimple1()}
-{forkRibbon()}
-{whatsThisModal()}
-</div>
+  <div>
+  {navbar()}
+  {mainContentSimple1()}
+  {forkRibbon()}
+  {whatsThisModal()}
+  </div>

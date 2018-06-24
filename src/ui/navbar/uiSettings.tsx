@@ -1,6 +1,6 @@
 import React from 'react';
-import { render } from '../main';
-import { getUIConfig, setEditorKind } from './iuConfig';
+import { render } from '../../main';
+import { getUIConfig, setEditorKind } from '../iuConfig';
 
 export default () =>
   <form className={"px-4 py-3"}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { monaco } from './monacoEditor';
+import { monaco } from '../uiUtil';
 import { editor } from 'monaco-editor'
 import { getUIConfig } from '../iuConfig';
 
@@ -7,11 +7,6 @@ type Props = { id: string, code: string, width: string, height: string }
 
 export class Editor extends React.Component<Props> {
   editor: editor.IStandaloneCodeEditor;
-  // editorKind: string;
-  // constructor(props: Props) {
-  //   super(props)
-  // this.editorKind = getUIConfig().editorKind
-  // }
   render() {
     if (getUIConfig().editorKind === 'monaco') {
       return (
@@ -53,16 +48,3 @@ export class Editor extends React.Component<Props> {
     this.uninstallMonaco()
   }
 }
-
-
-
-// function installResizeWatcher(el: HTMLElement, fn: ()=>void, interval:number = 2000):  NodeJS.Timer{
-//   let offset = {width: el.offsetWidth, height: el.offsetHeight}
-//   return setInterval(()=>{
-//     let newOffset = {width: el.offsetWidth, height: el.offsetHeight}
-//     if(offset.height!=newOffset.height||offset.width!=newOffset.width){
-//       offset = newOffset
-//       fn()
-//     }
-//   }, interval)
-// }

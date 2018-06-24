@@ -1,5 +1,5 @@
 import React from 'react';
-import { getExamples } from '../examples';
+import { getExamples } from '../../examples';
 import uiSettings from './uiSettings';
 
 export default () =>
