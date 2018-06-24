@@ -1,7 +1,7 @@
 import React from 'react';
 import { monaco } from '../uiUtil';
 import { editor } from 'monaco-editor'
-import { getUIConfig } from '../iuConfig';
+import { getUIConfig } from '../iuSettingsState';
 
 type Props = { id: string, code: string, width: string, height: string }
 
