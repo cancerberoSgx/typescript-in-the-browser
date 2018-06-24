@@ -19,7 +19,7 @@ export function getLogLines():string[]{
 
 import * as monaco from 'monaco-editor'
 import { ProgramFile } from '../programProvider';
-import { getMonaco } from './editor/monaco';
+import { getMonaco } from './monacoFacade';
 import * as ts from 'typescript'
 import { Example } from '../types';
 

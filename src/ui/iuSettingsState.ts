@@ -1,6 +1,6 @@
 const config: UIConfig = {
   editorKind: 'monaco',
-  mainContentKind: 'simple1'
+  mainContentKind: 'project'
 }
 export function getUIConfig(): UIConfig{
   return config

@@ -2,3 +2,11 @@
   resize: vertical;
   overflow: auto;
 }
+
+.node {
+  min-width: 100%;
+  position: relative;
+}
+/* rst__tree .rstcustom__node {
+    left: -10px;
+} */

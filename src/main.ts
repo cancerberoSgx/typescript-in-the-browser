@@ -1,7 +1,7 @@
 import { dispatchExamples } from './examples';
 import ReactDOM from 'react-dom'
 import layout from './ui/layout';
-import { requireMonaco } from './ui/editor/monaco';
+import { requireMonaco } from './ui/monacoFacade';
 
 export function render() {
   dispatchExamples()

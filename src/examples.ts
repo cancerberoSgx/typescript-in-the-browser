@@ -12,7 +12,7 @@ import loadProjectJsonTest1 from './examples/loadProjectJsonTest1';
 import * as ts from 'typescript';
 import { ProgramFile } from './programProvider';
 import { debugFactory } from './util';
-import { getMonaco } from './ui/editor/monaco';
+import { getMonaco } from './ui/monacoFacade';
 
 
 const debug = debugFactory('examples')
