@@ -1,27 +1,10 @@
 
-// log
-
-const lines:string[] = []
-export function log(...args:any[]){
-  const line = args.join(' ') + '\n'
-  lines.push(line)
-}
-export function resetLog(){
-  lines.length = 0
-}
-export function getLogLines():string[]{
-  return lines
-}
-
-
-
-
 
 import * as monaco from 'monaco-editor'
-import { ProgramFile } from '../programProvider';
+import { ProgramFile } from '../compiler/programProvider';
 import { getMonaco } from './monacoFacade';
 import * as ts from 'typescript'
-import { Example } from '../types';
+import { Example } from '../compiler/types';
 
 // monaco editor models to files conversion helpers
 function getMonacoUriFromFile(file: ProgramFile){

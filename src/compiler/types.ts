@@ -8,6 +8,7 @@ export interface ExampleExecutionOptions {
 export interface ExampleExecutionResult {
 }
 export type ExampleExecute = (config: ExampleExecutionOptions) => (ExampleExecutionResult | undefined | void)
+
 export interface Example {
   name: string
   id: string

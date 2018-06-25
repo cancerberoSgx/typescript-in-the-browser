@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
-import { ProgramFile } from '../programProvider';
+import { ProgramFile } from '../compiler/programProvider';
 
 //TODO: windows build probably will fail 
 // heads up - files are read at compile time with brfs - modify this only if you know what you are doing. 

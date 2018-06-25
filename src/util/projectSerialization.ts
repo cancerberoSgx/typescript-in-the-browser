@@ -1,4 +1,4 @@
-import { Example } from '../types';
+import { Example } from '../compiler/types';
 
 export function projectToJson(p: Example): string {
   return JSON.stringify({

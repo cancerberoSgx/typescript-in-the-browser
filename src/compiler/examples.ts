@@ -1,18 +1,19 @@
-import languageService1 from './examples/languageService1';
-import transformation1 from './examples/transformation1';
-import tsquery1 from './examples/tsquery1';
-import tsSimple1 from './examples/tsSimple1';
-import tsTranspilingProject1 from './examples/tsTranspilingProject1';
-import typeChecker1 from './examples/typeChecker1';
+import languageService1 from '../examples/languageService1';
+import transformation1 from '../examples/transformation1';
+import tsquery1 from '../examples/tsquery1';
+import tsSimple1 from '../examples/tsSimple1';
+import tsTranspilingProject1 from '../examples/tsTranspilingProject1';
+import typeChecker1 from '../examples/typeChecker1';
 import { getDefaultLanguageServiceProvider } from './languageServiceProvider/languageServiceProviderFactory';
 import { getDefaultProgramProvider } from './programProvider/programProviderFactory';
 import { Example } from './types';
-import { log, resetLog, resetMonacoModelsAndEditors, setMonacoTypeScriptDefaults, createAllMonacoModelsFor } from './util/uiUtil';
-import loadProjectJsonTest1 from './examples/loadProjectJsonTest1';
+import { log, resetLog  } from './util/uiUtil';
+import { resetMonacoModelsAndEditors, setMonacoTypeScriptDefaults, createAllMonacoModelsFor } from '../util/monacoUtil';
+import loadProjectJsonTest1 from '../examples/loadProjectJsonTest1';
 import * as ts from 'typescript';
 import { ProgramFile } from './programProvider';
 import { debugFactory } from './util/util';
-import { getMonaco } from './util/monacoFacade';
+import { getMonaco } from '../util/monacoFacade';
 
 
 const debug = debugFactory('examples')

@@ -3,8 +3,8 @@ import React from 'react';
 import { editor } from 'monaco-editor'
 import { getUIConfig } from '../iuSettingsState';
 import { ProgramFile } from '../../programProvider';
-import {  getMonaco } from '../../util/monacoFacade';
-import { getMonacoModelFor, registerEditor } from '../../util/uiUtil';
+import {  getMonaco } from '../../../util/monacoFacade';
+import { getMonacoModelFor, registerEditor } from '../../../util/monacoUtil';
 
 type Props = { id: string, file: ProgramFile, width: string, height: string }
 

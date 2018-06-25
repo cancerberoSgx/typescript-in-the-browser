@@ -1,5 +1,5 @@
 
-import { log } from '../util/uiUtil';
+import { log } from '../compiler/util/uiUtil';
 import * as ts from 'typescript'
 
 export function printNode(n: ts.Node, level: number = 0): string {

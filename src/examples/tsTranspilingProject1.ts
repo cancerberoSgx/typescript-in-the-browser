@@ -1,10 +1,10 @@
 
 import { basename, extname } from 'path';
 import * as ts from 'typescript';
-import { Example, ExampleExecutionOptions } from '../types';
-import { log } from '../util/uiUtil';
+import { Example, ExampleExecutionOptions } from '../compiler/types';
+import { log } from '../compiler/util/uiUtil';
 import { getFiles } from './exampleFilesManager';
-import { defaultFormatDiagnosticHost } from '../util/util';
+import { defaultFormatDiagnosticHost } from '../compiler/util/util';
 // import { defaultFormatDiagnosticHost } from './exampleUtil';
 
 
