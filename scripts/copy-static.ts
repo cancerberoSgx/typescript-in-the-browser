@@ -21,10 +21,5 @@ export function copy (){
     cp('-rf', c.source, c.dest)
   })
 }
-// mkdir('-p', 'static/monaco-editor/min/vs/base')
-// mkdir('-p', 'static/monaco-editor/min/vs/editor')
-// mkdir('-p', 'static/monaco-editor/min/vs/language/typescript')
-// mkdir('-p', 'static/monaco-editor/min/vs/language/json')
-// mkdir('-p', 'static/monaco-editor/min/vscode-languageserver-types')
 copy()
 
