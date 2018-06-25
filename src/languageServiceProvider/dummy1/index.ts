@@ -99,8 +99,8 @@ export class LanguageServiceHostDummy1 implements ts.LanguageServiceHost {
         resolvedModules.push(result.resolvedModule);
       }
       else {
-        debugger;
-        const moduleSearchLocations = [this.getCurrentDirectory()]
+        // debugger;
+        const moduleSearchLocations = reusedNames&& reusedNames.length ? reusedNames : [this.getCurrentDirectory()]
         for (const location of moduleSearchLocations) {
           const modulePath = join(location, moduleName + ".d.ts");
           if (this.fileExists(modulePath)) {

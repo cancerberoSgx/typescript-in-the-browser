@@ -41,6 +41,7 @@ export function getCurrentExampleTsFilesOnly(): ProgramFile[] {
 export function getCurrentExample(): Example {
   return currentExample
 }
+
 export function dispatchExamples() {
   const defaultTest = examples[0].id
   const exampleId = window.location.hash.split('example=')[1] || defaultTest
@@ -55,6 +56,8 @@ export function dispatchExamples() {
   }
   executeExample(currentExample)
 }
+
+
 let currentLanguageService: ts.LanguageService
 export function executeExample(example: Example) {
   try {
@@ -63,11 +66,23 @@ export function executeExample(example: Example) {
     currentExampleTsSourceFilesOnly = example.files.filter(f => ['.ts', '.tsx'].find(ends => f.fileName.endsWith(ends))) || []
     const tsConfigFile = example.files.find(f => f.fileName === 'tsconfig.json')
     const compilerOptionsValue = tsConfigFile ? tsConfigFile.content : ts.getDefaultCompilerOptions()
+    try {
     currentExampleProgram = getDefaultProgramProvider().createProgram(currentExampleTsSourceFilesOnly, compilerOptionsValue)
-    currentLanguageService = getDefaultLanguageServiceProvider().createLanguageService(example.files, compilerOptionsValue)
+    } catch (error) {
+      debug('Failed createProgram error: '+error + ' - '+error.stack)
+    }
+    try {    
+      currentLanguageService = getDefaultLanguageServiceProvider().createLanguageService(example.files, compilerOptionsValue)
+    } catch (error) {
+      debug('Failed createLanguageService error: '+error + ' - '+error.stack)
+    }
+    
     const t0 = performance.now()
-    setMonacoTypeScriptDefaults(currentExampleProgram)
-    createAllMonacoModelsFor(currentExample) // /heads up: we want to create all monaco models for all files always no matter if the will be displayed or not
+    setMonacoTypeScriptDefaults()
+
+    // /heads up: we want to create all monaco models for all files always no matter if the will be displayed or not
+    createAllMonacoModelsFor(currentExample) 
+    
     example.execute({ program: currentExampleProgram, languageService: currentLanguageService })
     // refreshMonacoModelsAndEditors()
     lastExampleExecutionTime = performance.now() - t0

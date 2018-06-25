@@ -35,7 +35,8 @@ export function installTsFolderDropManager(){
   let folderDDManager: FolderDropManager
   const folderDDListener = function (event: FolderDropManagerEvent) {
     if(event.type==='finish'){
-      console.log('finish');
+      console.log('finish files : '+files.map(f=>f.fileName));
+      debugger;
       const newExample: Example = {
         id: 'dropped_'+performance.now(),
         name: 'A folder just dropped',

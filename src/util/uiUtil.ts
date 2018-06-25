@@ -36,7 +36,7 @@ export function getMonacoModelFor(file: ProgramFile): monaco.editor.IModel {
   return getMonaco().editor.createModel(file.content, undefined, uri)
 }
 
-export function setMonacoTypeScriptDefaults(currentExampleProgram: ts.Program){
+export function setMonacoTypeScriptDefaults(){
   getMonaco().languages.typescript.typescriptDefaults.setCompilerOptions({
     baseUrl: 'src', 
     module: getMonaco().languages.typescript.ModuleKind.CommonJS, 

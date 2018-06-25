@@ -1,4 +1,4 @@
-const DEBUG = false
+const DEBUG = true
 export function debugFactory(componentName: string): Debug {
   return function debug(m: string) {
     if (DEBUG) {

@@ -2,6 +2,7 @@ import { join } from 'path';
 import * as ts from "typescript";
 import { buildCompilerOptions, debugFactory } from '../../util/util';
 import { ProgramFile, ProgramProvider } from '../index';
+import { getLibraries } from '../../util/libraries';
 
 
 const debug = debugFactory('programProviderVeryDummyImpl')
@@ -32,13 +33,18 @@ export class ModuleResolutionHostVeryDummy implements ts.ModuleResolutionHost {
     this.files = this.files.concat(files).filter((f, i, arr) => arr.indexOf(f) === i)
   }
   fileExists(fileName: string): boolean {
-    debug(`fileExists ${fileName}`)
-    return !!this.files.find(f => f.fileName === fileName)
+    const result = !!this.files.find(f => f.fileName === fileName)
+    debug(`fileExists ${result} - ${fileName}`)
+    return result
   }
   readFile(fileName: string): string | undefined {
-    debug(`readFile ${fileName}`)
-    const file = this.files.find(f => f.fileName === fileName)
-    return !!file ? file.content : undefined
+    let file = this.files.find(f => f.fileName === fileName)
+    if(!file){
+      file = getLibraries().find(l=>l.fileName===fileName)
+    }
+    const result =  !!file ? file.content : undefined
+    debug(`readFile ${!!result} ${fileName}`)
+    return result
   }
   trace?(s: string): void {
     console.trace(s)
@@ -82,9 +88,10 @@ export class CompilerHostVeryDummy extends ModuleResolutionHostVeryDummy impleme
   // }
 
   getDefaultLibFileName() {
-    return "lib.d.ts" //TODO
+    return 'node_modules/typescript/lib/lib.d.ts' // TODO: depends on the compiler config target version
   }
   // getDefaultLibLocation?(): string{
+  //   return 'node_modules/typescript/lib/lib.d.ts'
   // }
 
   writeFile(fileName: string, content: string) {
@@ -121,7 +128,9 @@ export class CompilerHostVeryDummy extends ModuleResolutionHostVeryDummy impleme
         resolvedModules.push(result.resolvedModule)
       }
       else {
-        for (const location of moduleSearchLocations) {
+        // debugger
+        let iterable = moduleSearchLocations&& moduleSearchLocations.length ? moduleSearchLocations : [this.getCurrentDirectory()]
+        for (const location of iterable) {
           const modulePath = join(location, moduleName + ".d.ts")
           if (this.fileExists(modulePath)) {
             resolvedModules.push({ resolvedFileName: modulePath })
