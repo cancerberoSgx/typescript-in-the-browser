@@ -8,12 +8,12 @@ import { getDefaultLanguageServiceProvider } from './languageServiceProvider/lan
 import { getDefaultProgramProvider } from './programProvider/programProviderFactory';
 import { Example } from './types';
 import { log, resetLog  } from './util/uiUtil';
-import { resetMonacoModelsAndEditors, setMonacoTypeScriptDefaults, createAllMonacoModelsFor } from '../util/monacoUtil';
+import { resetMonacoModelsAndEditors, setMonacoTypeScriptDefaults, createAllMonacoModelsFor } from '../common/util/monacoUtil';
 import loadProjectJsonTest1 from '../examples/loadProjectJsonTest1';
 import * as ts from 'typescript';
 import { ProgramFile } from './programProvider';
 import { debugFactory } from './util/util';
-import { getMonaco } from '../util/monacoFacade';
+// import { getMonaco } from '../util/monacoFacade';
 
 
 const debug = debugFactory('examples')
