@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import SortableTree, { ExtendedNodeData } from 'react-sortable-tree';
 import FileExplorerTheme from 'react-sortable-tree-theme-file-explorer';
-import { filesToTreeNodes } from '../../util/util';
-import { Example } from '../../types';
-import { setSelectedFile } from '../mainContentProjectEditor/projectState';
-import { render } from '../../main';
+import { filesToTreeNodes } from '../../../compiler/util/util';
+import { Example } from '../../../compiler/types';
+import { setSelectedFile } from '../../../compiler/ui/mainContentProjectEditor/projectState';
+import { render } from '../../../compiler/main';
 
 export class FileTree extends Component<{ example: Example }> {
   

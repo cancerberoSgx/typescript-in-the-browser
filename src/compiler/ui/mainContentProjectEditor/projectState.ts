@@ -1,5 +1,5 @@
 import { ProgramFile } from '../../programProvider';
-import { getCurrentExample } from '../../examples';
+import { getCurrentExample } from '../../manager';
 
 let selectedFile:ProgramFile
 

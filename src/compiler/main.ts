@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
 import ReactDOM from 'react-dom';
-import { dispatchExamples, executeExample } from './examples';
+import { dispatchExamples, executeExample } from './manager';
 import layout from './ui/layout';
 import { requireMonaco } from '../util/monacoFacade';
 import { createFolderDropManager, FolderDropManagerEvent, FolderDropManagerFileFile, FolderDropManager } from '../util/folderDropManager';

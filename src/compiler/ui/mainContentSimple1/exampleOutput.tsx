@@ -1,5 +1,5 @@
 import React from 'react';
-import { lastExampleExecutionTime } from '../../examples';
+import { lastExampleExecutionTime } from '../../manager';
 import { getLogLines } from '../../util/uiUtil';
 
 export default () =>

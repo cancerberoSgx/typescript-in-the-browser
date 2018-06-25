@@ -1,6 +1,6 @@
 import React from 'react';
 import { projectToJson } from '../../../util/projectSerialization';
-import { getCurrentExample } from '../../examples';
+import { getCurrentExample } from '../../manager';
 
 export default ()=>{
   

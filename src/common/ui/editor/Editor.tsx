@@ -1,8 +1,8 @@
 import React from 'react';
 // import { monaco } from '../uiUtil';
 import { editor } from 'monaco-editor'
-import { getUIConfig } from '../iuSettingsState';
-import { ProgramFile } from '../../programProvider';
+import { getUIConfig } from '../../../compiler/ui/iuSettingsState';
+import { ProgramFile } from '../../../compiler/programProvider';
 import {  getMonaco } from '../../../util/monacoFacade';
 import { getMonacoModelFor, registerEditor } from '../../../util/monacoUtil';
 

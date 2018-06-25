@@ -1,5 +1,5 @@
 import React from 'react';
-import { Editor } from '../editor/Editor';
+import { Editor } from '../../../common/ui/editor/Editor';
 import { getSelectedFile } from './projectState';
 
 export default () => {

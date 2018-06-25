@@ -1,8 +1,8 @@
 import React from 'react';
-import { getCurrentExample } from '../../examples';
+import { getCurrentExample } from '../../manager';
 import sourceFileEditor from './sourceFileEditor';
 import exampleOutput from '../mainContentSimple1/exampleOutput';
-import { FileTree } from '../editor/FileTree';
+import { FileTree } from '../../../common/ui/editor/FileTree';
 export default () => {
 
   const example = getCurrentExample()

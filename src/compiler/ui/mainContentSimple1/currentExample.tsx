@@ -1,6 +1,6 @@
 import React from 'react';
-import { getCurrentExample } from '../../examples';
-import { Editor } from '../editor/Editor';
+import { getCurrentExample } from '../../manager';
+import { Editor } from '../../../common/ui/editor/Editor';
 
 export default () => {
   const example = getCurrentExample()
