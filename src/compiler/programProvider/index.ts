@@ -5,12 +5,10 @@
 // WIP
 
 import * as ts from "typescript";
+import { AbstractFile } from '../../common/types';
 
 /** very simple type representing data files - previously to any parsing for now just a fileName and content */
-export interface ProgramFile {
-  fileName: string
-  content: string
-  isDirectory?: boolean
+export interface ProgramFile extends AbstractFile {
   isLink?: boolean
 }
 

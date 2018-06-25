@@ -2,11 +2,11 @@ import React from 'react';
 // import { monaco } from '../uiUtil';
 import { editor } from 'monaco-editor'
 import { getUIConfig } from '../../../compiler/ui/iuSettingsState';
-import { ProgramFile } from '../../../compiler/programProvider';
+import { AbstractFile } from '../../types';
 import {  getMonaco } from '../../util/monacoFacade';
 import { getMonacoModelFor, registerEditor } from '../../util/monacoUtil';
 
-type Props = { id: string, file: ProgramFile, width: string, height: string }
+type Props = { id: string, file: AbstractFile, width: string, height: string }
 
 export class Editor extends React.Component<Props> {
   editor: editor.IStandaloneCodeEditor;

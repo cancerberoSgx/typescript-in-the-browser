@@ -39,6 +39,7 @@ These are self contained examples that uses typescript without processing or cha
  * [I can create individual SourceFile and visit its Nodes](https://cancerberosgx.github.io/typescript-in-the-browser/examples/ts-browser-create-sourcefile-works.html)
  * [Cannot work with ts.Program](https://cancerberosgx.github.io/typescript-in-the-browser/examples/ts-browser-create-program-fails.html)
  * [Monaco TypeScript Project](https://cancerberosgx.github.io/typescript-in-the-browser/examples/monaco-project.html)
+ * [Candombed - humble attempt to build a TypeScript Project Editor](https://cancerberosgx.github.io/typescript-in-the-browser/candombed)
 
 ## Status
 
@@ -57,6 +58,7 @@ These are self contained examples that uses typescript without processing or cha
 
 ## TODO: 
 
+ * issue : monaco-editor is inside src.js
  * this file https://cdnjs.cloudflare.com/ajax/libs/typescript/2.9.2/typescript.min.js works when transpiling and weight only 400kb. Let's try with that one instead of with the big one we are currently using 
  * JS api so I can easily use this "project" in my own - for example, I want to compile typescript in my project that runs in the browser and easily require this one using browserify. - I think is already done we should test if it works
  * development - sourcemaps
