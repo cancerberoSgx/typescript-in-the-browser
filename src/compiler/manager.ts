@@ -12,7 +12,7 @@ import { resetMonacoModelsAndEditors, setMonacoTypeScriptDefaults, createAllMona
 import loadProjectJsonTest1 from '../examples/loadProjectJsonTest1';
 import * as ts from 'typescript';
 import { ProgramFile } from './programProvider';
-import { debugFactory } from './util/util';
+import { debugFactory } from '../common/util/util';
 // import { getMonaco } from '../util/monacoFacade';
 
 

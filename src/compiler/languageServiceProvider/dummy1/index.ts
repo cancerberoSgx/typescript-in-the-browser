@@ -3,7 +3,7 @@ import * as ts from "typescript";
 import { LanguageServiceProvider } from '..';
 import { ProgramFile } from '../../programProvider';
 import { CompilerHostVeryDummy } from '../../programProvider/dummy1/programProviderVeryDummyImpl';
-import { buildCompilerOptions, debugFactory } from '../../util/util';
+import { buildCompilerOptions, debugFactory } from '../../../common/util/util';
 
 
 const debug = debugFactory('LanguageServiceProviderDummyImpl')
@@ -17,7 +17,7 @@ export class LanguageServiceProviderDummy1 implements LanguageServiceProvider {
       files[f.fileName] = f
       fileVersions[f.fileName] = { version: 0 }
     })
-    const finalCompilerOptions = buildCompilerOptions(compilerOptions, ts)
+    const finalCompilerOptions = buildCompilerOptions(compilerOptions)
     const servicesHost = new LanguageServiceHostDummy1(finalCompilerOptions) // || this.defaultCompilerOptions
     const services = ts.createLanguageService(servicesHost, ts.createDocumentRegistry())
     return services

@@ -1,6 +1,6 @@
 import { join } from 'path';
 import * as ts from "typescript";
-import { buildCompilerOptions, debugFactory } from '../../util/util';
+import { buildCompilerOptions, debugFactory } from '../../../common/util/util';
 import { ProgramFile, ProgramProvider } from '../index';
 import { getLibraries } from '../../util/libraries';
 
@@ -17,7 +17,7 @@ export class ProgramProviderVeryDummyImpl implements ProgramProvider {
 
   /** creates a dummy ts.Program in memory with given source files inside */
   createProgram(files: ProgramFile[], compilerOptions: ts.CompilerOptions | string): ts.Program {
-    const finalCompilerOptions = buildCompilerOptions(compilerOptions, ts)
+    const finalCompilerOptions = buildCompilerOptions(compilerOptions)
     this.compilerHost = new CompilerHostVeryDummy(finalCompilerOptions, files)
     this.program = ts.createProgram(files.map(f => f.fileName), finalCompilerOptions, this.compilerHost)
     return this.program

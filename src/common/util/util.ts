@@ -12,8 +12,14 @@ export type Debug = (m: string) => void
 
 
 import * as typescript from "typescript";
-export function buildCompilerOptions(compilerOptions: typescript.CompilerOptions|string, ts: typeof typescript): typescript.CompilerOptions {
+
+export function getTs(): typeof typescript{
+  return (window as any).ts
+}
+
+export function buildCompilerOptions(compilerOptions: typescript.CompilerOptions|string): typescript.CompilerOptions {
   let finalCompilerOptions: typescript.CompilerOptions|undefined
+  const ts = getTs()
   if(typeof compilerOptions==='string'){      
     const tsConfigJson = ts.parseConfigFileTextToJson('tsconfig.json',compilerOptions)
     if(tsConfigJson.error){
