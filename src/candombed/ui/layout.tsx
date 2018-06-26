@@ -1,36 +1,43 @@
 import React from 'react';
 import SplitPane from 'react-split-pane';
-// import { getState } from '../state/State';
-import { CandomedFileTree } from './FileTree';
+import { CandombedFileTree } from './fileTree';
 import navbar from './navbar';
-import { Editor } from '../../common/ui/editor/Editor';
-import { State } from '../actions/State';
+import { Editor } from '../../common/ui/Editor';
+import { State, getSelectedFile } from '../actions/State';
+import whatsThisModal from './modals/whatsThisModal';
+import loadProjectModal from './modals/loadProjectModal';
+import saveProjectModal from './modals/saveProjectModal';
 
 export default (state: State) => {
 
   return (
   <div className="container-fluid">
-    {navbar()}
+    {navbar(state)}
 
     <SplitPane
       split="vertical"
-      minSize={100}
+      // minSize={'10%'}
       defaultSize={'20%'}
+      // maxSize={'80%'}
       className="primary"
       pane1Style={{ background: '#eee' }}
       resizerStyle={{ background: '#000' }}
     >
-      <CandomedFileTree project={state.project} />
+      <CandombedFileTree project={state.project} />
 
       <SplitPane split="horizontal"
         minSize={100}
         defaultSize={'80%'}
-        paneStyle={{   }}
+        paneStyle={{  }}
         pane2Style={{ background: '#aaa4ba' }}>
 
-        <Editor file={state.selectedFile} width="100%" height="100%" id={'selected-file-'} />
+        <Editor file={getSelectedFile(state)} width="100%" height="100%" id={'selected-file-'} />
         <div><pre>console.log stuff panel</pre></div>
       </SplitPane>
     </SplitPane>
-  </div>)
+{whatsThisModal()} 
+{loadProjectModal()} 
+{saveProjectModal()} 
+  </div> 
+)
 }

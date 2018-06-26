@@ -1,26 +1,16 @@
 import { Project, ProjectFile } from '../types'
+// import { store } from '../main';
 
 export interface State{
   project: Project
-  selectedFile?: ProjectFile
+  selectedFile?: string
 }
 
-import * as tsSampleProjectFiles from '../../examples/projectsJson/ts-sample-project.json'
-const sampleFiles = (tsSampleProjectFiles as any).files as ProjectFile[]
-export const initialState = {
-  project: {
-    name: 'yamat',
-    files: sampleFiles
-  },
-}
-
-
-// export let state: State
-
-// export function getState(): State{
-//   if(!state){
-//     state = initialState
-//   }
-//   return state
+export const initialState = {project: {name: '', files: []}}
+// export function getCurrentState():State {
+//   return store.getState()
 // }
 
+export function getSelectedFile(state: State): ProjectFile{
+  return state.project.files.find(f=>f.fileName===state.selectedFile)
+}

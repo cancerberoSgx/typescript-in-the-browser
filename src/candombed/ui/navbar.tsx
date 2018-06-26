@@ -1,30 +1,35 @@
 import React from 'react';
+import { getExamples } from '../util/examples';
+import { dispatchSelectExample } from '../actions/selectExample';
+import { installTypes } from '../util/installTypes';
+import { State } from '../actions/State';
 
-export default () =>
+export default (state: State) =>
   <nav className={"navbar navbar-expand-lg navbar-dark bg-dark"}>
     <button className={"navbar-toggler"} type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
       <span className={"navbar-toggler-icon"}></span>
     </button>
 
-    <div className={"collapse navbar-collapse justify-content-md-center"} id="navbarsExample08">
+    <div className={"collapse navbar-collapse justify-content-md-left"} id="navbarsExample08">
       <ul className={"navbar-nav"}>
-        <li className={"nav-item active"}>
-          <a className={"nav-link"} href="#">Condombed TypeScript Editor!</a>
-        </li>
 
         <li className={"nav-item dropdown"}>
-          <a className={"nav-link dropdown-toggle"} href="#" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</a>
+          <a className={"nav-link dropdown-toggle"} href="#" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Project</a>
           <div className={"dropdown-menu"} aria-labelledby="dropdown06">
-            <a className={"dropdown-item"} href="#" data-toggle="modal" data-target="#dropTsProjectFolder">Drop a TypeScript Project Folder</a>
             <a className={"dropdown-item"} href="#saveProject" data-toggle="modal" data-target="#saveProjectModal">Save Project</a>
             <a className={"dropdown-item"} href="#loadProject" data-toggle="modal" data-target="#loadProjectModal">Load Project</a>
           </div>
         </li>
-
+        <li className={"nav-item dropdown"}>
+          <a className={"nav-link dropdown-toggle"} href="#" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</a>
+          <div className={"dropdown-menu"} aria-labelledby="dropdown06">
+            <a className={"dropdown-item"}  onClick={()=>installTypes(state.project)}>Install @types</a>
+          </div>
+        </li>
         <li className={"nav-item dropdown"}>
           <a className={"nav-link dropdown-toggle"} href="#" id="dropdown08" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Examples</a>
           <div className={"dropdown-menu"} aria-labelledby="dropdown08">
-            {/* {getExamples().map(ex => <a className={"dropdown-item"} href={"#example=" + ex.id} key={ex.id}>{ex.name}</a>)} */}
+            {getExamples().map(ex => <a className={"dropdown-item"} key={ex.name} onClick={()=>dispatchSelectExample(ex.name)}>{ex.name}</a>)}
           </div>
         </li>
 
@@ -36,12 +41,6 @@ export default () =>
           </div>
         </li>
 
-        <li className={"nav-item dropdown"}>
-          <a className={"nav-link dropdown-toggle"} href="#" id="dropdown10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">UI Settings</a>
-          <div className={"dropdown-menu"}>
-            {/* {uiSettings()} */}
-          </div>
-        </li>
 
       </ul>
     </div>

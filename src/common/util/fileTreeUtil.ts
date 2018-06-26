@@ -4,10 +4,14 @@ export interface TreeNode {
   isDirectory: boolean
   children: TreeNode[]
   title: string
-  fileName?:string,
+  fileName?: string,
   expanded?: boolean
 }
-export function filesToTreeNodes(arr: AbstractFile[]): TreeNode[] {
+
+function sort(a: TreeNode, b: TreeNode): number {
+  return a.fileName < b.fileName ? -1 : 1
+}
+export function filesToTreeNodes(arr: AbstractFile[], childSortCompareFn: (a: TreeNode, b: TreeNode) => number = sort): TreeNode[] {
   var tree = {}
   function addnode(obj: AbstractFile) {
     var splitpath = obj.fileName.replace(/^\/|\/$/g, "").split('/');
@@ -20,7 +24,7 @@ export function filesToTreeNodes(arr: AbstractFile[]): TreeNode[] {
         isDirectory: true
       };
       if (i == splitpath.length - 1) {
-        node.fileName=obj.fileName
+        node.fileName = obj.fileName
         node.isDirectory = false
       }
       ptr[splitpath[i]] = ptr[splitpath[i]] || node;
@@ -35,12 +39,16 @@ export function filesToTreeNodes(arr: AbstractFile[]): TreeNode[] {
       }
     })
     if (node.children) {
-      node.children = Object.values(node.children)
+      node.children = toArray(node.children)
       node.children.forEach(objectToArr)
     }
   }
+  function toArray(obj: { [key: string]: TreeNode }) {
+    const arr = Object.values(obj)
+    return childSortCompareFn ? arr.sort(childSortCompareFn) : arr
+  }
   arr.map(addnode);
   objectToArr(tree)
-  return Object.values(tree)
+  return toArray(tree)
 }
 

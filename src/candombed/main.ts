@@ -1,44 +1,32 @@
 
 import ReactDOM from 'react-dom';
-import layout from './ui/layout';
-import { requireMonaco } from '../common/util/monacoFacade';
-import { EventEmitter } from 'events';
-import { createConstructorTypeNode } from 'typescript';
 import { createStore, Store } from 'redux';
+import { requireMonaco } from '../common/util/monacoFacade';
 import { getReduceres } from './actions/reducers';
-import { dispatchSelectFileFromTree } from './actions/selectFileFromTree';
-// import { installResizableGrid } from './util/resizableGrid';
+import layout from './ui/layout';
+import { State, initialState } from './actions/State';
+import { EventEmitter } from 'events';
+import { installProjectObserver } from './projectObserver';
 
 export const store: Store = createStore(getReduceres())
 
 export function render() {
-  // setInitialState()
-  // getRenderEmitter().emit('beforeRender')
-  console.log('render!', store.getState());
-  
-  ReactDOM.render(layout(store.getState()), document.getElementById('candombed-main')/* , () => getRenderEmitter().emit('afterRender') */)
+  ReactDOM.render(layout(store.getState()), document.getElementById('candombed-main'))
 }
 
+export const emitter = new EventEmitter()
+let oldState: State = initialState
+function stateChanged(){
+  render()
+  const newState = store.getState()
+  emitter.emit('stateChange', oldState, newState)
+  oldState = newState
+}
+
+
 requireMonaco(function(){
-  store.subscribe(render)
-  dispatchSelectFileFromTree('')
+  store.subscribe(stateChanged)
+  installProjectObserver()
   render()
 })
 
-
-// function initialInstall() {
-//   // window.onhashchange = render
-//   render()
-// }
-// const renderEmitter = new EventEmitter()
-
-// export function getRenderEmitter(): EventEmitter {
-//   return renderEmitter
-// }
-
-// function setInitialState() {
-
-// }
-
-// getRenderEmitter().on('afterRender', installResizableGrid)
-//TODO: on beforeRender uninstall

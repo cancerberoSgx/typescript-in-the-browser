@@ -1,7 +1,7 @@
 import React from 'react';
 // import { monaco } from '../uiUtil';
 import { editor } from 'monaco-editor'
-import { Editor } from '../../../common/ui/editor/Editor';
+import { Editor } from '../../../common/ui/Editor';
 import { getUIConfig } from '../iuSettingsState';
 // import { getUIConfig } from '../../../compiler/ui/iuSettingsState';
 // import { AbstractFile } from '../../types';

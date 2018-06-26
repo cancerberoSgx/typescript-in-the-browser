@@ -17,7 +17,7 @@ export class LanguageServiceProviderDummy1 implements LanguageServiceProvider {
       files[f.fileName] = f
       fileVersions[f.fileName] = { version: 0 }
     })
-    const finalCompilerOptions = buildCompilerOptions(compilerOptions)
+    const finalCompilerOptions = buildCompilerOptions(compilerOptions, ts)
     const servicesHost = new LanguageServiceHostDummy1(finalCompilerOptions) // || this.defaultCompilerOptions
     const services = ts.createLanguageService(servicesHost, ts.createDocumentRegistry())
     return services

@@ -17,7 +17,7 @@ export class ProgramProviderVeryDummyImpl implements ProgramProvider {
 
   /** creates a dummy ts.Program in memory with given source files inside */
   createProgram(files: ProgramFile[], compilerOptions: ts.CompilerOptions | string): ts.Program {
-    const finalCompilerOptions = buildCompilerOptions(compilerOptions)
+    const finalCompilerOptions = buildCompilerOptions(compilerOptions, ts)
     this.compilerHost = new CompilerHostVeryDummy(finalCompilerOptions, files)
     this.program = ts.createProgram(files.map(f => f.fileName), finalCompilerOptions, this.compilerHost)
     return this.program

@@ -15,6 +15,10 @@
   width: 100%
 }
 
+#candombed-main .container-fluid{
+  padding: 0
+}
+
 .Resizer {
   background: #000;
   opacity: .2;

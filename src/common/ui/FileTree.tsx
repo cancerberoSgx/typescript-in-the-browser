@@ -12,7 +12,7 @@ export class FileTree extends Component<{ project: AbstractProject }> {
     }
     const treeData = filesToTreeNodes(this.props.project.files)
     return (
-      <div style={{ height: 400 }}>
+      <div style={{ height: '100%' }}>
         <SortableTree
           treeData={ treeData}
           onChange={treeData => this.setState({ treeData })}
@@ -31,13 +31,9 @@ export class FileTree extends Component<{ project: AbstractProject }> {
       return
     }
     const selectedFile = this.props.project.files.find(f => rowInfo.node.fileName === f.fileName)
-    if(selectedFile){
-      this.setSelectedFile(selectedFile)
-      // render()
-    }
+    this.setSelectedFile(selectedFile)
   }
 
   setSelectedFile(file){
-
   }
 }

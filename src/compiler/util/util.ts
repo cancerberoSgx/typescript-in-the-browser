@@ -11,9 +11,9 @@ export type Debug = (m: string) => void
 
 
 
-import * as ts from "typescript";
-export function buildCompilerOptions(compilerOptions: ts.CompilerOptions|string) {
-  let finalCompilerOptions: ts.CompilerOptions|undefined
+import * as typescript from "typescript";
+export function buildCompilerOptions(compilerOptions: typescript.CompilerOptions|string, ts: typeof typescript): typescript.CompilerOptions {
+  let finalCompilerOptions: typescript.CompilerOptions|undefined
   if(typeof compilerOptions==='string'){      
     const tsConfigJson = ts.parseConfigFileTextToJson('tsconfig.json',compilerOptions)
     if(tsConfigJson.error){
@@ -31,7 +31,7 @@ export function buildCompilerOptions(compilerOptions: ts.CompilerOptions|string)
   return finalCompilerOptions
 }
 
-export const defaultFormatDiagnosticHost: ts.FormatDiagnosticsHost = {
+export const defaultFormatDiagnosticHost: typescript.FormatDiagnosticsHost = {
   getCanonicalFileName(fileName: string) { return fileName },
   getCurrentDirectory() { return '.' },
   getNewLine() { return '\n' }

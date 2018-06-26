@@ -1,9 +1,6 @@
-
-
 import * as monaco from 'monaco-editor'
-import { AbstractFile } from '../types';
+import { AbstractFile, AbstractProject } from '../types';
 import { getMonaco } from './monacoFacade';
-import { Example } from '../../compiler/types';
 
 // monaco editor models to files conversion helpers
 function getMonacoUriFromFile(file: AbstractFile){
@@ -33,13 +30,13 @@ export function registerEditor(editor: monaco.editor.ICodeEditor, model: monaco.
   if(!editors.find(ed=>ed===editor)){
     editors.push(editor)
   }
-  editor.getModel().setValue(  editor.getModel().getValue()) // make it dirty so it refresh itself in the "project"
+  editor.getModel().setValue(editor.getModel().getValue()) // make it dirty so it refresh itself in the "project"
 }
 export function resetMonacoModelsAndEditors(){
   getMonaco().editor.getModels().forEach(model=>model.dispose())
   editors.forEach(editor=>editor.dispose())
 }
-export function createAllMonacoModelsFor(example: Example){
+export function createAllMonacoModelsFor(example: AbstractProject){
   example.files.forEach(file=>{
     getMonacoModelFor( file)
   })
