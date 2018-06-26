@@ -9,7 +9,7 @@ export default () =>
     <div className={"collapse navbar-collapse justify-content-md-center"} id="navbarsExample08">
       <ul className={"navbar-nav"}>
         <li className={"nav-item active"}>
-          <a className={"nav-link"} href="#">TypeScript Compiler in the browser!</a>
+          <a className={"nav-link"} href="#">Condombed TypeScript Editor!</a>
         </li>
 
         <li className={"nav-item dropdown"}>

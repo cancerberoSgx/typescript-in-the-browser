@@ -7,3 +7,7 @@ export interface Project extends AbstractProject{
 export interface ProjectFile extends AbstractFile{
 
 }
+
+// export interface Action {
+//   id: string
+// }

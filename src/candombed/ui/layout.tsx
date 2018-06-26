@@ -1,15 +1,15 @@
 import React from 'react';
 import SplitPane from 'react-split-pane';
-import { getState } from '../State';
+// import { getState } from '../state/State';
 import { CandomedFileTree } from './FileTree';
 import navbar from './navbar';
 import { Editor } from '../../common/ui/editor/Editor';
+import { State } from '../actions/State';
 
-export default () => {
+export default (state: State) => {
 
-  const project = getState().project
-
-  return (<div className="container-fluid">
+  return (
+  <div className="container-fluid">
     {navbar()}
 
     <SplitPane
@@ -20,7 +20,7 @@ export default () => {
       pane1Style={{ background: '#eee' }}
       resizerStyle={{ background: '#000' }}
     >
-      <CandomedFileTree project={project} />
+      <CandomedFileTree project={state.project} />
 
       <SplitPane split="horizontal"
         minSize={100}
@@ -28,11 +28,9 @@ export default () => {
         paneStyle={{   }}
         pane2Style={{ background: '#aaa4ba' }}>
 
-        <Editor file={getState().selectedFile} width="100%" height="100%" id={'selected-file-'} />
+        <Editor file={state.selectedFile} width="100%" height="100%" id={'selected-file-'} />
         <div><pre>console.log stuff panel</pre></div>
       </SplitPane>
     </SplitPane>
-
-
   </div>)
 }

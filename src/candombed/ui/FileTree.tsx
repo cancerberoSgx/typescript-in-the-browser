@@ -1,13 +1,10 @@
-import { FileTree } from '../../common/ui/FileTree';
 import { AbstractFile } from '../../common/types';
-import { getState } from '../State';
-import { render } from '../main';
+import { FileTree } from '../../common/ui/FileTree';
+import { dispatchSelectFileFromTree } from '../actions/selectFileFromTree';
 
 
 export class CandomedFileTree extends FileTree  {
    setSelectedFile(selectedFile: AbstractFile){
-     //TODO: redux reducers & actions
-     getState().selectedFile=selectedFile
-     render()
+     dispatchSelectFileFromTree(selectedFile.fileName)
   }
 }
