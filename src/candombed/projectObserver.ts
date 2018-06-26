@@ -1,26 +1,24 @@
-import { Project } from './types';
-import { Store } from 'redux';
-import { emitter } from './main';
+import { createAllMonacoModelsFor, resetMonacoModelsAndEditors } from '../common/util/monacoUtil';
 import { State } from './actions/State';
-import { resetMonacoModelsAndEditors, createAllMonacoModelsFor } from '../common/util/monacoUtil';
+import { emitter } from './main';
+import { installTsConfig } from './util/installJsConfig';
 import { getMonaco } from '../common/util/monacoFacade';
-import { buildCompilerOptions, getTs } from '../common/util/util';
 
 
 export function installProjectObserver(){
 
+  getMonaco().languages.typescript.typescriptDefaults.setEagerModelSync(true)
+
   emitter.on('stateChange', (oldState: State, newState: State)=>{
+  //   debugger
+  //   if(!oldState || !oldState.project || ! oldState.project.name){
+  //     getMonaco().languages.typescript.typescriptDefaults.setEagerModelSync(true)
+  //   }
+  //   else 
     if(oldState.project.name!==newState.project.name){
       console.log('create all monaco models for '+newState.project.files.length)
       resetMonacoModelsAndEditors()
-
-      const tsconfig = newState.project.files.find(f=>f.fileName==='tsconfig.json')
-      if(tsconfig && getTs()){
-        const options = buildCompilerOptions(tsconfig.content)
-        options.lib = undefined// ['lib.es6.d.ts']
-          debugger
-        getMonaco().languages.typescript.typescriptDefaults.setCompilerOptions(options as any)
-      }
+      installTsConfig(newState.project)
       createAllMonacoModelsFor(newState.project)
     }
   })

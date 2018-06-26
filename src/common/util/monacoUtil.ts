@@ -3,9 +3,13 @@ import { AbstractFile, AbstractProject } from '../types';
 import { getMonaco } from './monacoFacade';
 
 // monaco editor models to files conversion helpers
-function getMonacoUriFromFile(file: AbstractFile){
-  return getMonaco().Uri.file('/home/sg/project1/'+file.fileName)
+export function getMonacoUriFromFile(file: AbstractFile){
+  return getMonaco().Uri.file(file.fileName)//'/home/sg/project1/'+file.fileName)
 }
+export function uriToFileName(uri: monaco.Uri){
+  return uri.fsPath
+}
+
 export function getMonacoModelFor(file?: AbstractFile): monaco.editor.IModel {
   if(!file){
     return getMonaco().editor.createModel('')
@@ -26,11 +30,11 @@ export function setMonacoTypeScriptDefaults(){
   })
 } 
 const editors: monaco.editor.ICodeEditor[] = []
-export function registerEditor(editor: monaco.editor.ICodeEditor, model: monaco.editor.IModel){
+export function registerEditor(editor: monaco.editor.ICodeEditor){
   if(!editors.find(ed=>ed===editor)){
     editors.push(editor)
+    editor.getModel().setValue(editor.getModel().getValue()) // make it dirty so it refresh itself in the "project"
   }
-  editor.getModel().setValue(editor.getModel().getValue()) // make it dirty so it refresh itself in the "project"
 }
 export function resetMonacoModelsAndEditors(){
   getMonaco().editor.getModels().forEach(model=>model.dispose())

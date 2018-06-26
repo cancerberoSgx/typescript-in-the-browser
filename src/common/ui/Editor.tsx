@@ -23,15 +23,20 @@ export class Editor extends React.Component<Props> {
     const model = getMonacoModelFor(this.props.file)
     this.editor = getMonaco().editor.create(document.getElementById(this.props.id), {
       model,
-      automaticLayout: true
+      automaticLayout: true, 
+      lightbulb: {enabled: true}
     })
-    setTimeout(() => registerEditor(this.editor, model), 1000)
+    // setTimeout(() => registerEditor(this.editor), 500)
+    
+
   }
+
   private uninstallMonaco() {
     if (this.editor) {
       this.editor.dispose()
     }
   }
+
   componentWillUnmount() {
     this.uninstallMonaco()
   }

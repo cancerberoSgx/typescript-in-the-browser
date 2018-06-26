@@ -24,7 +24,7 @@ export function installTypes(project: Project) {
     depsResponses.forEach((text,i)=>{
       const d = deps[i]
       const fname  = `node_modules/@types${d.name.substring('@types'.length, d.name.length)}/index.d.ts`
-      console.log('addExtraLib', fname)      
+      // console.log('addExtraLib', fname)      
       getMonaco().languages.typescript.typescriptDefaults.addExtraLib(text,fname)
     })
   }).catch(ex=>console.log(ex))
@@ -39,3 +39,5 @@ function heutisticSort(deps: {name:string, version: string}[]){
   }
   return deps
 }
+
+

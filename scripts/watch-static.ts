@@ -8,3 +8,6 @@ watch('src/static', ()=>{
 watch('src/static/candombed', ()=>{
   copy()
 })
+watch('src/static/examples', ()=>{
+  copy()
+})
