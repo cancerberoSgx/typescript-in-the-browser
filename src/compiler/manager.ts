@@ -8,7 +8,7 @@ import { getDefaultLanguageServiceProvider } from './languageServiceProvider/lan
 import { getDefaultProgramProvider } from './programProvider/programProviderFactory';
 import { Example } from './types';
 import { log, resetLog  } from './util/uiUtil';
-import { resetMonacoModelsAndEditors, setMonacoTypeScriptDefaults, createAllMonacoModelsFor } from '../common/util/monacoUtil';
+import { resetMonacoModelsAndEditors, setMonacoTypeScriptDefaults, createAllMonacoModelsFor } from '../common/monaco/util';
 import loadProjectJsonTest1 from '../examples/loadProjectJsonTest1';
 import * as ts from 'typescript';
 import { ProgramFile } from './programProvider';

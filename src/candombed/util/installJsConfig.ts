@@ -1,7 +1,7 @@
 
 import { Project } from '../types';
-import { getMonaco } from '../../common/util/monacoFacade';
-import { buildCompilerOptions, getTs } from '../../common/util/util';
+import { getMonaco } from '../../common/monaco/monacoFacade';
+import { buildCompilerOptions, getTs } from '../../common/util/tsUtil';
 import { fetchFileText } from '../../common/util/fetchUtil';
 
 
@@ -29,7 +29,7 @@ export function installTsConfig(project: Project){
 
 
 import { Uri } from 'monaco-editor';
-import { getMonacoUriFromFile, getMonacoModelFor } from '../../common/util/monacoUtil';
+import { getMonacoUriFromFile, getMonacoModelFor } from '../../common/monaco/util';
 import { getSelectedFile, State } from '../actions/State';
 
 import * as ts from "typescript";

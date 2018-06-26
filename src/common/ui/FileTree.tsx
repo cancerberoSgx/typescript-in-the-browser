@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SortableTree, { ExtendedNodeData } from 'react-sortable-tree';
 import FileExplorerTheme from 'react-sortable-tree-theme-file-explorer';
-import { filesToTreeNodes } from '../../common/util/fileTreeUtil';
+import { filesToTreeNodes } from '../ui-util/fileTreeUtil';
 import { AbstractProject } from '../../common/types';
 
 export class FileTree extends Component<{ project: AbstractProject }> {

@@ -45,21 +45,3 @@ export function createAllMonacoModelsFor(example: AbstractProject){
     getMonacoModelFor( file)
   })
 }
-
-// export function refreshMonacoModelsAndEditors(){  
-//   // editors.forEach(editor=>editor.render())//..updateOptions({}))
-//   // getMonaco().editor.getModels().forEach(model=>(model as any).emitModelTokensChangedEvent())
-//   getMonaco().editor.getModels().forEach(model=>model.setValue(model.getValue()))
-
-//   // models.forEach(model=>model.updateOptions({}))
-// }
-
-// configure monaco.languages.typescripttypescriptDefaults for a new example
-// export function configureMonacoTypeScriptDefaults(example: Example = getCurrentExample(), program: ts.Program = getCurrentExampleProgram()){
-  // monaco().languages.typescript.typescriptDefaults.setDiagnosticsOptions({noSemanticValidation: false, noSyntaxValidation: false})
-  // monaco().languages.typescript.typescriptDefaults.setCompilerOptions(program.getCompilerOptions() as any)
-
-  // getCurrentExampleTsFilesOnly().forEach(f=>{
-    // monaco().languages.typescript.typescriptDefaults.addExtraLib(f.content, f.fileName)
-  // })
-// }

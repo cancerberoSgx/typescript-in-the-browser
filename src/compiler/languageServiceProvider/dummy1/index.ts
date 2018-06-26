@@ -3,7 +3,8 @@ import * as ts from "typescript";
 import { LanguageServiceProvider } from '..';
 import { ProgramFile } from '../../programProvider';
 import { CompilerHostVeryDummy } from '../../programProvider/dummy1/programProviderVeryDummyImpl';
-import { buildCompilerOptions, debugFactory } from '../../../common/util/util';
+import { debugFactory } from '../../../common/util/util';
+import { buildCompilerOptions } from '../../../common/util/tsUtil';
 
 
 const debug = debugFactory('LanguageServiceProviderDummyImpl')

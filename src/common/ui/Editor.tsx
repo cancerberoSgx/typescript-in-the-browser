@@ -1,8 +1,8 @@
 import { editor } from 'monaco-editor';
 import React from 'react';
 import { AbstractFile } from '../types';
-import { getMonaco } from '../util/monacoFacade';
-import { getMonacoModelFor, registerEditor } from '../util/monacoUtil';
+import { getMonaco } from '../monaco/monacoFacade';
+import { getMonacoModelFor, registerEditor } from '../monaco/util';
 
 type Props = { id: string, file: AbstractFile, width: string, height: string }
 

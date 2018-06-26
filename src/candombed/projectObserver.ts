@@ -1,8 +1,8 @@
-import { createAllMonacoModelsFor, resetMonacoModelsAndEditors } from '../common/util/monacoUtil';
+import { createAllMonacoModelsFor, resetMonacoModelsAndEditors } from '../common/monaco/util';
 import { State } from './actions/State';
 import { emitter } from './main';
 import { installTsConfig } from './util/installJsConfig';
-import { getMonaco } from '../common/util/monacoFacade';
+import { getMonaco } from '../common/monaco/monacoFacade';
 
 
 export function installProjectObserver(){

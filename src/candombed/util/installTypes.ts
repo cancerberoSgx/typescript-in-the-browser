@@ -1,7 +1,7 @@
 import { AbstractFile } from '../../common/types';
 import { fetchFileText } from '../../common/util/fetchUtil';
 import { Project } from '../types';
-import { getMonaco } from '../../common/util/monacoFacade';
+import { getMonaco } from '../../common/monaco/monacoFacade';
 /**
  * get all @types dependencies from package.json and query https://unpkg.com/@types/... to download its index.d.ts
  * then instruct monaco to add them
