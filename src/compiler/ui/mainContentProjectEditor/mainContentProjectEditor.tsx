@@ -1,8 +1,11 @@
 import React from 'react';
 import { getCurrentExample } from '../../manager';
-import sourceFileEditor from './sourceFileEditor';
+// import sourceFileEditor from './sourceFileEditor';
 import exampleOutput from '../mainContentSimple1/exampleOutput';
-import { FileTree } from '../../../common/ui/editor/FileTree';
+// import { FileTree } from '../../../common/ui/FileTree';
+import { CompilerFileTree } from './CompilerFileTree';
+import { CompilerEditor } from './CompilerEditor';
+import { getSelectedFile } from './projectState';
 export default () => {
 
   const example = getCurrentExample()
@@ -16,10 +19,11 @@ export default () => {
     <div className={"row"}>
       <div className={"col-3"}>
         {/* {fileNavigator()} */}
-        <FileTree example={example}/> 
+        <CompilerFileTree project={example}/> 
       </div>
       <div className={"col-9"}>
-      {sourceFileEditor()}
+      <CompilerEditor file={ getSelectedFile()} width="100%" height="300px" id={'selected-file-'} />
+      {/* {sourceFileEditor()} */}
       </div>
     </div>
     <div className={"row"}>

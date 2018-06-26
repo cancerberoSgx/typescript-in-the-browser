@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import SortableTree, { ExtendedNodeData } from 'react-sortable-tree';
 import FileExplorerTheme from 'react-sortable-tree-theme-file-explorer';
-import { filesToTreeNodes } from '../../../compiler/util/util';
-import { Example } from '../../../compiler/types';
-import { setSelectedFile } from '../../../compiler/ui/mainContentProjectEditor/projectState';
-import { render } from '../../../compiler/main';
+import { filesToTreeNodes } from '../../common/util/fileTreeUtil';
+import { AbstractProject } from '../../common/types';
 
-export class FileTree extends Component<{ example: Example }> {
+export class FileTree extends Component<{ project: AbstractProject }> {
   
   render() {
-    const treeData = filesToTreeNodes(this.props.example.files)
+    if(!this.props.project){
+      return (<div>No project open</div>)
+    }
+    const treeData = filesToTreeNodes(this.props.project.files)
     return (
       <div style={{ height: 400 }}>
         <SortableTree
@@ -29,10 +30,14 @@ export class FileTree extends Component<{ example: Example }> {
     if (!rowInfo.node || rowInfo.node && rowInfo.node.children && rowInfo.node.children.length) {
       return
     }
-    const selectedFile = this.props.example.files.find(f => rowInfo.node.fileName === f.fileName) || (this.props.example.exampleSource.fileName === rowInfo.node.fileName ? this.props.example.exampleSource : undefined)
+    const selectedFile = this.props.project.files.find(f => rowInfo.node.fileName === f.fileName)
     if(selectedFile){
-      setSelectedFile(selectedFile)
-      render()
+      this.setSelectedFile(selectedFile)
+      // render()
     }
+  }
+
+  setSelectedFile(file){
+
   }
 }

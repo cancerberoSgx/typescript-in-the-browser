@@ -1,6 +1,6 @@
-import { AbstractFile } from '../common/types';
+import { AbstractFile, AbstractProject } from '../common/types';
 
-export interface Project {
+export interface Project extends AbstractProject{
   files: AbstractFile[]
 }
 

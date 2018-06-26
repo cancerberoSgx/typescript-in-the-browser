@@ -9,7 +9,10 @@ import { Example } from '../../compiler/types';
 function getMonacoUriFromFile(file: AbstractFile){
   return getMonaco().Uri.file('/home/sg/project1/'+file.fileName)
 }
-export function getMonacoModelFor(file: AbstractFile): monaco.editor.IModel {
+export function getMonacoModelFor(file?: AbstractFile): monaco.editor.IModel {
+  if(!file){
+    return getMonaco().editor.createModel('')
+  }
   const uri = getMonacoUriFromFile(file)
   let model = getMonaco().editor.getModels().find(m=>m.uri.toString()===uri.toString())
   if(model){

@@ -1,5 +1,6 @@
 import * as ts from 'typescript';
 import { ProgramFile } from './programProvider';
+import { AbstractProject } from '../common/types';
 
 export interface ExampleExecutionOptions {
   program: ts.Program
@@ -9,11 +10,10 @@ export interface ExampleExecutionResult {
 }
 export type ExampleExecute = (config: ExampleExecutionOptions) => (ExampleExecutionResult | undefined | void)
 
-export interface Example {
-  name: string
+
+export interface Example extends AbstractProject{
   id: string
   description: string
   execute: ExampleExecute
-  files: ProgramFile[]
   exampleSource: ProgramFile
 }

@@ -3,3 +3,8 @@ export interface AbstractFile {
   content: string
   isDirectory?: boolean
 }
+
+export interface AbstractProject {
+  name: string
+  files: AbstractFile[]
+}
