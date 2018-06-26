@@ -1,14 +1,13 @@
-import { AbstractFile } from '../../common/types';
-import { fetchFileText } from '../../common/util/fetchUtil';
-import { Project } from '../types';
-import { getMonaco } from '../../common/monaco/monacoFacade';
+import { AbstractFile, AbstractProject } from '../types';
+import { fetchFileText } from '../util/fetchUtil';
+import { getMonaco } from './monacoFacade';
 /**
  * get all @types dependencies from package.json and query https://unpkg.com/@types/... to download its index.d.ts
  * then instruct monaco to add them
  * 
  * TODO: there could be dependencies that dont need @type we should query all by package.json and see its typing property
  */
-export function installTypes(project: Project) {
+export function installTypes(project: AbstractProject) {
   let pj: AbstractFile
   if (!project || !project.files || !(pj = project.files.find(f => f.fileName === 'package.json'))) {
     return Promise.resolve() 

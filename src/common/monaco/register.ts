@@ -3,8 +3,8 @@ import { AbstractFile, AbstractProject } from '../types';
 import { getMonaco } from './monacoFacade';
 
 // monaco editor models to files conversion helpers
-export function getMonacoUriFromFile(file: AbstractFile){
-  return getMonaco().Uri.file(file.fileName)//'/home/sg/project1/'+file.fileName)
+export function getMonacoUriFromFile(file: AbstractFile|string){
+  return getMonaco().Uri.file(typeof file==='string' ? file : file.fileName)//'/home/sg/project1/'+file.fileName)
 }
 export function uriToFileName(uri: monaco.Uri){
   return uri.fsPath

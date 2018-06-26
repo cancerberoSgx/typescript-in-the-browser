@@ -2,7 +2,7 @@ import { editor } from 'monaco-editor';
 import React from 'react';
 import { AbstractFile } from '../types';
 import { getMonaco } from '../monaco/monacoFacade';
-import { getMonacoModelFor, registerEditor } from '../monaco/util';
+import { getMonacoModelFor, registerEditor } from '../monaco/register';
 
 type Props = { id: string, file: AbstractFile, width: string, height: string }
 
@@ -28,7 +28,6 @@ export class Editor extends React.Component<Props> {
     })
     // setTimeout(() => registerEditor(this.editor), 500)
     
-
   }
 
   private uninstallMonaco() {
