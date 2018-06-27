@@ -1,4 +1,8 @@
-# TypeScript Project editor
+# Candombed 
+
+A TypeScript Project editor and framework, 100% in the browser, on top of [monaco-editor](https://github.com/Microsoft/monaco-editor).
+
+![candombed](https://upload.wikimedia.org/wikipedia/commons/b/b5/12_candombe.jpg)
 
 # See it in action
 

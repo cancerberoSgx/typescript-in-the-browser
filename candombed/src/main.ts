@@ -16,20 +16,13 @@ export function render(state: State = store.getState()) {
 
 export const emitter = new EventEmitter()
 let oldState: State = initialState
-function stateChanged(){
-  const newState = store.getState()
-  emitter.emit('stateChange', oldState, newState)
-  oldState = newState
-  // render(newState)
-}
-
-// export function getState(): State{
-//   return oldState
-// }
 requireMonaco(function(){
   installProjectObserver()
-  store.subscribe(stateChanged)
-  store.subscribe(render)
-  // render()
+  store.subscribe(()=>{
+    const newState = store.getState()
+    emitter.emit('stateChange', oldState, newState)
+    oldState = newState
+    render(newState)
+  })
 })
 

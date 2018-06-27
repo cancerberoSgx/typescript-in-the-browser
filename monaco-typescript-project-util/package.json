@@ -33,6 +33,9 @@
   ],
   "author": "Sebastian Gurin",
   "license": "MIT",
+  "scripts": {
+    "all": "exit 0"
+  },
   "dependencies": {
     "@phenomnomnominal/tsquery": "^2.0.0-beta.4",
     "bootstrap": "^4.1.1",

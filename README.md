@@ -22,3 +22,14 @@ These are self contained examples that uses typescript without processing or cha
  * [TypeScript Compiler API very simple example - transpiling code](https://cancerberosgx.github.io/typescript-in-the-browser/examples/ts-browser-transpile-works.html)
  * [I can create individual SourceFile and visit its Nodes](https://cancerberosgx.github.io/typescript-in-the-browser/examples/ts-browser-create-sourcefile-works.html)
  * [Cannot work with ts.Program](https://cancerberosgx.github.io/typescript-in-the-browser/examples/ts-browser-create-program-fails.html)
+
+
+# build all 
+
+```
+npm i 
+npm run all
+http-server docs
+```
+
+for development please go to specify projects. 
