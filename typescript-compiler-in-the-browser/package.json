@@ -10,6 +10,7 @@
     "tsc-watch": "tsc -w  --preserveWatchOutput ",
     "cp-static": "ts-node scripts/copy-static",
     "watch-static": "ts-node scripts/watch-static",
+    "prepare": "npm run tsc",
     "bundle-src": "npm run tsc && npm run copy-projects-json && browserify dist/src/compiler/main.js --debug -x typescript -t brfs -o static/src.js",
     "bundle-candombed-src": "npm run tsc && npm run copy-projects-json  && browserify dist/src/candombed/main.js --debug -x typescript -x monaco-editor -t brfs -o static/candombed/src.js",
     "bundle-typescript": "cd node_modules/typescript/lib/ ; browserify -r typescript -o ../../../static/typescript.js ; cd ../../..",

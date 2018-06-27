@@ -39,6 +39,7 @@
     "jquery": "^3.3.1",
     "jsonc-parser": "^2.0.0",
     "monaco-editor": "^0.13.1",
+    "prepare": "npm run tsc",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-sortable-tree": "^2.2.0",

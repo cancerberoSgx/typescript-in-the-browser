@@ -11,6 +11,7 @@
     "cp-static": "ts-node scripts/copy-static",
     "watch-static": "ts-node scripts/watch-static",
     "bundle-src": "npm run tsc && npm run copy-projects-json  && browserify dist/src/main.js --debug -x typescript -x monaco-editor -t brfs -o static/candombed/src.js",
+    "prepare": "npm run tsc",
     "minify-src": "google-closure-compiler --js=static/candombed/src.js --js_output_file=static/candombed/src.min.js && mv static/candombed/src.min.js static/candombed/src.js",
     "watchify": "watchify dist/src/main.js --debug -x typescript  -x monaco-editor -o static/candombed/src.js",
     "dev-prepare": "rm -rf static dist ; npm run tsc ; npm run cp-static; npm run bundle-src",
