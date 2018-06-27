@@ -23,9 +23,9 @@ function stateChanged(){
   oldState = newState
 }
 
-export function getState(): State{
-  return oldState
-}
+// export function getState(): State{
+//   return oldState
+// }
 requireMonaco(function(){
   store.subscribe(stateChanged)
   installProjectObserver()

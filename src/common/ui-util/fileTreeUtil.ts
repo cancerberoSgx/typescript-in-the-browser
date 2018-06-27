@@ -17,15 +17,13 @@ export function filesToTreeNodes(arr: AbstractFile[], childSortCompareFn: (a: Tr
     var splitpath = obj.fileName.replace(/^\/|\/$/g, "").split('/');
     var ptr = tree;
     for (let i = 0; i < splitpath.length; i++) {
+      const isFile = i == splitpath.length - 1
       let node: TreeNode = {
         title: splitpath[i],
+        fileName : isFile ? obj.fileName : splitpath[i],
         children: [],
-        expanded: true,
-        isDirectory: true
-      }
-      if (i == splitpath.length - 1) {
-        node.fileName = obj.fileName
-        node.isDirectory = false
+        expanded: !isFile,
+        isDirectory: !isFile
       }
       Object.assign(node, nodeEnhance(node, obj))
       ptr[splitpath[i]] = ptr[splitpath[i]] || node;

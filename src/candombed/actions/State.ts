@@ -5,7 +5,8 @@ export interface State {
   selectedFile?: string
 
   ui: {
-    fileTreeNodes: TreeNode[]
+    fileTreeNodes: TreeNode[],
+    directoryExpandedNodeData: {fileName: string, expanded: boolean}[]
   }
 }
 
@@ -15,7 +16,8 @@ export const initialState: State = {
     files: []
   },
   ui: {
-    fileTreeNodes: []
+    fileTreeNodes: [], 
+    directoryExpandedNodeData: []
   }
 }
 export function getSelectedFile(state: State): ProjectFile {

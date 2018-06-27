@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import  { ExtendedNodeData } from 'react-sortable-tree';
 import SortableTree from 'react-sortable-tree';
 import FileExplorerTheme from 'react-sortable-tree-theme-file-explorer';
-import { filesToTreeNodes } from '../ui-util/fileTreeUtil';
+import { filesToTreeNodes, TreeNode } from '../ui-util/fileTreeUtil';
 import { AbstractProject } from '../../common/types';
 import { DragDropContext } from 'react-dnd';
 
-export class FileTree extends Component<{ project: AbstractProject }> {
+export class FileTree<T> extends Component<{ state: T&{project: AbstractProject} }> {
   
   render() {
-    if(!this.props.project){
+    if(!this.props.state.project){
       return (<div>No project open</div>)
     }
     const treeData = this.getTestData()
@@ -19,26 +19,19 @@ export class FileTree extends Component<{ project: AbstractProject }> {
           treeData={ treeData}
           onChange={treeData => this.setState({ treeData })}
           theme={FileExplorerTheme}
-          canDrag={false}
-          generateNodeProps={rowInfo => {
-            let nodeProps = { onClick: event => this.nodeClicked(event, rowInfo) }
-            return nodeProps;
-          }}
+          canDrag={true}
+          generateNodeProps={rowInfo => ({ onClick: event => this.nodeClicked(event, rowInfo) })}
         />
       </div>
     );
   }
   getTestData(){
-    return filesToTreeNodes(this.props.project.files)
+    return filesToTreeNodes(this.props.state.project.files)
   }
   nodeClicked(event: MouseEvent, rowInfo: ExtendedNodeData): any {
-    if (!rowInfo.node || rowInfo.node && rowInfo.node.children && rowInfo.node.children.length) {
-      return
-    }
-    const selectedFile = this.props.project.files.find(f => rowInfo.node.fileName === f.fileName)
-    this.setSelectedFile(selectedFile)
+    this.setSelectedFile(rowInfo.node as TreeNode)
   }
 
-  setSelectedFile(file){
+  setSelectedFile(node: TreeNode){
   }
 }

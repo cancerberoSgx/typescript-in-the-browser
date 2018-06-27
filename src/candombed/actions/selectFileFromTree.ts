@@ -1,31 +1,44 @@
 import { Action } from 'redux';
 import { initialState, State } from '../actions/State';
 import { store } from '../main';
-// import { getNavigationBarItems } from '../../common/monaco/tsWorker';
-// import { getMonacoModelFor, getMonacoUriFromFile } from '../../common/monaco/util';
+import { projectFilesToTreeNodes } from '../projectActions';
+import { TreeNode } from '../../common/ui-util/fileTreeUtil';
+
 
 export function selectFileFromTree(state: State = initialState, action: SelectFileFromTreeAction): State {
   if (action.type === SelectFileFromTreeActionId && state.project && state.project.files) {
-    const selected = state.project.files.find(f=>f.fileName===action.selectedFileName)
-    if(selected.isDirectory){
-      
+    if (action.node.isDirectory) {
+      let d = state.ui.directoryExpandedNodeData.find(d => d.fileName === action.node.fileName)
+      if (!d) {
+        d = { expanded: true, fileName: action.node.fileName }
+        state.ui.directoryExpandedNodeData.push(d)
+      }
+
+      Object.assign(d, { expanded: !d.expanded })
+      const fileTreeNodes = projectFilesToTreeNodes(state)
+      return Object.assign({}, state, {
+        ui: Object.assign(state.ui, {
+          directoryExpandedNodeData: state.ui.directoryExpandedNodeData,
+          fileTreeNodes
+        })
+      })
     }
     else {
       return Object.assign({}, state, {
-        selectedFile: action.selectedFileName
+        selectedFile: action.node.fileName
       })
     }
   }
   return state
 }
 
-export const SelectFileFromTreeActionId:'SelectFileFromTreeAction' = 'SelectFileFromTreeAction'
-export function dispatchSelectFileFromTree(selectedFileName: string) {
+export const SelectFileFromTreeActionId: 'SelectFileFromTreeAction' = 'SelectFileFromTreeAction'
+export function dispatchSelectFileFromTree(node: TreeNode) {
   store.dispatch({
     type: SelectFileFromTreeActionId,
-    selectedFileName
+    node
   })
 }
 interface SelectFileFromTreeAction extends Action {
-  selectedFileName: string
+  node: TreeNode
 }

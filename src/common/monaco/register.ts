@@ -2,6 +2,7 @@ import * as monaco from 'monaco-editor'
 import { AbstractFile, AbstractProject } from '../types';
 import { getMonaco } from './monacoFacade';
 import { EventEmitter } from 'events';
+import { basename, dirname } from 'path';
 
 // monaco editor models to files conversion helpers
 export function getMonacoUriFromFile(file: AbstractFile|string){
@@ -46,7 +47,11 @@ export function resetMonacoModelsAndEditors(){
 }
 export function createAllMonacoModelsFor(example: AbstractProject){
   example.files.forEach(file=>{
-    getMonacoModelFor( file)
+    getMonacoModelFor(file)
+    if(file.fileName.endsWith('index.ts')){
+      console.log(dirname(file.fileName)+'.ts');
+      getMonacoModelFor({fileName: dirname(file.fileName)+'.ts', content: file.content})
+    }
   })
 }
 

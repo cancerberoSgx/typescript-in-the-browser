@@ -19,7 +19,7 @@ export default () => {
     <div className={"row"}>
       <div className={"col-3"}>
         {/* {fileNavigator()} */}
-        <CompilerFileTree project={example}/> 
+        <CompilerFileTree state={{project: example}}/> 
       </div>
       <div className={"col-9"}>
       <CompilerEditor file={ getSelectedFile()} width="100%" height="300px" id={'selected-file-'} />

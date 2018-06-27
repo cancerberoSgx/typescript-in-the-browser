@@ -23,7 +23,7 @@ export default (state: State) => {
       pane1Style={{ background: '#eee' }}
       resizerStyle={{ background: '#000' }}
     >
-      <CandombedFileTree project={state.project} />
+      <CandombedFileTree state={state}/>
 
       <SplitPane split="horizontal"
         minSize={100}
