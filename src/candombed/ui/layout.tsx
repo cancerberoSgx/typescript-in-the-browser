@@ -7,7 +7,8 @@ import { State, getSelectedFile } from '../actions/State';
 import whatsThisModal from './modals/whatsThisModal';
 import loadProjectModal from './modals/loadProjectModal';
 import saveProjectModal from './modals/saveProjectModal';
-import { DragSource } from 'react-dnd';
+
+
 export default (state: State) => {
 
   return (
@@ -37,7 +38,7 @@ export default (state: State) => {
     </SplitPane>
 {whatsThisModal()} 
 {loadProjectModal()} 
-{saveProjectModal()} 
+{saveProjectModal()}
   </div> 
 )
 }

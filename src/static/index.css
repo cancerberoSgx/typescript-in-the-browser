@@ -14,3 +14,9 @@
 #saveProjectJsonTextarea{
   width: 100%
 }
+.rstcustom__rowWrapper{
+cursor: pointer
+}
+.rstcustom__node .selected {
+  background-color: #edaaaa
+}

@@ -74,3 +74,90 @@ cursor: not-allowed;
 .Resizer.disabled:hover {
 border-color: transparent;
 }
+
+
+
+/* popper - tooltip css */
+.popper,
+.tooltip {
+    position: absolute;
+    background: rgb(83, 33, 33);
+    color: black;
+    width: 150px;
+    border-radius: 5px;
+    box-shadow: 0 0 2px rgba(0,0,0,0.5);
+    padding: 0px;
+    text-align: left;
+    opacity: 0.7;
+    font-size: 0.7em
+}
+.popper .popper__arrow,
+.tooltip .tooltip-arrow {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    position: absolute;
+    margin: 1px;
+    border-color:rgb(83, 33, 33);
+}
+
+.popper[x-placement^="top"],
+.tooltip[x-placement^="top"] {
+    margin-bottom: 2px;
+}
+.popper[x-placement^="top"] .popper__arrow,
+.tooltip[x-placement^="top"] .tooltip-arrow {
+    border-width: 10px 10px 0 10px;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    bottom: -10px;
+    left: calc(50% - 10px);
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.popper[x-placement^="bottom"],
+.tooltip[x-placement^="bottom"] {
+    margin-top: 1px;
+}
+.tooltip[x-placement^="bottom"] .tooltip-arrow,
+.popper[x-placement^="bottom"] .popper__arrow {
+    border-width: 0 10px 10px 10px;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    top: -10px;
+    left: calc(50% - 10px);
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.tooltip[x-placement^="right"],
+.popper[x-placement^="right"] {
+    margin-left: 1px;
+}
+.popper[x-placement^="right"] .popper__arrow,
+.tooltip[x-placement^="right"] .tooltip-arrow {
+    border-width: 10px 10px 10px 0;
+    border-left-color: transparent;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    left: -10px;
+    top: calc(50% - 10px);
+    margin-left: 0;
+    margin-right: 0;
+}
+.popper[x-placement^="left"],
+.tooltip[x-placement^="left"] {
+    margin-right: 10px;
+}
+.popper[x-placement^="left"] .popper__arrow,
+.tooltip[x-placement^="left"] .tooltip-arrow {
+    border-width: 10px 0 10px 10px;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    right: -10px;
+    top: calc(50% - 10px);
+    margin-left: 0;
+    margin-right: 0;
+} 

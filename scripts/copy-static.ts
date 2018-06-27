@@ -11,7 +11,10 @@ const copies = [
   { source: 'node_modules/monaco-editor/min/vs/language/json/*', dest: 'static/monaco-editor/min/vs/language/json' },
   { source: 'node_modules/monaco-editor/min/vs/loader.js', dest: 'static/monaco-editor/min/vs' },
   { source: 'node_modules/vscode-languageserver-types/lib/umd/main.js', dest: 'static/monaco-editor/min/vscode-languageserver-types/' },
-  { source: 'node_modules/jsonc-parser/lib/umd/main.js', dest: 'static/candombed/jsonc-parser' }
+  { source: 'node_modules/jsonc-parser/lib/umd/main.js', dest: 'static/candombed/jsonc-parser' },
+  { source: 'node_modules/popper.js/dist/umd/popper.min.js', dest: 'static/popper.js/' }
+
+
 ]
 
 
