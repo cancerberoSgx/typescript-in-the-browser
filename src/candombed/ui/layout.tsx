@@ -36,9 +36,9 @@ export default (state: State) => {
         <div><pre>console.log stuff panel</pre></div>
       </SplitPane>
     </SplitPane>
-{whatsThisModal()} 
-{loadProjectModal()} 
-{saveProjectModal()}
+{whatsThisModal(state)} 
+{loadProjectModal(state)} 
+{saveProjectModal(state)}
   </div> 
 )
 }

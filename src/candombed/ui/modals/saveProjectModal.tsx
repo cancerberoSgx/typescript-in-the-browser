@@ -1,8 +1,8 @@
 import React from 'react';
 import { projectToJson } from '../../../common/util/projectSerialization';
-// import { getCurrentExample } from '../../manager';
+import { State } from '../../actions/State';
 
-export default ()=>{
+export default (state: State)=>{
   
   return (
 
@@ -20,7 +20,7 @@ export default ()=>{
       <p>The following is the current TypeScript project serialized into JSON format. You can copy &amp; paste and save it in your system and load it in the future: </p>
         
       <textarea id="saveProjectJsonTextarea">
-        {/* {projectToJson(getCurrentExample())} */}
+        {projectToJson(state.project)}
       </textarea>
       </div>
       <div className={"modal-footer"}>

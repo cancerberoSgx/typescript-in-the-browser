@@ -6,20 +6,14 @@ import { projectFilesToTreeNodes } from '../projectActions';
 
 export function selectExample(state: State = initialState, action: SelectExampleAction): State {
   if (action.type === SelectExampleActionId) {
-    const exampleFound = getExamples().find(ex => ex.name === action.exampleName)
-    // console.log('selectExample', exampleFound, exampleFound.name);
-    state = Object.assign({}, state,
-      {
-        project: exampleFound,
-        selectedFile: undefined
-      })
-
-    state = Object.assign({}, state, {
+    const newState: State = Object.assign({}, state, {
+      project: getExamples().find(ex => ex.name === action.exampleName),
+      selectedFile: action.exampleName, 
       ui: Object.assign({}, state.ui, {
-        fileTreeNodes: projectFilesToTreeNodes(state)
+        fileTreeNodes: projectFilesToTreeNodes(state.project.files, state.ui.directoryExpandedNodeData)
       })
     })
-
+    return newState
   }
   return state
 }

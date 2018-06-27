@@ -37,9 +37,7 @@ export interface ITypeScriptWorker {
 export function getTsWorker(uri: monaco.Uri): Promise<ITypeScriptWorker> {
   return new Promise(resolve => {
     getMonaco().languages.typescript.getTypeScriptWorker().then(_worker => {
-      _worker(uri).then(worker => {
-        resolve(worker)
-      })
+      _worker(uri).then(resolve)
     })
   })
 }

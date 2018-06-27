@@ -10,25 +10,26 @@ import { installProjectObserver } from './projectObserver';
 
 export const store: Store = createStore(getReduceres())
 
-export function render() {
-  ReactDOM.render(layout(store.getState()), document.getElementById('candombed-main'))
+export function render(state: State = store.getState()) {
+  ReactDOM.render(layout(state), document.getElementById('candombed-main'))
 }
 
 export const emitter = new EventEmitter()
 let oldState: State = initialState
 function stateChanged(){
-  render()
   const newState = store.getState()
   emitter.emit('stateChange', oldState, newState)
   oldState = newState
+  // render(newState)
 }
 
 // export function getState(): State{
 //   return oldState
 // }
 requireMonaco(function(){
-  store.subscribe(stateChanged)
   installProjectObserver()
-  render()
+  store.subscribe(stateChanged)
+  store.subscribe(render)
+  // render()
 })
 

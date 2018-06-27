@@ -1,9 +1,13 @@
+// @ts-nocheck
+
 // TODO: this is old js - adapt to typescript or get a better lib
 // working in chrome and firefox - put it in its own project!
 
-// interface FolderDropManagerConstructor { new () : FolderDropManager }
+// @ts-ignore
 export interface FolderDropManager {
+  // @ts-ignore
   install(el: HTMLElement, listener: (e: FolderDropManagerEvent) => void)
+  // @ts-ignore
   uninstall(el: HTMLElement, listener: (e: FolderDropManagerEvent) => void)
 }
 export interface FolderDropManagerEvent {
@@ -34,7 +38,6 @@ export interface FolderDropManagerFileEntry {
   isFile: boolean
   name: string
 }
-
 /**
  * a FolderDDManager instance can be installed on a DOm Element and mange all the files 
  * (recursively) contained in a dropped folder by the user. Then it will work for collecting 
@@ -44,6 +47,7 @@ export interface FolderDropManagerFileEntry {
  */
 function  FolderDDManager () { };
 export function createFolderDropManager(): FolderDropManager{
+  // @ts-ignore
   return new FolderDDManager()
 }
 const proto = FolderDDManager.prototype;
@@ -52,22 +56,25 @@ const w = (window as any)
 w.requestFileSystem = w.requestFileSystem || w.webkitRequestFileSystem;
 w.resolveLocalFileSystemURL = w.webkitResolveLocalFileSystemURL ||
   w.webkitResolveLocalFileSystemURL;
-
+// @ts-ignore
 proto.error = function (e) {
   console.log('error', e);
   this.notifyListener({type: 'error', error: e})
   throw e
 };
+// @ts-ignore
 proto.error_from_readentries = function (e) {
   console.log('error_from_readentries', e);
   this.notifyListener({type: 'error', error: e})
   throw e
 };
+// @ts-ignore
 proto.traverseFileTree = function (item, path) {
   path = path || "";
   var self = this;
   if (item.isFile) {
     // Get file
+    // @ts-ignore
     item.file(function (file) {
       self.readFileText(file, item, path);
     }
@@ -77,6 +84,7 @@ proto.traverseFileTree = function (item, path) {
 
     // Get folder contents
     var dirReader = item.createReader();
+    // @ts-ignore
     dirReader.readEntries(function (entries) {
 
       const fileInfo = { item, isFile: false, isDirectory: true, fullPath: item.fullPath, entries }
@@ -94,6 +102,7 @@ proto.traverseFileTree = function (item, path) {
 /**
 @method isBinary
 */
+// @ts-ignore
 proto.isBinary = function (str) {
   //we guess by comparing form 3rd char to 100 for if charcode>=65533
   if (str.length < 3) {
@@ -109,12 +118,14 @@ proto.isBinary = function (str) {
 /**
 @method readFileText
 */
+// @ts-ignore
 proto.readFileText = function (file, item, path) {
   var reader = new FileReader();
   var self = this;
   reader.readAsText(file);
   reader.addEventListener('loadend', function (e) {
     var isBinary = self.isBinary(reader.result);
+    // @ts-ignore
     const fileInfo = { file, fullPath: item.fullPath, item, isDirectory: item.isDirectory, isBinary, isFile: item.isFile, content: undefined }
     if (isBinary) {
       // console.log('BINARYFILE');
@@ -129,6 +140,7 @@ proto.readFileText = function (file, item, path) {
 };
 
 // TODO. a very very heuristic method to realize if the data transfer has finished (just a timeout). TODO: research and do this better.
+// @ts-ignore
 proto.emitFileEventFinish = function(fn){
   this.lastFileEventTime = performance.now()
   this.emitFileEventFinishTimer = setInterval(()=>{
@@ -138,11 +150,12 @@ proto.emitFileEventFinish = function(fn){
     }
   }, 1000)
 }
+// @ts-ignore
 proto.notifyListener = function(e){
   this.emitFileEventFinish = performance.now()
   this.listener(e)
 }
-
+// @ts-ignore
 proto.handleDrop = function (evt) {
   evt.stopPropagation();
   evt.preventDefault();
@@ -157,7 +170,7 @@ proto.handleDrop = function (evt) {
     }
   }
 };
-
+// @ts-ignore
 proto.handleDragOver = function (evt) {
   evt.stopPropagation();
   evt.preventDefault();
@@ -168,6 +181,7 @@ proto.handleDragOver = function (evt) {
 @param el HTMLElement
 @param listener Function
 */
+// @ts-ignore
 proto.install = function (el: HTMLElement, listener) {
   this.listener = listener;
   this.handleDropListenerFn = this.handleDrop.bind(this)
@@ -176,9 +190,10 @@ proto.install = function (el: HTMLElement, listener) {
   el.addEventListener("dragover",this. handleDragOverListenerFn, false);
 };
 
-
+// @ts-ignore all
 proto.uninstall = function (el: HTMLElement, listener) {
   delete this.listener
   el.removeEventListener("drop", this.handleDropListenerFn, false);
   el.addEventListener("dragover",this.handleDragOverListenerFn, false);
 };
+// @ts-nocheck

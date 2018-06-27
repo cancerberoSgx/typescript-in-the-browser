@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { render } from '../../main';
 import { getUIConfig, setEditorKind, setMainContentKind } from '../iuSettingsState';
 
@@ -17,12 +17,12 @@ export default () =>
   </form>
 
 
-function toggleMainContentKindChanged(e) {
+function toggleMainContentKindChanged(e: ChangeEvent<HTMLInputElement>) {
   setMainContentKind(e.target.checked ? 'project' : 'simple1')
   render()
 }
 
-function toggleEditorKindChanged(e) {
+function toggleEditorKindChanged(e: ChangeEvent<HTMLInputElement>) {
   setEditorKind(e.target.checked ? 'monaco' : 'pre')
   render()
 }

@@ -10,10 +10,10 @@
     "rootDir": ".",
     "strict": true, 
     "strictNullChecks": false,
-    "noImplicitAny": false,
+    // "noImplicitAny": false,
     "sourceMap": true,
     "esModuleInterop": true,
-    "declaration": true
-  }, 
-  "exclude": ["assets", "test", "static", "dist", "scripts", "doc"]
+    "declaration": true,
+    "skipLibCheck": true
+  }
 }

@@ -1,12 +1,7 @@
 import { AbstractProject } from '../types';
 
 export function projectToJson(p: AbstractProject): string {
-  return JSON.stringify({
-    // id: p.id,
-    // description: p.description,
-    name: p.name,
-    flies: p.files
-  })
+  return JSON.stringify(p)
 }
 
 export function jsonToProject(s: string): AbstractProject {

@@ -1,6 +1,7 @@
 import React from 'react';
+import { State } from '../../actions/State';
 
-export default ()=>
+export default (state: State)=>
 
 <div className={"modal fade"} id="whatsThisModal" role="dialog" aria-labelledby="whatsThisModalLabel" aria-hidden="true">
   <div className={"modal-dialog modal-lg"} role="document">

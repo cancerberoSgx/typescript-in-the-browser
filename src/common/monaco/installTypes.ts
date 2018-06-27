@@ -13,7 +13,7 @@ export function installTypes(project: AbstractProject) {
     return Promise.resolve()
   }
   const packageJSON = JSON.parse(pj.content)
-  let deps = []
+  let deps: {name: string, version: string}[] = []
   Object.keys(packageJSON.dependencies||{}).filter(k => k.startsWith('@types'))
     .forEach(d => deps.push({ name: d, version: packageJSON.dependencies[d] }))
   Object.keys(packageJSON.devDependencies||{}).filter(k => k.startsWith('@types'))

@@ -4,8 +4,6 @@ import { dispatchSelectExample } from '../actions/selectExample';
 import { installTypes } from '../../common/monaco/installTypes';
 import { State } from '../actions/State';
 import { getEmitOutput } from '../projectActions';
-// import { testtest } from '../util/testtest';
-// import { testtest } from '../util/testtest';
 
 export default (state: State) =>
   <nav className={"navbar navbar-expand-lg navbar-dark bg-dark"}>

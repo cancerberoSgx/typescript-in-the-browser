@@ -5,7 +5,7 @@ import { getMonacoDefinitionAtPosition } from './tsWorker';
 
 let definitionProviderRegistered = false
 let lastProvidedDefinition: monaco.languages.Definition
-let lastProvidedDefinitionPosition
+let lastProvidedDefinitionPosition: monaco.Position
 /** very dirty solution to navigate to other files on ctrl-click. Basically register a definition provide once providing 
  * using language service based getMonacoDefinitionAtPosition and for each editor register a onMouseUp listener that 
  * checks agains the last provided definition in that position and set a new model to the editor, revealing position and 

@@ -13,13 +13,10 @@ export function selectFileFromTree(state: State = initialState, action: SelectFi
         d = { expanded: true, fileName: action.node.fileName }
         state.ui.directoryExpandedNodeData.push(d)
       }
-
       Object.assign(d, { expanded: !d.expanded })
-      const fileTreeNodes = projectFilesToTreeNodes(state)
       return Object.assign({}, state, {
         ui: Object.assign(state.ui, {
-          directoryExpandedNodeData: state.ui.directoryExpandedNodeData,
-          fileTreeNodes
+          fileTreeNodes: projectFilesToTreeNodes(state.project.files, state.ui.directoryExpandedNodeData)
         })
       })
     }

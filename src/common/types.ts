@@ -8,3 +8,7 @@ export interface AbstractProject {
   name: string
   files: AbstractFile[]
 }
+
+export interface AbstractState{
+  project: AbstractProject, selectedFile?: string
+}

@@ -21,14 +21,16 @@ export async function getEmitOutput(state: State) {
   })
 }
 
-export function projectFilesToTreeNodes(state: State): TreeNode[] {
-  return filesToTreeNodes(state.project.files, undefined, (node, file: ProjectFile) => {
+export function projectFilesToTreeNodes(files: ProjectFile[], 
+  directoryExpandedNodeData: { fileName: string, expanded: boolean }[]): TreeNode[] {
+  return filesToTreeNodes(files, undefined, (node, file: ProjectFile) => {
     if (node.isDirectory) {
-      const found = state.ui.directoryExpandedNodeData.find(n=>n.fileName===node.fileName)
-      node= Object.assign(node, { expanded: !found || found.expanded})
-    }else {
-      node= Object.assign({}, node)
+      const found = directoryExpandedNodeData.find(n => n.fileName === node.fileName)
+      node = Object.assign(node, { expanded: !found || found.expanded })
     }
+    // else {
+    //   node= Object.assign({}, node)
+    // }
     return node
   })
 }

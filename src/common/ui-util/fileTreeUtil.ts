@@ -1,5 +1,6 @@
 
 import { AbstractFile } from '../types';
+
 export interface TreeNode {
   isDirectory: boolean
   children: TreeNode[]
@@ -26,11 +27,15 @@ export function filesToTreeNodes(arr: AbstractFile[], childSortCompareFn: (a: Tr
         isDirectory: !isFile
       }
       Object.assign(node, nodeEnhance(node, obj))
+      // @ts-ignore
       ptr[splitpath[i]] = ptr[splitpath[i]] || node;
+      // @ts-ignore
       ptr[splitpath[i]].children = ptr[splitpath[i]].children || {};
+      // @ts-ignore
       ptr = ptr[splitpath[i]].children;
     }
   }
+  // @ts-ignore
   function objectToArr(node) {
     Object.keys(node || {}).map((k) => {
       if (node[k].children) {

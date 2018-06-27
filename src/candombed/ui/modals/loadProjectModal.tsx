@@ -1,6 +1,7 @@
 import React from 'react';
+import { State } from '../../actions/State';
 
-export default ()=>{
+export default (state: State)=>{
   
   return (
 
@@ -17,16 +18,12 @@ export default ()=>{
         <p>Paste previously saved JSON in the following text area for loading that project:</p>
         <textarea id="loadProjectJsonTextarea">
         </textarea>
-
-
           <p>Also You can drag and drop a local project folder into the next drop area and the application will try to load it as a TypeScript project. </p>
           <p>Be careful to clean up the folder before, like removing all unnecessary files like node_modules, dist/ folders etc. </p>
 
           <p>Make sure the tsconfig.json file is at the root of the folder:</p>
 
           <div id="tsProjectFolderDropArea"></div>
-
-
       </div>
       <div className={"modal-footer"}>
         <button type="button" className={"btn btn-secondary"} data-dismiss="modal">Load</button>
