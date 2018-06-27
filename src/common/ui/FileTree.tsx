@@ -6,7 +6,7 @@ import { filesToTreeNodes, TreeNode } from '../ui-util/fileTreeUtil';
 import { AbstractProject } from '../../common/types';
 import { DragDropContext } from 'react-dnd';
 
-export class FileTree<T> extends Component<{ state: T&{project: AbstractProject} }> {
+export class FileTree<T> extends Component<{ state: T&{project: AbstractProject, selectedFile?: string} }> {
   
   render() {
     if(!this.props.state.project){
@@ -20,7 +20,7 @@ export class FileTree<T> extends Component<{ state: T&{project: AbstractProject}
           onChange={treeData => this.setState({ treeData })}
           theme={FileExplorerTheme}
           canDrag={true}
-          generateNodeProps={rowInfo => ({ onClick: event => this.nodeClicked(event, rowInfo) })}
+          generateNodeProps={rowInfo => ({ onClick: event => this.nodeClicked(event, rowInfo) , class: this.props.state.selectedFile=== (rowInfo.node as TreeNode).fileName ? 'selected' : ''})}
         />
       </div>
     );

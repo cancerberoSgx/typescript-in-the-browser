@@ -84,19 +84,22 @@ export function getScriptFileNames(): Promise<string[]> {
 
 
 
-export function getMonacoDefinitionAtPosition(model: monaco.editor.IModel, position: monaco.IPosition): Promise<monaco.languages.Definition> {
+export function getMonacoDefinitionAtPosition(model: monaco.editor.IModel, position: monaco.IPosition): Promise<monaco.languages.Location[]> {
   return new Promise((resolve, reject) => {
     getDefinitionAtPosition(model.uri, model.getOffsetAt(position)).then(defs => {
       if (defs) {
         const locations = defs.map(def => {
           const uri = getMonaco().Uri.parse(def.fileName)
           const targetModel = getMonaco().editor.getModel(uri)
+          if(!targetModel){
+            return undefined
+          }
           const range = getMonaco().Range.fromPositions(targetModel.getPositionAt(def.textSpan.start), targetModel.getPositionAt(def.textSpan.start + def.textSpan.length))
           return {
             uri,
             range
           }
-        })
+        }).filter(l=>!!l)
         resolve(locations)
       }
       resolve([])

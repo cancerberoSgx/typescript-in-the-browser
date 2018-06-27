@@ -2,7 +2,8 @@ import * as monaco from 'monaco-editor'
 import { AbstractFile, AbstractProject } from '../types';
 import { getMonaco } from './monacoFacade';
 import { EventEmitter } from 'events';
-import { basename, dirname } from 'path';
+// import { basename, dirname } from 'path';
+// import { emitter as mainEmitter} from '../../candombed/main';
 
 // monaco editor models to files conversion helpers
 export function getMonacoUriFromFile(file: AbstractFile|string){
@@ -12,7 +13,7 @@ export function uriToFileName(uri: monaco.Uri){
   return uri.fsPath
 }
 
-export function getMonacoModelFor(file?: AbstractFile): monaco.editor.IModel {
+export function getMonacoModelFor(file: AbstractFile): monaco.editor.IModel {
   if(!file){
     return getMonaco().editor.createModel('')
   }
@@ -21,7 +22,9 @@ export function getMonacoModelFor(file?: AbstractFile): monaco.editor.IModel {
   if(model){
     return model
   }
-  return getMonaco().editor.createModel(file.content, undefined, uri)
+  model= getMonaco().editor.createModel(file.content, undefined, uri)
+  emitter.emit('modelRegistered', model, file)
+  return model
 }
 
 export function setMonacoTypeScriptDefaults(){
@@ -33,11 +36,11 @@ export function setMonacoTypeScriptDefaults(){
 } 
 const editors: monaco.editor.ICodeEditor[] = []
 
-export const editorRegisterEmitter = new EventEmitter()
+export const emitter = new EventEmitter()
 export function registerEditor(editor: monaco.editor.ICodeEditor){
   if(!editors.find(ed=>ed===editor)){
     editors.push(editor)
-    editorRegisterEmitter.emit('editorRegistered', editor)
+    emitter.emit('editorRegistered', editor)
     // editor.getModel().setValue(editor.getModel().getValue()) // make it dirty so it refresh itself in the "project"
   }
 }
@@ -48,10 +51,6 @@ export function resetMonacoModelsAndEditors(){
 export function createAllMonacoModelsFor(example: AbstractProject){
   example.files.forEach(file=>{
     getMonacoModelFor(file)
-    if(file.fileName.endsWith('index.ts')){
-      console.log(dirname(file.fileName)+'.ts');
-      getMonacoModelFor({fileName: dirname(file.fileName)+'.ts', content: file.content})
-    }
   })
 }
 

@@ -11,7 +11,7 @@ let lastProvidedDefinitionPosition
  * checks agains the last provided definition in that position and set a new model to the editor, revealing position and 
  * selecting the target Range. 
  */
-export function install(editor: monaco.editor.ICodeEditor, fn: (editor, model, def)=>void) {
+export function install(editor: monaco.editor.ICodeEditor, fn: (editor: monaco.editor.ICodeEditor, model: monaco.editor.IModel, def: monaco.languages.Location)=>void) {
   if (!definitionProviderRegistered) {
     getMonaco().languages.registerDefinitionProvider('typescript', {
       provideDefinition(model, position, token) {
@@ -29,9 +29,10 @@ export function install(editor: monaco.editor.ICodeEditor, fn: (editor, model, d
 
   editor.onMouseUp(e => {
     if (e.event.ctrlKey && e.target.position.equals(lastProvidedDefinitionPosition)) {
+      //TODO: support multiple locations and return {model, loc}[]
       const def: monaco.languages.Location = (Array.isArray(lastProvidedDefinition) && lastProvidedDefinition.length ? lastProvidedDefinition[0] : lastProvidedDefinition) as any
       if (def) {
-        const model = getMonaco().editor.getModels().find(m => m.uri.toString() === def.uri.toString())
+        const model = getMonaco().editor.getModels().find(m => m.uri && def.uri && (m.uri.toString() === def.uri.toString()))
         if (model) {
           fn(editor, model, def)
         }

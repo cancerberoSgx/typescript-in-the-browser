@@ -17,11 +17,12 @@ export function installTsConfig(project: AbstractProject) {
     const options = buildCompilerOptions(tsconfig.content)
     const libs = options.lib || []
     getMonaco().languages.typescript.typescriptDefaults.setCompilerOptions(options as any)
-    Promise.all(libs.map(l => fetchFileText(`https://unpkg.com/typescript@2.9.2/lib/lib.${l}.d.ts`))).then(depsResponses => {
+    Promise.all(libs.map(l => fetchFileText(`https://unpkg.com/typescript@2.9.2/lib/${l}`))).then(depsResponses => {
       depsResponses.forEach((text, i) => {
-        const fname = `node_modules/typescript/lib/lib.${libs[i]}.d.ts`
-        getMonaco().languages.typescript.typescriptDefaults.addExtraLib(text, fname)
-        getMonacoModelFor({ fileName: fname, content: text })
+        const fileName = `node_modules/typescript/lib/${libs[i]}`
+        console.log('addExtraLib url:'+`https://unpkg.com/typescript@2.9.2/lib/${libs[i]} Filename:`+fileName);
+        getMonaco().languages.typescript.typescriptDefaults.addExtraLib(text, fileName)
+        // getMonacoModelFor({ fileName: fname, content: text })
       })
     })
   }

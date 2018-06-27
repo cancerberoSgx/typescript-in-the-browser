@@ -18,6 +18,12 @@
 #candombed-main .container-fluid{
   padding: 0
 }
+.rstcustom__rowWrapper{
+cursor: pointer
+}
+.rstcustom__node .selected {
+  background-color: #edaaaa
+}
 
 .Resizer {
   background: #000;

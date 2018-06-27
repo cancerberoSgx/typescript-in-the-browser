@@ -14,9 +14,9 @@ export function installTypes(project: AbstractProject) {
   }
   const packageJSON = JSON.parse(pj.content)
   let deps = []
-  Object.keys(packageJSON.dependencies).filter(k => k.startsWith('@types'))
+  Object.keys(packageJSON.dependencies||{}).filter(k => k.startsWith('@types'))
     .forEach(d => deps.push({ name: d, version: packageJSON.dependencies[d] }))
-  Object.keys(packageJSON.devDependencies).filter(k => k.startsWith('@types'))
+  Object.keys(packageJSON.devDependencies||{}).filter(k => k.startsWith('@types'))
     .forEach(d => deps.push({ name: d, version: packageJSON.devDependencies[d] }))
   deps = heuristicSort(deps)
   Promise.all(deps.map(d => fetchFileText(`https://unpkg.com/${d.name}@${d.version}/index.d.ts`))).then(depsResponses => {
