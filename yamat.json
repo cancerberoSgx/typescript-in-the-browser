@@ -1,10 +1,14 @@
 [
   {
-    "name": "compiler-and-candombed",
-    "path": "compiler-and-candombed"
-  },
-  {
     "name": "monaco-typescript-project-util",
     "path": "monaco-typescript-project-util"
+  },
+  {
+    "name": "typescript-compiler-in-the-browser",
+    "path": "typescript-compiler-in-the-browser"
+  },  
+  {
+    "name": "candombed",
+    "path": "candombed"
   }
 ]

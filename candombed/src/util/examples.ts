@@ -1,6 +1,6 @@
 
-import * as tsSampleProjectFiles from '../../examples/projectsJson/ts-sample-project.json'
-import * as yamatProjectFiles from '../../examples/projectsJson/yamat.json'
+import * as tsSampleProjectFiles from '../examples/projectsJson/ts-sample-project.json'
+import * as yamatProjectFiles from '../examples/projectsJson/yamat.json'
 import { ProjectFile } from '../types';
 
 export function getExamples(){

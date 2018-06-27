@@ -1,5 +1,5 @@
 {
-  "name": "typescript-in-the-browser",
+  "name": "typescript-compiler-in-the-browser",
   "version": "0.1.0",
   "description": "attempt to see if and how much we can run typescript compiler in the browser",
   "main": "dist/src/index.js",
