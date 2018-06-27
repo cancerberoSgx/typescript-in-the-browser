@@ -1,7 +1,7 @@
 [
   {
-    "name": "typescript-in-the-browesr",
-    "path": "."
+    "name": "compiler-and-candombed",
+    "path": "compiler-and-candombed"
   },
   {
     "name": "monaco-typescript-project-util",
