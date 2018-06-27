@@ -2,7 +2,8 @@
 
 # See it in action
 
-[Using TypeScript Compiler in the browser demo](https://cancerberosgx.github.io/typescript-in-the-browser/)
+ * [Using TypeScript Compiler in the browser demo](https://cancerberosgx.github.io/typescript-in-the-browser/)
+ * [Candombed - humble attempt to build a TypeScript Project Editor](https://cancerberosgx.github.io/typescript-in-the-browser/candombed)
 
 # Objectives
 
@@ -21,7 +22,14 @@ Development environment:
 
 ```sh
 npm run dev-prepare # just once
-npm run dev
+npm run dev # http://localhost:3000/
+```
+
+or for candombed: 
+
+```sh
+npm run dev-candombed-prepare # just once
+npm run dev-candombed # http://localhost:3000/candombed/
 ```
 
 Production build: 
@@ -38,8 +46,8 @@ These are self contained examples that uses typescript without processing or cha
  * [TypeScript Compiler API very simple example - transpiling code](https://cancerberosgx.github.io/typescript-in-the-browser/examples/ts-browser-transpile-works.html)
  * [I can create individual SourceFile and visit its Nodes](https://cancerberosgx.github.io/typescript-in-the-browser/examples/ts-browser-create-sourcefile-works.html)
  * [Cannot work with ts.Program](https://cancerberosgx.github.io/typescript-in-the-browser/examples/ts-browser-create-program-fails.html)
+ * [Using TypeScript Compiler in the browser demo](https://cancerberosgx.github.io/typescript-in-the-browser/)
  * [Monaco TypeScript Project](https://cancerberosgx.github.io/typescript-in-the-browser/examples/monaco-project.html)
- * [Candombed - humble attempt to build a TypeScript Project Editor](https://cancerberosgx.github.io/typescript-in-the-browser/candombed)
 
 ## Status
 
