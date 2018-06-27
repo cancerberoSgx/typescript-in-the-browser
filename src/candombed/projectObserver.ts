@@ -5,6 +5,7 @@ import { getMonaco } from '../common/monaco/monacoFacade';
 import { installTsConfig } from '../common/monaco/tsConfig';
 import { install } from '../common/monaco/navigateExternalDefinitions';
 import { installTypes } from '../common/monaco/installTypes';
+import { dispatchSelectExample } from './actions/selectExample';
 
 /** perform magics some the editor as a project with many files works */
 export function installProjectObserver(){
@@ -17,13 +18,16 @@ export function installProjectObserver(){
       editor.setSelection(def.range)
     })
   })
+  setTimeout(() => {
+    dispatchSelectExample('yamat')
+  }, 1000);
   emitter.on('stateChange', (oldState: State, newState: State)=>{
     if(oldState.project.name!==newState.project.name){
       console.log('create all monaco models for '+newState.project.files.length)
-      installTypes(newState.project)
       resetMonacoModelsAndEditors()
       installTsConfig(newState.project)
       createAllMonacoModelsFor(newState.project)
+      installTypes(newState.project)
     }
   })
 }

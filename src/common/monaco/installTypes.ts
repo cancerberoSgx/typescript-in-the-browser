@@ -18,7 +18,7 @@ export function installTypes(project: AbstractProject) {
     .forEach(d => deps.push({ name: d, version: packageJSON.dependencies[d] }))
   Object.keys(packageJSON.devDependencies).filter(k => k.startsWith('@types'))
     .forEach(d => deps.push({ name: d, version: packageJSON.devDependencies[d] }))
-  deps = heutisticSort(deps)
+  deps = heuristicSort(deps)
   Promise.all(deps.map(d => fetchFileText(`https://unpkg.com/${d.name}@${d.version}/index.d.ts`))).then(depsResponses => {
     depsResponses.forEach((text, i) => {
       const d = deps[i]
@@ -28,7 +28,7 @@ export function installTypes(project: AbstractProject) {
   }).catch(ex => console.log(ex))
 }
 
-function heutisticSort(deps: { name: string, version: string }[]) {
+function heuristicSort(deps: { name: string, version: string }[]) {
   const n = deps.findIndex(d => d.name.startsWith('@types/node'))
   if (n != -1) {
     const aux = deps[0]

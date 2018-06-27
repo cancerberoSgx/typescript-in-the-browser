@@ -1,13 +1,9 @@
 import { AbstractFile, AbstractProject } from '../common/types';
 
 export interface Project extends AbstractProject{
-  files: AbstractFile[]
+  files: ProjectFile[]
 }
 
 export interface ProjectFile extends AbstractFile{
-
+  expanded?: boolean
 }
-
-// export interface Action {
-//   id: string
-// }

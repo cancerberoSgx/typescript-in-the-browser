@@ -6,12 +6,15 @@ import { store } from '../main';
 
 export function selectFileFromTree(state: State = initialState, action: SelectFileFromTreeAction): State {
   if (action.type === SelectFileFromTreeActionId && state.project && state.project.files) {
-
-    // getNavigationBarItems(getMonacoUriFromFile(action.selectedFileName)).then(result=>console.log('sdfsdfsdf', result))
-
-    return Object.assign({}, state, {
-      selectedFile: action.selectedFileName
-    })
+    const selected = state.project.files.find(f=>f.fileName===action.selectedFileName)
+    if(selected.isDirectory){
+      
+    }
+    else {
+      return Object.assign({}, state, {
+        selectedFile: action.selectedFileName
+      })
+    }
   }
   return state
 }

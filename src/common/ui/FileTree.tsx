@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import SortableTree, { ExtendedNodeData } from 'react-sortable-tree';
+import  { ExtendedNodeData } from 'react-sortable-tree';
+import SortableTree from 'react-sortable-tree';
 import FileExplorerTheme from 'react-sortable-tree-theme-file-explorer';
 import { filesToTreeNodes } from '../ui-util/fileTreeUtil';
 import { AbstractProject } from '../../common/types';
+import { DragDropContext } from 'react-dnd';
 
 export class FileTree extends Component<{ project: AbstractProject }> {
   
@@ -10,13 +12,14 @@ export class FileTree extends Component<{ project: AbstractProject }> {
     if(!this.props.project){
       return (<div>No project open</div>)
     }
-    const treeData = filesToTreeNodes(this.props.project.files)
+    const treeData = this.getTestData()
     return (
       <div style={{ height: '100%' }}>
         <SortableTree
           treeData={ treeData}
           onChange={treeData => this.setState({ treeData })}
           theme={FileExplorerTheme}
+          canDrag={false}
           generateNodeProps={rowInfo => {
             let nodeProps = { onClick: event => this.nodeClicked(event, rowInfo) }
             return nodeProps;
@@ -25,7 +28,9 @@ export class FileTree extends Component<{ project: AbstractProject }> {
       </div>
     );
   }
-
+  getTestData(){
+    return filesToTreeNodes(this.props.project.files)
+  }
   nodeClicked(event: MouseEvent, rowInfo: ExtendedNodeData): any {
     if (!rowInfo.node || rowInfo.node && rowInfo.node.children && rowInfo.node.children.length) {
       return
