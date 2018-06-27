@@ -31,7 +31,7 @@ export class Editor extends React.Component<Props> {
 }
 
 
-  private uninstallMonaco() {
+protected uninstallMonaco() {
     if (this.editor) {
       this.editor.dispose()
     }

@@ -36,6 +36,7 @@
   "dependencies": {
     "@phenomnomnominal/tsquery": "^2.0.0-beta.4",
     "bootstrap": "^4.1.1",
+    "folder-drop-manager": "0.0.2",
     "install": "^0.11.0",
     "jquery": "^3.3.1",
     "jsonc-parser": "^2.0.0",

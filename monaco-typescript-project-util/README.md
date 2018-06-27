@@ -12,6 +12,7 @@ Features and objectives:
  * basic widgets to represent file tree, workbench, actions, etc
  * this is not about using/ implementing language services, etc in the browser, but just leveraging monaco-typescript so is easier to implement TypeScript **Project** editors in the browsers
  * objective : move / the things currently on src/common to here. remove non necessary dependencies 
+ * objective : should be able to use it in typescript-compiler-playground - while I cannot run ts-simple-ast in the browser I can still develop the entire proect in the broser an run it in the server.
 
 
 # Usage

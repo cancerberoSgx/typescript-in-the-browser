@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { dispatchExamples, executeExample } from './manager';
 import layout from './ui/layout';
 import { requireMonaco } from '../common/monaco/monacoFacade';
-import { createFolderDropManager, FolderDropManagerEvent, FolderDropManagerFileFile, FolderDropManager } from '../common/ui-util/folderDropManager';
+import { createFolderDropManager, FolderDropManagerEvent, FolderDropManagerFileFile, FolderDropManager } from 'folder-drop-manager';
 import { ProgramFile } from './programProvider';
 import { Example } from './types';
 

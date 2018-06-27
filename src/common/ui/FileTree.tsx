@@ -1,9 +1,7 @@
 import React, { Component, MouseEvent } from 'react';
-import { ExtendedNodeData } from 'react-sortable-tree';
-import SortableTree from 'react-sortable-tree';
+import SortableTree, { ExtendedNodeData } from 'react-sortable-tree';
+import { AbstractState } from '../../common/types';
 import { filesToTreeNodes, TreeNode } from '../ui-util/fileTreeUtil';
-import { AbstractProject, AbstractState } from '../../common/types';
-import { onContextMenu } from './contextMenu';
 const FileExplorerTheme  = require('react-sortable-tree-theme-file-explorer');
 
 export class FileTree<T extends AbstractState> extends Component<{ state:T }> {
@@ -23,7 +21,7 @@ export class FileTree<T extends AbstractState> extends Component<{ state:T }> {
           generateNodeProps={rowInfo => ({
             onClick: (event:MouseEvent) => this.nodeClicked(event, rowInfo),
             class: this.props.state.selectedFile === (rowInfo.node as TreeNode).fileName ? 'selected' : '',
-            onContextMenu: (e:MouseEvent) => { onContextMenu(e, rowInfo, this.props.state) }
+            onContextMenu: (e:MouseEvent) => { this.onContextMenu(e, rowInfo, this.props.state) }
           })}
         />
       </div>
@@ -36,7 +34,9 @@ export class FileTree<T extends AbstractState> extends Component<{ state:T }> {
     console.log(event.button)
     this.setSelectedFile(rowInfo.node as TreeNode)
   }
+  onContextMenu(e: MouseEvent<Element>, rowInfo: ExtendedNodeData, state: AbstractState){
 
+  }
   setSelectedFile(node: TreeNode) {
   }
 }

@@ -7,6 +7,7 @@ import { State, getSelectedFile } from '../actions/State';
 import whatsThisModal from './modals/whatsThisModal';
 import loadProjectModal from './modals/loadProjectModal';
 import saveProjectModal from './modals/saveProjectModal';
+import forkRibbon from './forkRibbon';
 
 
 export default (state: State) => {
@@ -36,6 +37,7 @@ export default (state: State) => {
         <div><pre>console.log stuff panel</pre></div>
       </SplitPane>
     </SplitPane>
+    {forkRibbon()}
 {whatsThisModal(state)} 
 {loadProjectModal(state)} 
 {saveProjectModal(state)}

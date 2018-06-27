@@ -2,8 +2,8 @@
 import React, { MouseEvent } from 'react';
 import ReactDOM from 'react-dom';
 import { ExtendedNodeData } from 'react-sortable-tree';
-import { TreeNode } from '../ui-util/fileTreeUtil';
-import { AbstractProject, AbstractState } from '../types';
+import { TreeNode } from '../../common/ui-util/fileTreeUtil';
+import { AbstractProject, AbstractState } from '../../common/types';
 
 const Tooltip = require('tooltip.js')
 
