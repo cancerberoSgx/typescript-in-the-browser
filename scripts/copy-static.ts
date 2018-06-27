@@ -11,8 +11,7 @@ const copies = [
   { source: 'node_modules/monaco-editor/min/vs/language/json/*', dest: 'static/monaco-editor/min/vs/language/json' },
   { source: 'node_modules/monaco-editor/min/vs/loader.js', dest: 'static/monaco-editor/min/vs' },
   { source: 'node_modules/vscode-languageserver-types/lib/umd/main.js', dest: 'static/monaco-editor/min/vscode-languageserver-types/' },
-  { source: 'node_modules/jsonc-parser/lib/umd/main.js', dest: 'static/candombed/jsonc-parser' },
-  { source: 'node_modules/popper.js/dist/umd/popper.min.js', dest: 'static/popper.js/' }
+  { source: 'node_modules/jsonc-parser/lib/umd/main.js', dest: 'static/candombed/jsonc-parser' }
 
 
 ]
@@ -21,11 +20,8 @@ const copies = [
 import { cp, mkdir } from 'shelljs'
 export function copy() {
   copies.forEach(c => {
-    // const dest2 = c.dest.replace('static/', 'static/candombed/')
     mkdir('-p', c.dest);
-    // mkdir('-p', dest2);
     cp('-rf', c.source, c.dest)
-    // cp('-rf', c.source, dest2)
   })
 }
 copy()

@@ -1,0 +1,10 @@
+[
+  {
+    "name": "typescript-in-the-browesr",
+    "path": "."
+  },
+  {
+    "name": "monaco-typescript-project-util",
+    "path": "monaco-typescript-project-util"
+  }
+]
