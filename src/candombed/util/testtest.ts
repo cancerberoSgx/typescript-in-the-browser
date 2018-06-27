@@ -1,10 +1,10 @@
 
 
 
-// import { getMonacoUriFromFile, getMonacoModelFor } from '../../common/monaco/util';
 // import { getSelectedFile, State } from '../actions/State';
 // import { getMonaco } from '../../common/monaco/monacoFacade';
 // import { getTsWorker, getMonacoDefinitionAtPosition } from '../../common/monaco/tsWorker';
+// import { getMonacoUriFromFile } from '../../common/monaco/register';
 
 
 

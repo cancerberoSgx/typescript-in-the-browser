@@ -1,0 +1,42 @@
+import * as monaco from 'monaco-editor';
+import { getMonaco } from './monacoFacade';
+import { getMonacoDefinitionAtPosition } from './tsWorker';
+
+
+let definitionProviderRegistered = false
+let lastProvidedDefinition: monaco.languages.Definition
+let lastProvidedDefinitionPosition
+/** very dirty solution to navigate to other files on ctrl-click. Basically register a definition provide once providing 
+ * using language service based getMonacoDefinitionAtPosition and for each editor register a onMouseUp listener that 
+ * checks agains the last provided definition in that position and set a new model to the editor, revealing position and 
+ * selecting the target Range. 
+ */
+export function install(editor: monaco.editor.ICodeEditor, fn: (editor, model, def)=>void) {
+  if (!definitionProviderRegistered) {
+    getMonaco().languages.registerDefinitionProvider('typescript', {
+      provideDefinition(model, position, token) {
+        lastProvidedDefinitionPosition = position
+        return new Promise(resolve => {
+          getMonacoDefinitionAtPosition(model, position).then(result => {
+            lastProvidedDefinition = result
+            resolve(result)
+          })
+        })
+      }
+    })
+    definitionProviderRegistered = true
+  }
+
+  editor.onMouseUp(e => {
+    if (e.event.ctrlKey && e.target.position.equals(lastProvidedDefinitionPosition)) {
+      const def: monaco.languages.Location = (Array.isArray(lastProvidedDefinition) && lastProvidedDefinition.length ? lastProvidedDefinition[0] : lastProvidedDefinition) as any
+      if (def) {
+        const model = getMonaco().editor.getModels().find(m => m.uri.toString() === def.uri.toString())
+        if (model) {
+          fn(editor, model, def)
+        }
+      }
+    }
+  })
+
+}

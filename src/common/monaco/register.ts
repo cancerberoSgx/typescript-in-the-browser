@@ -1,6 +1,7 @@
 import * as monaco from 'monaco-editor'
 import { AbstractFile, AbstractProject } from '../types';
 import { getMonaco } from './monacoFacade';
+import { EventEmitter } from 'events';
 
 // monaco editor models to files conversion helpers
 export function getMonacoUriFromFile(file: AbstractFile|string){
@@ -30,10 +31,13 @@ export function setMonacoTypeScriptDefaults(){
   })
 } 
 const editors: monaco.editor.ICodeEditor[] = []
+
+export const editorRegisterEmitter = new EventEmitter()
 export function registerEditor(editor: monaco.editor.ICodeEditor){
   if(!editors.find(ed=>ed===editor)){
     editors.push(editor)
-    editor.getModel().setValue(editor.getModel().getValue()) // make it dirty so it refresh itself in the "project"
+    editorRegisterEmitter.emit('editorRegistered', editor)
+    // editor.getModel().setValue(editor.getModel().getValue()) // make it dirty so it refresh itself in the "project"
   }
 }
 export function resetMonacoModelsAndEditors(){
@@ -45,3 +49,4 @@ export function createAllMonacoModelsFor(example: AbstractProject){
     getMonacoModelFor( file)
   })
 }
+

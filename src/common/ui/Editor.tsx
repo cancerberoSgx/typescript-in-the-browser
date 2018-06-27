@@ -3,6 +3,7 @@ import React from 'react';
 import { AbstractFile } from '../types';
 import { getMonaco } from '../monaco/monacoFacade';
 import { getMonacoModelFor, registerEditor } from '../monaco/register';
+import { install } from '../monaco/navigateExternalDefinitions';
 
 type Props = { id: string, file: AbstractFile, width: string, height: string }
 
@@ -24,11 +25,11 @@ export class Editor extends React.Component<Props> {
     this.editor = getMonaco().editor.create(document.getElementById(this.props.id), {
       model,
       automaticLayout: true, 
-      lightbulb: {enabled: true}
-    })
-    // setTimeout(() => registerEditor(this.editor), 500)
-    
-  }
+      lightbulb: {enabled: true}}
+    )
+    registerEditor(this.editor)
+}
+
 
   private uninstallMonaco() {
     if (this.editor) {

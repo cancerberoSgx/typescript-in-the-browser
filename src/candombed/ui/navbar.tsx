@@ -4,6 +4,7 @@ import { dispatchSelectExample } from '../actions/selectExample';
 import { installTypes } from '../../common/monaco/installTypes';
 import { State } from '../actions/State';
 // import { testtest } from '../util/testtest';
+// import { testtest } from '../util/testtest';
 
 export default (state: State) =>
   <nav className={"navbar navbar-expand-lg navbar-dark bg-dark"}>
@@ -25,7 +26,7 @@ export default (state: State) =>
           <a className={"nav-link dropdown-toggle"} href="#" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</a>
           <div className={"dropdown-menu"} aria-labelledby="dropdown06">
             <a className={"dropdown-item"}  onClick={()=>installTypes(state.project)}>Install @types</a>
-            <a className={"dropdown-item"} >test</a>
+            <a className={"dropdown-item"} onClick={()=>{}}>test</a>
           </div>
         </li>
         <li className={"nav-item dropdown"}>
