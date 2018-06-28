@@ -1,6 +1,5 @@
-
 // monaco-editor type and hacks "facade"
-import * as _monaco from 'monaco-editor'
+import * as _monaco from 'monaco-editor';
 export function getMonaco(): typeof _monaco {
   return (window as any).monaco
 }

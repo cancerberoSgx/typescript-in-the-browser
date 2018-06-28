@@ -1,8 +1,9 @@
 import { Action } from 'redux';
 import { initialState, State } from '../actions/State';
-import { store } from '../main';
+// import { store } from '../main';
 import { projectFilesToTreeNodes } from '../projectActions';
 import { TreeNode } from 'monaco-typescript-project-util';
+import { storeDispatch } from '../main';
 
 
 export function selectFileFromTree(state: State = initialState, action: SelectFileFromTreeAction): State {
@@ -31,7 +32,7 @@ export function selectFileFromTree(state: State = initialState, action: SelectFi
 
 export const SelectFileFromTreeActionId: 'SelectFileFromTreeAction' = 'SelectFileFromTreeAction'
 export function dispatchSelectFileFromTree(node: TreeNode) {
-  store.dispatch({
+  storeDispatch({
     type: SelectFileFromTreeActionId,
     node
   })

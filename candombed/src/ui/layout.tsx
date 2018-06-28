@@ -26,7 +26,6 @@ export default (state: State) => {
       resizerStyle={{ background: '#000' }}
     >
       <CandombedFileTree state={state}/>
-
       <SplitPane split="horizontal"
         minSize={100}
         defaultSize={'80%'}
@@ -38,9 +37,9 @@ export default (state: State) => {
       </SplitPane>
     </SplitPane>
     {forkRibbon()}
-{whatsThisModal(state)} 
-{loadProjectModal(state)} 
-{saveProjectModal(state)}
+    {whatsThisModal(state)} 
+    {loadProjectModal(state)} 
+    {saveProjectModal(state)}
   </div> 
-)
+  )
 }

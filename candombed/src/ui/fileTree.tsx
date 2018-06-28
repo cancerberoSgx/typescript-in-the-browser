@@ -1,23 +1,23 @@
 import { FileTree, TreeNode } from 'monaco-typescript-project-util';
-import { dispatchSelectFileFromTree } from '../actions/selectFileFromTree';
-// import { getState } from '../main';
-// import { TreeNode } from '../../common/ui-util/fileTreeUtil';
-import { State } from '../actions/State';
-import { ExtendedNodeData } from 'react-sortable-tree';
 import { MouseEvent } from 'react';
-import { onContextMenu } from './contextMenu';
+import { ExtendedNodeData } from 'react-sortable-tree';
+import { dispatchSelectFileFromTree } from '../actions/selectFileFromTree';
+import { State } from '../actions/State';
+import { onContextMenu, destroyTooltip } from './contextMenu';
+import { projectFilesToTreeNodes } from '../projectActions';
 
 
 export class CandombedFileTree extends FileTree<State>  {
-   setSelectedFile(node: TreeNode){
-     dispatchSelectFileFromTree(node)
+  setSelectedFile(node: TreeNode) {
+    dispatchSelectFileFromTree(node)
+    destroyTooltip() // TODO: do it right with state and redux!
   }
 
-  getTestData(): TreeNode[]{
-    return this.props.state.ui.fileTreeNodes
+  getTestData(): TreeNode[] {
+    return projectFilesToTreeNodes(this.props.state.project.files, this.props.state.ui.directoryExpandedNodeData)
   }
-  
-  onContextMenu(e: MouseEvent<Element>, rowInfo: ExtendedNodeData, state:  State){
-onContextMenu
+
+  onContextMenu(e: MouseEvent<Element>, rowInfo: ExtendedNodeData, state: State) {
+    onContextMenu(e, rowInfo, state)
   }
 }

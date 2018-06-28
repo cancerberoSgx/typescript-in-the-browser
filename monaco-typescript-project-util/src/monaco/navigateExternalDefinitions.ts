@@ -8,7 +8,7 @@ let lastProvidedDefinition: monaco.languages.Definition
 let lastProvidedDefinitionPosition: monaco.Position
 /** very dirty solution to navigate to other files on ctrl-click. Basically register a definition provide once providing 
  * using language service based getMonacoDefinitionAtPosition and for each editor register a onMouseUp listener that 
- * checks agains the last provided definition in that position and set a new model to the editor, revealing position and 
+ * checks against the last provided definition in that position and set a new model to the editor, revealing position and 
  * selecting the target Range. 
  */
 export function install(editor: monaco.editor.ICodeEditor, fn: (editor: monaco.editor.ICodeEditor, model: monaco.editor.IModel, def: monaco.languages.Location)=>void) {
@@ -26,7 +26,6 @@ export function install(editor: monaco.editor.ICodeEditor, fn: (editor: monaco.e
     })
     definitionProviderRegistered = true
   }
-
   editor.onMouseUp(e => {
     if (e.event.ctrlKey && e.target.position.equals(lastProvidedDefinitionPosition)) {
       //TODO: support multiple locations and return {model, loc}[]

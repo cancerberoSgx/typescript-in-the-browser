@@ -1,8 +1,9 @@
 import { Action } from 'redux';
 import { initialState, State } from '../actions/State';
-import { store } from '../main';
+// import { store } from '../main';
 import { ProjectFile } from '../types';
 import { projectFilesToTreeNodes } from '../projectActions';
+import { storeDispatch } from '../main';
 
 export function addFiles(state: State = initialState, action: AddFilesAction): State {
   if (action.type === AddFilesActionId && state.project && state.project.files) {
@@ -20,7 +21,7 @@ export function addFiles(state: State = initialState, action: AddFilesAction): S
 
 export const AddFilesActionId: 'AddFilesAction' = 'AddFilesAction'
 export function dispatchAddFile(files: ProjectFile[]) {
-  store.dispatch({
+  storeDispatch({
     type: AddFilesActionId,
     files
   })

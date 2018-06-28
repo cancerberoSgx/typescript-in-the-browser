@@ -1,0 +1,22 @@
+.editor{
+  resize: vertical;
+  overflow: auto;
+}
+
+
+#tsProjectFolderDropArea {
+  width: 300px; 
+  height: 150px; 
+  border: 3px solid pink; 
+  background-color: darkolivegreen
+}
+
+#saveProjectJsonTextarea{
+  width: 100%
+}
+.rstcustom__rowWrapper{
+cursor: pointer
+}
+.rstcustom__node .selected {
+  background-color: #edaaaa
+}

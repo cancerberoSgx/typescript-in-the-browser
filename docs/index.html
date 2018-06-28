@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>TypeScript Compiler in the browser</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="index.css" />
+</head>
+<body>
+  <div id="typescript-in-the-browser-main"></div>
+
+
+  <script src="jquery.slim.min.js"></script>
+  <script src="popper.js/popper.min.js"></script>
+  <script src="bootstrap.min.js"></script>
+  
+<script>require = {paths: { "vs": "monaco-editor/min/vs" }} </script>
+<script src="monaco-editor/min/vs/loader.js"></script>
+<script src="monaco-editor/min/vs/editor/editor.main.nls.js"></script>
+<script src="monaco-editor/min/vs/editor/editor.main.js"></script>
+
+
+<script>
+  var __monacoRequire = require
+  RequireMonaco = function(fn){
+    delete define.amd // monaco redefines global require as amd. And there is a UMD library that will fail esquery, required by tsquery. With this hack UMD snippet will think it's commonsjs. The fault is monaco's - it should provide a 100% commonsjs distribution. 
+    if(window.monaco){
+      fn(monaco)
+    }
+    else{
+      __monacoRequire(["vs/editor/editor.main"], function(){fn()})
+    }
+  }
+  RequireMonaco(function(monaco){
+    __Monaco = monaco
+  })
+  </script>
+  <script src="typescript.js"></script>
+  <script src="src.js"></script>
+</body>
+</html>

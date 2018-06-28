@@ -1,13 +1,15 @@
 import { watch } from 'fs';
 import { copy } from './copy-static';
 
-watch('src/static', ()=>{
-  copy()
-})
+
+import { cp, mkdir } from 'shelljs'
+// watch('src/static', ()=>{
+//   copy()
+// })
 
 watch('src/static/candombed', ()=>{
-  copy()
+  cp('-r', 'src/static/candombed/*', 'static/candombed')
 })
-watch('src/static/examples', ()=>{
-  copy()
-})
+// watch('src/static/examples', ()=>{
+//   copy()
+// })

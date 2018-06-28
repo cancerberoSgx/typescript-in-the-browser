@@ -1,8 +1,9 @@
 import { Action } from 'redux';
 import { initialState, State } from '../actions/State';
-import { store } from '../main';
+// import { store } from '../main';
 import { getExamples } from '../util/examples';
 import { projectFilesToTreeNodes } from '../projectActions';
+import { storeDispatch } from '../main';
 
 export function selectExample(state: State = initialState, action: SelectExampleAction): State {
   if (action.type === SelectExampleActionId) {
@@ -20,7 +21,7 @@ export function selectExample(state: State = initialState, action: SelectExample
 export const SelectExampleActionId: 'SelectExample' = 'SelectExample'
 
 export function dispatchSelectExample(exampleName: string) {
-  store.dispatch({
+  storeDispatch({
     type: SelectExampleActionId,
     exampleName
   })

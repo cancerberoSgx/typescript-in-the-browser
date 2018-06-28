@@ -1,7 +1,7 @@
 import React from 'react';
 import { getExamples } from '../util/examples';
 import { dispatchSelectExample } from '../actions/selectExample';
-import { installTypes } from 'monaco-typescript-project-util';
+import { getActionManager } from 'monaco-typescript-project-util';
 import { State } from '../actions/State';
 import { getEmitOutput } from '../projectActions';
 
@@ -24,7 +24,7 @@ export default (state: State) =>
         <li className={"nav-item dropdown"}>
           <a className={"nav-link dropdown-toggle"} href="#" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</a>
           <div className={"dropdown-menu"} aria-labelledby="dropdown06">
-            <a className={"dropdown-item"}  onClick={()=>installTypes(state.project)}>Install @types</a>
+            <a className={"dropdown-item"}  onClick={()=>getActionManager().installTypes(state.project)}>Install @types</a>
             <a className={"dropdown-item"} onClick={()=>{getEmitOutput(state)}}>Emit Output</a>
           </div>
         </li>

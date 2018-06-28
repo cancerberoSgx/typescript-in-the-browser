@@ -17,7 +17,7 @@
     "dev-prepare": "rm -rf static dist ; npm run tsc ; npm run cp-static; npm run bundle-src",
     "dev": "concurrently --kill-others \"npm run watchify\" \"npm run tsc-watch\" \"npm run browser-sync\" \"npm run watch-static\"",
     "browser-sync": "node_modules/.bin/browser-sync start -s static -w -f \"static/*\"",
-    "all": "rm -rf dist static docs; npm run tsc && npm run copy-projects-json && npm run cp-static  && npm run bundle-src && npm run minify-src && npm run bundle-src && npm run minify-src && mv static docs",
+    "all": "rm -rf dist static docs; npm run tsc && npm run copy-projects-json && npm run cp-static  && npm run bundle-src && npm run minify-src && npm run bundle-src && npm run minify-src  && rm -rf ../docs/candombed && mv static ../docs/candombed",
     "all-no-minify": "rm -rf dist static docs ; npm run tsc && npm run copy-projects-json && npm run cp-static && npm run bundle-src && npm run minify-src && npm run bundle-src && rm -rf ../docs/candombed && mv static ../docs/candombed"
   },
   "keywords": [

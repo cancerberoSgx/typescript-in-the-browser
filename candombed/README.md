@@ -43,3 +43,9 @@ npm run all
 ```
 
 That last one will generate a production ready distribution in ./docs
+
+
+# TODO
+
+ * remove examples from the source code put in docs and fetch() 
+ add a example using tsx

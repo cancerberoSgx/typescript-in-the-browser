@@ -26,10 +26,14 @@ function onMenuButtonClick(e: MouseEvent<HTMLElement>, state: AbstractState) {
   const fileName = e.currentTarget.getAttribute('data-fileName')
   const action = e.currentTarget.getAttribute('data-action')
   if(action==='remove'){
+    if(confirm('Are you sure you want to remove file '+fileName+'?')){
 
-  }else {
+    }
+  }
+  else {
     alert('Not implemented yet')
   }
+  destroyTooltip()
   console.log('onMenuButtonClick', fileName, action)
 }
 
@@ -40,8 +44,7 @@ function buildContextMenuHtml(node: TreeNode, state: AbstractState) {
 }
 
 let tooltip:any = undefined
-export function onContextMenu(e: MouseEvent<Element>, rowInfo: ExtendedNodeData, state: AbstractState) {
-  e.preventDefault()
+export function destroyTooltip(){
   if (tooltip) {
     try {
       tooltip.hide()
@@ -50,6 +53,10 @@ export function onContextMenu(e: MouseEvent<Element>, rowInfo: ExtendedNodeData,
       console.log('error hiding tooltip', error, error.stack)
     }
   }
+}
+export function onContextMenu(e: MouseEvent<Element>, rowInfo: ExtendedNodeData, state: AbstractState) {
+  e.preventDefault()
+  destroyTooltip()
   tooltip = new Tooltip(e.currentTarget, {
     title: buildContextMenuHtml(rowInfo.node as TreeNode, state),
     html: true,
