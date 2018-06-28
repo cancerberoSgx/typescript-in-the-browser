@@ -5,26 +5,8 @@
   "main": "dist/src/index.js",
   "typings": "dist/src/index.d.ts",
   "scripts": {
-    "tsc": "tsc",
-    "copy-projects-json": "mkdir -p ./dist/src/examples/projectsJson ;  cp -rf ./src/examples/projectsJson/* ./dist/src/examples/projectsJson",
-    "tsc-watch": "tsc -w  --preserveWatchOutput ",
-    "cp-static": "ts-node scripts/copy-static",
-    "watch-static": "ts-node scripts/watch-static",
-    "bundle-src": "npm run tsc && npm run copy-projects-json && browserify dist/src/compiler/main.js --debug -x typescript -t brfs -o static/src.js",
-    "bundle-candombed-src": "npm run tsc && npm run copy-projects-json  && browserify dist/src/candombed/main.js --debug -x typescript -x monaco-editor -t brfs -o static/candombed/src.js",
-    "bundle-typescript": "cd node_modules/typescript/lib/ ; browserify -r typescript -o ../../../static/typescript.js ; cd ../../..",
-    "minify-typescript": "google-closure-compiler --js=static/typescript.js --js_output_file=static/typescript.min.js && mv static/typescript.min.js static/typescript.js",
-    "minify-src": "google-closure-compiler --js=static/src.js --js_output_file=static/src.min.js && mv static/src.min.js static/src.js",
-    "minify-candombed-src": "google-closure-compiler --js=static/candombed/src.js --js_output_file=static/candombed/src.min.js && mv static/candombed/src.min.js static/candombed/src.js",
-    "watchify": "watchify dist/src/compiler/main.js --debug -x typescript -t brfs -o static/src.js ",
-    "watchify-candombed": "watchify dist/src/candombed/main.js --debug -x typescript  -x monaco-editor -o static/candombed/src.js",
-    "dev-prepare": "rm -rf static dist ; npm run tsc ; npm run copy-projects-json; npm run cp-static ; npm run bundle-typescript && npm run bundle-src",
-    "dev-candombed-prepare": "rm -rf static dist ; npm run tsc ; npm run cp-static; npm run bundle-candombed-src",
-    "dev": "concurrently --kill-others \"npm run watchify\" \"npm run tsc-watch\" \"npm run browser-sync\" \"npm run watch-static\"",
-    "dev-candombed": "concurrently --kill-others \"npm run watchify-candombed\" \"npm run tsc-watch\" \"npm run browser-sync\" \"npm run watch-static\"",
-    "browser-sync": "node_modules/.bin/browser-sync start -s static -w -f \"static/*\"",
-    "all": "rm -rf dist static docs; npm run tsc && npm run copy-projects-json && npm run cp-static && npm run bundle-typescript && npm run minify-typescript && npm run bundle-src && npm run minify-src && npm run bundle-candombed-src && npm run minify-candombed-src && mv static docs",
-    "all-no-minify": "rm -rf dist static docs; npm run tsc && npm run copy-projects-json && npm run cp-static && npm run bundle-typescript && npm run bundle-src && npm run minify-src && npm run bundle-candombed-src && mv static docs"
+    "all": "exit 0",
+    "prepare": "npm run tsc"
   },
   "keywords": [
     "TypeScript",
@@ -33,16 +15,10 @@
   ],
   "author": "Sebastian Gurin",
   "license": "MIT",
-  "scripts": {
-    "all": "exit 0"
-  },
   "dependencies": {
     "@phenomnomnominal/tsquery": "^2.0.0-beta.4",
-    "bootstrap": "^4.1.1",
-    "jquery": "^3.3.1",
     "jsonc-parser": "^2.0.0",
     "monaco-editor": "^0.13.1",
-    "prepare": "npm run tsc",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-sortable-tree": "^2.2.0",
@@ -53,6 +29,7 @@
   "devDependencies": {
     "@types/node": "^10.3.6",
     "@types/react": "^16.4.2",
+    "@types/react-dom": "^16.0.6",
     "@types/react-sortable-tree": "^0.2.1",
     "browser-sync": "^2.24.4",
     "browserify": "^16.2.2",

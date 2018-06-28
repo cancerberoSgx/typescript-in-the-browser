@@ -3,8 +3,8 @@ import SortableTree, { ExtendedNodeData } from 'react-sortable-tree';
 import { AbstractState } from '../types';
 import { filesToTreeNodes, TreeNode } from '../ui-util/fileTreeUtil';
 const FileExplorerTheme  = require('react-sortable-tree-theme-file-explorer');
-export class FileTree<T extends AbstractState> extends Component<{ state:T }> {
 
+export class FileTree<T extends AbstractState> extends Component<{ state:T }> {
   render() {
     if (!this.props.state.project) {
       return (<div>No project open</div>)

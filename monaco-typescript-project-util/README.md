@@ -36,3 +36,8 @@ http-server static && firefox localhost:8080
 
  * the experience should be similar as previous but this time the editor is opinionated and prettier.
  check dependencies and @types using https://data.jsdelivr.com/v1/package/npm/@types/node or unpkg for example - given dependency shelljs@0.0.7 we first try https://data.jsdelivr.com/v1/package/npm/@types/shell@0.0.7 and if not found we fetch all deps https://data.jsdelivr.com/v1/package/npm/@types/shell and get the latest or the closest one - ake a library for this.
+
+
+# TODO
+
+ * provide html loader snippets for : external CDN and local node_modules. Also using AMD and ESM bundled monacos

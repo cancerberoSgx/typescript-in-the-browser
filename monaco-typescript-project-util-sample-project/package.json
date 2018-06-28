@@ -1,13 +1,16 @@
 {
   "name": "monaco-typescript-project-util-sample-project",
   "version": "1.0.0",
-  "description": "",
+  "description": "example on using monaco-typescript-project-util just to see how easy it is",
   "main": "index.js",
   "scripts": {
-    "all": "exit 0"
+    "cp-static": "rm -rf static && mkdir static && cp -r src/static/* static",
+    "tsc": "tsc",
+    "umd": "browserify dist/index.js -s awesomeSampleProject1 -o static/awesomeSampleProject1.js"
+
   },
   "keywords": [],
-  "author": "",
+  "author": "Sebastian Gurin",
   "license": "ISC",
   "dependencies": {
     "monaco-typescript-project-util": "file:../monaco-typescript-project-util"

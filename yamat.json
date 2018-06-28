@@ -2,6 +2,10 @@
   {
     "name": "monaco-typescript-project-util",
     "path": "monaco-typescript-project-util"
+  }, 
+  {
+    "name": "monaco-typescript-project-util-sample-project",
+    "path": "monaco-typescript-project-util-sample-project"
   },
   {
     "name": "typescript-compiler-in-the-browser",
