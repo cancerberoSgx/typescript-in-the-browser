@@ -2,8 +2,7 @@
 
 # See it in action
 
- * [Using TypeScript Compiler in the browser demo](https://cancerberosgx.github.io/typescript-in-the-browser/)
- * [Candombed - humble attempt to build a TypeScript Project Editor](https://cancerberosgx.github.io/typescript-in-the-browser/candombed)
+ * [Demo](https://cancerberosgx.github.io/typescript-in-the-browser/typescript-compiler)
 
 # Objectives
 
@@ -12,7 +11,7 @@
  * Find out TypeScript limitations while running in other environments than node.js - particularly in the browser. Is it too large ? is it too slow ?  is it too difficult / impossible to support something in the browser ? something
  * can we run third party tools around TypeScript compiler like ts-simple-ast or tsquery ? 
 
-## Use
+# Use
 
 ```sh
 npm install
@@ -47,9 +46,8 @@ These are self contained examples that uses typescript without processing or cha
  * [I can create individual SourceFile and visit its Nodes](https://cancerberosgx.github.io/typescript-in-the-browser/examples/ts-browser-create-sourcefile-works.html)
  * [Cannot work with ts.Program](https://cancerberosgx.github.io/typescript-in-the-browser/examples/ts-browser-create-program-fails.html)
  * [Using TypeScript Compiler in the browser demo](https://cancerberosgx.github.io/typescript-in-the-browser/)
- * [Monaco TypeScript Project](https://cancerberosgx.github.io/typescript-in-the-browser/examples/monaco-project.html)
 
-## Status
+# Status
 
  * Successfully and Straightforwardly compiling and running TypeScript in the browser with browserify  didn't had to make any magic - tsc and browserify did the trick.
 
@@ -64,7 +62,7 @@ These are self contained examples that uses typescript without processing or cha
  * ts-simple-ast - not possible to run in the browser - is to tight to filesystem - gracefulfs etc - ... report issue and ask if it's possible to decouple from fs - at least the compiler part.
 
 
-## TODO: 
+# TODO: 
 
  * development - sourcemaps
  * specs / test - would be interesting to have the plugin development experience in the browser. seems to be fast.
@@ -73,7 +71,7 @@ These are self contained examples that uses typescript without processing or cha
  * monaco + plugins + compiler 100% in client would be awesome
  * large projects ? support .zip file with ts project drag and drop
 
-## Dones
+## DONE
 
  * idea: for each project in example files add a tsconfig.json and show all files as a project and use that tsconfig when creating the ts.Program
  * monaco editor and 100% client side typescript experience

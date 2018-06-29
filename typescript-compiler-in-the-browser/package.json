@@ -4,6 +4,7 @@
   "description": "attempt to see if and how much we can run typescript compiler in the browser",
   "main": "dist/src/index.js",
   "typings": "dist/src/index.d.ts",
+  "private": true,
   "scripts": {
     "tsc": "tsc",
     "copy-projects-json": "mkdir -p ./dist/src/examples/projectsJson ;  cp -rf ./src/examples/projectsJson/* ./dist/src/examples/projectsJson",
@@ -19,8 +20,9 @@
     "dev-prepare": "rm -rf static dist ; npm run tsc ; npm run copy-projects-json; npm run cp-static ; npm run bundle-typescript && npm run bundle-src",
     "dev": "concurrently --kill-others \"npm run watchify\" \"npm run tsc-watch\" \"npm run browser-sync\" \"npm run watch-static\"",
     "browser-sync": "node_modules/.bin/browser-sync start -s static -w -f \"static/*\"",
-    "all": "rm -rf dist static docs; npm run tsc && npm run copy-projects-json && npm run cp-static && npm run bundle-typescript && npm run minify-typescript && npm run bundle-src && npm run minify-src && mkdir ../docs && mv static/* ../docs",
-    "all-no-minify": "rm -rf dist static docs; npm run tsc && npm run copy-projects-json && npm run cp-static && npm run bundle-typescript && npm run bundle-src && npm run minify-src && mkdir ../docs && mv static/* ../docs"
+    "build": "rm -rf dist static docs; npm run tsc && npm run copy-projects-json && npm run cp-static && npm run bundle-src && npm run bundle-typescript",
+    "all": "npm run build && npm run minify-src && npm run minify-typescript && mkdir -p ../docs && rm -rf ../docs/typescript-compiler && mv static ../docs/typescript-compiler",
+    "all-no-minify": "npm run build && mkdir -p ../docs && rm -rf ../docs/typescript-compiler  && mv static ../docs/typescript-compiler"
   },
   "keywords": [
     "TypeScript",
@@ -39,11 +41,6 @@
     "monaco-typescript-project-util": "file:../monaco-typescript-project-util",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-sortable-tree": "^2.2.0",
-    "react-sortable-tree-theme-file-explorer": "^1.1.2",
-    "react-split-pane": "^0.1.77",
-    "redux": "^4.0.0",
-    "tooltip.js": "^1.2.0",
     "typescript": "^2.9.2",
     "vscode-languageserver-types": "^3.8.2"
   },

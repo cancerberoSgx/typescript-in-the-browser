@@ -1,4 +1,4 @@
-import { AbstractProject } from '../../monaco-typescript-project-util/dist/src';
+import { AbstractProject } from 'monaco-typescript-project-util';
 
 export function getDummyProject(): AbstractProject {
   return {

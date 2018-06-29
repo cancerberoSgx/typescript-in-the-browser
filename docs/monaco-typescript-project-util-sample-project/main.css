@@ -1,22 +1,19 @@
-html, body{ 
+html, body { 
   height: 100%; 
 } 
 .wrapper { 
   display: grid; 
   grid-template-columns: 1fr 2fr; 
   width: 100%;
-  height: 100% 
+  height: 100%;
  } 
-.editor{
+.editor {
   resize: both;
   overflow: auto;
 }
 .files {
   background: #918899
 }
-.files .selected{
+.files .selected {
   background: #ccabeb
-}
-.editor{
-  background:#e6e6ab
 }

@@ -1,9 +1,8 @@
 
-import React, { MouseEvent } from 'react';
-import ReactDOM from 'react-dom';
-import { ExtendedNodeData } from 'react-sortable-tree';
-import { TreeNode, AbstractState } from  'monaco-typescript-project-util';
-
+import React, { MouseEvent } from 'react'
+import ReactDOM from 'react-dom'
+import { ExtendedNodeData } from 'react-sortable-tree'
+import { TreeNode, AbstractState } from  'monaco-typescript-project-util'
 const Tooltip = require('tooltip.js')
 
 function contextMenuHtml(node: TreeNode, state: AbstractState) {

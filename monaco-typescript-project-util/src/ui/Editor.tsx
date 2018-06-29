@@ -34,7 +34,6 @@ export class Editor extends React.Component<Props> {
     const model = getMonacoModelFor(this.props.file)
     const monacoOptions = Object.assign({}, this.defaultMonacoOptions, this.props.monacoEditorOptions || {}, { model })
     this.monacoEditor = getMonaco().editor.create(document.getElementById(this.containerId), monacoOptions)
-    console.log(monacoOptions)    
     registerEditor(this.monacoEditor)
   }
   protected uninstallMonaco() {

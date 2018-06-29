@@ -7,8 +7,8 @@ import { cp, mkdir } from 'shelljs'
 //   copy()
 // })
 
-watch('src/static/candombed', ()=>{
-  cp('-r', 'src/static/candombed/*', 'static/candombed')
+watch('src/static', ()=>{
+  cp('-r', 'src/static/*', 'static')
 })
 // watch('src/static/examples', ()=>{
 //   copy()

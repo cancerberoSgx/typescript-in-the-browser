@@ -6,10 +6,11 @@ export interface ExampleExecutionOptions {
   program: ts.Program
   languageService: ts.LanguageService
 }
+
 export interface ExampleExecutionResult {
 }
-export type ExampleExecute = (config: ExampleExecutionOptions) => (ExampleExecutionResult | undefined | void)
 
+export type ExampleExecute = (config: ExampleExecutionOptions) => (ExampleExecutionResult | undefined | void)
 
 export interface Example extends AbstractProject{
   id: string

@@ -5,9 +5,6 @@ watch('src/static', ()=>{
   copy()
 })
 
-watch('src/static/candombed', ()=>{
-  copy()
-})
 watch('src/static/examples', ()=>{
   copy()
 })

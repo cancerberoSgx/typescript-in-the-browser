@@ -5,13 +5,19 @@
   "main": "dist/src/index.js",
   "typings": "dist/src/index.d.ts",
   "scripts": {
-    "all": "exit 0",
-    "prepare": "npm run tsc"
+    "build": "tsc",
+    "all": "npm run build",
+    "all-no-minify": "npm run build",
+    "prepare": "npm run build"
   },
   "keywords": [
-    "TypeScript",
-    "TypeScript Compiler",
-    "TypeScript API"
+    "monaco-editor",
+    "monaco editor",
+    "monaco",
+    "online editor",
+    "TypeScript editor",
+    "TypeScript project editor",
+    "TypeScript"
   ],
   "author": "Sebastian Gurin",
   "license": "MIT",

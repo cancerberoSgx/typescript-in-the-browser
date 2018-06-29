@@ -1,8 +1,8 @@
 import { AbstractProject } from '../types';
-import { resetMonacoModelsAndEditors, createAllMonacoModelsFor } from './register';
+import { resetMonacoModelsAndEditors, createAllMonacoModelsFor, getMonacoModelFor } from './register';
 import { installTsConfig, ProjectNature } from './tsConfig';
 import { installTypes } from './installTypes';
-import { emitter as registerEmitter, getMonaco, install, requireMonaco } from '..';
+import { monacoEditorEmitter, getMonaco, install, requireMonaco } from '..';
 
 
 
@@ -23,11 +23,17 @@ export abstract class Workspace {
    * @returns a promise resolved when everything is ready for the user to start rendering their app
    * and working with monaco 
    */
-  start(): Promise<void> {
+  setup(): Promise<void> {
     return new Promise(resolve => {
       monacoLoaded().then(() => {
+        // now we load a .ts monaco model so we trigger ts languageService loading so we dont wait 
+        // forever for the following promise:
+        getMonacoModelFor({fileName: '_blank.ts', content: ''}) 
+        return tsLoaded()
+      })
+      .then(()=>{
         getMonaco().languages.typescript.typescriptDefaults.setEagerModelSync(true)
-        registerEmitter.on('editorRegistered', (editor) => {
+        monacoEditorEmitter.on('editorRegistered', (editor) => {
           install(editor, (editor, model, def) => {
             this.willNavigateToOtherFile(editor, model, def)
           })
@@ -43,11 +49,19 @@ export abstract class Workspace {
    * references. The default implementation open the next sourcefile in the same editor. User can
    * override it to support other experience such as open a new editor in a new tab.  
    */
-  protected willNavigateToOtherFile(editor: monaco.editor.ICodeEditor, model: monaco.editor.IModel, def: monaco.languages.Location) {
-    editor.setModel(model)
-    editor.revealPositionInCenter({ column: def.range.startColumn, lineNumber: def.range.startLineNumber })
-    editor.setSelection(def.range)
-  }
+  protected abstract willNavigateToOtherFile(oldEditor: monaco.editor.ICodeEditor, model: monaco.editor.IModel, def: monaco.languages.Location):void; 
+  //  {
+  //   oldEditor.setModel(model)
+  //   oldEditor.revealPositionInCenter({ column: def.range.startColumn, lineNumber: def.range.startLineNumber })
+  //   oldEditor.setSelection(def.range)
+
+  //   //TODO: use this default impl and see if it works in candombed: 
+  //   // monacoEditorEmitter.once('editorRegistered', editor => {
+  //   //   editor.revealPositionInCenter({ column: def.range.startColumn, lineNumber: def.range.startLineNumber })
+  //   //   editor.setSelection(def.range)
+  //   // })
+  //   // this.fileChanged(uriToFileName(model.uri))
+  // }
   /*
    * User must notify the workspace that another project is loaded. 
    * TODO: we should wait until getTs() is true

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "example on using monaco-typescript-project-util just to see how easy it is",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "cp-static": "mkdir -p static &&  cp -r src/static/* static && mkdir -p dist/static && cp -r src/static/* dist/static",
     "tsc": "tsc",
@@ -13,7 +14,8 @@
     "dev": "npm run build && concurrently --kill-others \"npm run watch\" \"npm run browser-sync\"",
     "minify-src": "google-closure-compiler --js=static/src.js --js_output_file=static/src.min.js && mv static/src.min.js static/src.js",
     "build-production": "npm run build && npm run minify-src",
-    "all": "npm run build-production && rm -rf ../docs/monaco-typescript-project-util-sample-project && mv static ../docs/monaco-typescript-project-util-sample-project"
+    "all": "rm -rf static dist && npm run build-production && mkdir -p ../docs && rm -rf ../docs/monaco-typescript-project-util-sample-project && mv static ../docs/monaco-typescript-project-util-sample-project",
+    "all-no-minify": "rm -rf static dist && npm run build && mkdir -p ../docs && rm -rf ../docs/monaco-typescript-project-util-sample-project && mv static ../docs/monaco-typescript-project-util-sample-project"
   },
   "keywords": [
     "monaco-editor",
@@ -32,7 +34,6 @@
     "browser-sync": "^2.24.4",
     "concurrently": "^3.6.0",
     "google-closure-compiler": "^20180610.0.2",
-    "handlebars": "^4.0.11",
     "monaco-editor": "^0.13.1",
     "watch-cli": "^0.2.3"
   }

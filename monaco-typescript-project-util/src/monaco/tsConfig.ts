@@ -1,5 +1,5 @@
 /**
- * tis file is responsible of inspecting tsconfig.json and package.json if any and to identify the nature of the 
+ * this file is responsible of inspecting tsconfig.json and package.json if any and to identify the nature of the 
  * project and load tsconfig.lib incase of TS or just lib.d.ts in case of JS (See installTypes.ts and comes later 
  * to add more types - this is just lib.d.ts)
  */
@@ -21,6 +21,34 @@ import { monacoAddExtraLibrary } from './installTypes';
  */
 export function installTsConfig(project: AbstractProject): Promise<ProjectNature> {
   return new Promise<ProjectNature>(resolve => {
+
+    function loadCompilerOptions(options: ts.CompilerOptions) {
+      nature.tsConfig.compilerOptions = options
+      const libs: string[] = options.lib || []
+      try {
+        getMonaco().languages.typescript.typescriptDefaults.setCompilerOptions(options as any)
+
+        // heads up . getMonaco().languages.javascript is not defined in monaco-editor/api.d.ts
+        const languagesAsAny = getMonaco().languages as any
+        if (languagesAsAny.javascript && languagesAsAny.javascript.javascriptDefaults && languagesAsAny.javascript.javascriptDefaults.setCompilerOptions) {
+          languagesAsAny.javascript.javascriptDefaults.setCompilerOptions(options as any)
+        }
+
+      } catch (ex) {
+        nature.tsConfig.monacoSetCompilerOptionsError = ex
+      }
+      Promise.all(libs.map(l => fetchFileText(`https://unpkg.com/typescript@2.9.2/lib/${l}`)))
+        .then(depsResponses => {
+          depsResponses.forEach((content, i) => {
+            let libResource: ResourceLoaded = monacoAddExtraLibrary(libs[i], content)
+            nature.tsConfig.libs.push(libResource)
+          })
+          resolve(nature)
+        }).catch(ex => {
+          nature.tsConfig.libsLoadingError = ex
+          resolve(nature)
+        })
+    }
     const nature: ProjectNature = {
       type: 'unknown',
       extraLibAdded: [],
@@ -43,50 +71,27 @@ export function installTsConfig(project: AbstractProject): Promise<ProjectNature
     if (options) {
       // assume is a TS project. Now proceed to load libs
       nature.type = 'typescript'
-      nature.tsConfig.compilerOptions = options
-      const libs: string[] = options.lib || []
-      try {
-        getMonaco().languages.typescript.typescriptDefaults.setCompilerOptions(options as any)
-
-      } catch (ex) {
-        nature.tsConfig.monacoSetCompilerOptionsError = ex
-      }
-      Promise.all(libs.map(l => fetchFileText(`https://unpkg.com/typescript@2.9.2/lib/${l}`)))
-        .then(depsResponses => {
-          depsResponses.forEach((content, i) => {
-            let libResource: ResourceLoaded = monacoAddExtraLibrary(libs[i], content)
-            nature.tsConfig.libs.push(libResource)
-          })
-          resolve(nature)
-        }).catch(ex => {
-          nature.tsConfig.libsLoadingError = ex
-          resolve(nature)
-        })
+      loadCompilerOptions(options)
+      resolve(nature)
     }
     else {
       // assume is not a TS project. Try to load a package.json file to see if it at least is JS project
       const packageJson = project.files.find(f => f.fileName === 'package.json')
       if (!packageJson) {
         nature.packageJson.exists = false
-        return Promise.resolve(nature)
+        return resolve(nature)
       }
       let pj: PackageJson
       try {
         pj = JSON.parse(packageJson.content)
       } catch (ex) {
         nature.packageJson.errorLoadingPackageJson = ex
-        
-        resolve(nature)
+        return resolve(nature)
       }
-      // we want to add a tslib.d.ts - TODO: not sure how to guess which version, we load es6
-      fetchFileText(`https://unpkg.com/typescript@2.9.2/lib/es2018.d.ts`).then(content => {
-        let libResource: ResourceLoaded = monacoAddExtraLibrary('es6.d.ts', content)
-        nature.packageJson.libs.push(libResource)
-        resolve(nature)
-      }).catch(ex => {
-        nature.packageJson.libsLoadingError = ex
-        resolve(nature)
-      })
+      // assume is a JS project. we load a default tsconfig with all its libraries just as with typescript nature
+      nature.type = 'javascript'
+      loadCompilerOptions(getTs().getDefaultCompilerOptions())
+      resolve(nature)
     }
   })
 }

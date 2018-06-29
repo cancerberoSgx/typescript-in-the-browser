@@ -16,39 +16,36 @@ export function uriToFileName(uri: monaco.Uri) {
 
 export function getMonacoModelFor(file: AbstractFile): monaco.editor.IModel {
   if (!file) {
-    return getMonaco().editor.createModel('')
+    return getMonaco().editor.createModel('', 'typescript', getMonacoUriFromFile('_black.ts'))
   }
   const uri = getMonacoUriFromFile(file)
-  let model = getMonaco().editor.getModels().find(m => m.uri.toString() === uri.toString())
+  let model = getMonaco().editor.getModels().find(m => m.uri.toString() === uri.toString() && !m.isDisposed())
   if (model) {
     return model
   }
   model = getMonaco().editor.createModel(file.content, undefined, uri)
-  emitter.emit('modelRegistered', model, file)
+  monacoEditorEmitter.emit('modelRegistered', model, file)
   return model
 }
 
-export function setMonacoTypeScriptDefaults() {
-  getMonaco().languages.typescript.typescriptDefaults.setCompilerOptions({
-    baseUrl: 'src',
-    module: getMonaco().languages.typescript.ModuleKind.CommonJS,
-    moduleResolution: getMonaco().languages.typescript.ModuleResolutionKind.NodeJs
-  })
-}
+
+
 const editors: monaco.editor.ICodeEditor[] = []
 
-export const emitter: MonacoRegisterEmitter = new EventEmitter()
-export const editorRegister = emitter
-export interface MonacoRegisterEmitter extends EventEmitter {
+// export const emitter: MonacoEditorEmitter = new EventEmitter()
+export const monacoEditorEmitter: MonacoEditorEmitter = new EventEmitter()
+export interface MonacoEditorEmitter extends EventEmitter {
   on(name: 'editorRegistered', listener: (editor: monaco.editor.ICodeEditor) => void): this
   on(name: 'modelRegistered', listener: (model: monaco.editor.ITextModel, file: AbstractFile) => void): this
+  once(name: 'editorRegistered', listener: (editor: monaco.editor.ICodeEditor) => void): this
+  once(name: 'modelRegistered', listener: (model: monaco.editor.ITextModel, file: AbstractFile) => void): this
 }
 
 export function registerEditor(editor: monaco.editor.ICodeEditor) {
-  if (!editors.find(ed => ed === editor)) {
+  // if (!editors.find(ed => ed === editor)) {
     editors.push(editor)
-    emitter.emit('editorRegistered', editor)
-  }
+    monacoEditorEmitter.emit('editorRegistered', editor)
+  // }
 }
 // TODO: find a way of restarting tsserver
 export function resetMonacoModelsAndEditors(): void {
