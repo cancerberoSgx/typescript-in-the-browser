@@ -1,33 +1,56 @@
-import { renderEditor, AbstractProject, cdnAmdLoader } from '../../monaco-typescript-project-util/dist/src';
+import { cdnAmdLoader, emitter, Editor, MonacoRegisterEmitter, Workspace } from 'monaco-typescript-project-util';
+import * as monaco from 'monaco-editor'
 import { getDummyProject } from './dummyProject';
+import ReactDOM from 'react-dom';
+import layout from './layout';
 
+// we will be loading monaco-editor from an external CDN using its AMD bundled:
+cdnAmdLoader('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.13.1/min/')
 
+// function renderMonacoLoader() {
+//   const monacoLoaderHtmlFragment = cdnAmdLoader('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.13.1/min/')
+//   document.getElementById('monacoLoaderContainer').innerHTML = monacoLoaderHtmlFragment
+//   // const monacoLoaderContainer = document.createElement('div')
+//   // monacoLoaderContainer.innerHTML = monacoLoaderHtmlFragment
+//   // document.body.appendChild(monacoLoaderContainer)
+// }
+// renderMonacoLoader()
 
-
-const context = {
-  // we demonstrate with a dummy TS project in memory:
-  project: getDummyProject() ,
-  // we will be loading monaco-editor from an external CDN using its AMD bundled distro:
-  cdnMonacoBaseUrl: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.13.1/min/'
-}
-document.querySelector('#main').innerHTML = compile(indexHbs)(context)
-
-
-const editorComponent = renderEditor({
-  container: document.getElementById('my-editor1'),
+function renderApp(){
+  // we demonstrate with a dummy TsS project in memory:
+  const project = getDummyProject()
   // we simulate user has just open a file with the editor:
-  file: context.project.files.find(f=>f.fileName.endsWith('.ts'))
-})
-// editor should be up and running - we register a key listener just to test:
-editorComponent.monacoEditor.onKeyUp(e=>{
-  console.log('hey!', e)
-})
+  const file = project.files.find(f=>f.fileName.endsWith('.ts'))
+  ReactDOM.render(layout(project, file), document.getElementById('main'))
+}
 
 
-import * as indexHbs from './static/index.hbs'
-import {compile} from 'handlebars'
+
+class CandombeWorkspace extends Workspace {
+  workspaceReady() {
+    // debugger
+    renderApp()
+  }
+  protected willNavigateToOtherFile(editor: monaco.editor.ICodeEditor, model: monaco.editor.IModel, def: monaco.languages.Location) {
+    console.log('User navigate to other document with ctrl+click');
+    return super.willNavigateToOtherFile(editor ,model, def) // we are fine with the default implementation
+    
+  }
+}
+const workspace = new CandombeWorkspace()
+workspace.start()
 
 
+
+
+
+// let editor: monaco.editor.ICodeEditor
+// emitter.on('editorRegistered', (ed)=>{
+//   editor = ed
+//   ed.onDidChangeModel(e=>{
+//     console.log('mode changed')
+//   })
+// })
 
 
 

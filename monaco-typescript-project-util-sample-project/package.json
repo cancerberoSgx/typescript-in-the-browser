@@ -4,19 +4,32 @@
   "description": "example on using monaco-typescript-project-util just to see how easy it is",
   "main": "index.js",
   "scripts": {
-    "cp-static": " cp -r src/static/* static",
+    "cp-static": "mkdir -p static &&  cp -r src/static/* static && mkdir -p dist/static && cp -r src/static/* dist/static",
     "tsc": "tsc",
     "umd": "browserify dist/index.js -s awesomeSampleProject1 -o static/awesomeSampleProject1.js",
-    "all": "rm -rf static && mkdir static && npm run cp-static && npm run tsc && npm run umd"
+    "build": "npm run cp-static && npm run tsc && npm run umd",
+    "serve": "http-server static",
+    "watch": "watch -p \"src/**/*\" -c \"npm run build\"",
+    "dev": "npm run build && concurrently --kill-others \"npm run watch\" \"npm run serve\""
   },
-  "keywords": [],
+  "keywords": [
+    "monaco-editor",
+    "typescript"
+  ],
   "author": "Sebastian Gurin",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "monaco-typescript-project-util": "file:../monaco-typescript-project-util"
+    "monaco-typescript-project-util": "file:../monaco-typescript-project-util",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
   },
   "devDependencies": {
-    "@types/handlebars": "^4.0.38",
-    "handlebars": "^4.0.11"
+    "@types/react": "^16.4.4",
+    "@types/react-dom": "^16.0.6",
+    "concurrently": "^3.6.0",
+    "handlebars": "^4.0.11",
+    "http-server": "^0.11.1",
+    "monaco-editor": "^0.13.1",
+    "watch-cli": "^0.2.3"
   }
 }

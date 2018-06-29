@@ -13,9 +13,11 @@ type Props = { id?: string, file: AbstractFile, width?: string, height?: string,
 export class Editor extends React.Component<Props> {
   /** the monaco-editor internal instance of this component */
   monacoEditor: editor.IStandaloneCodeEditor;
+  containerId: string;
   render() {
+    this.containerId = this.props.id || '_id_' + Date.now()
     return (
-      <div className="editor" id={this.props.id || '_id_' + Date.now()} style={{ width: this.props.width || '400px', height: this.props.height || '400px' }}></div>
+      <div className="editor" id={this.containerId} style={{ width: this.props.width || '400px', height: this.props.height || '400px' }}></div>
     );
   }
   componentDidUpdate() {
@@ -31,7 +33,7 @@ export class Editor extends React.Component<Props> {
   protected installMonaco() {
     const model = getMonacoModelFor(this.props.file)
     const monacoOptions = Object.assign({}, this.defaultMonacoOptions || {}, this.props.monacoEditorOptions || {}, { model })
-    this.monacoEditor = getMonaco().editor.create(document.getElementById(this.props.id), monacoOptions)
+    this.monacoEditor = getMonaco().editor.create(document.getElementById(this.containerId), monacoOptions)
     registerEditor(this.monacoEditor)
   }
   protected uninstallMonaco() {

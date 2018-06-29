@@ -39,5 +39,5 @@ http-server static && firefox localhost:8080
 
 
 # TODO
-
+ * export the 'monaco' namespace so users doesn't have to install it and also we amke sure they use the same version as us.
  * provide html loader snippets for : external CDN and local node_modules. Also using AMD and ESM bundled monacos

@@ -1,18 +1,14 @@
-
-html, body{
-  height: 100%;
-}
-div{
-  border: 2px solid pink
-}
-.wrapper {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
+html, body{ 
+  height: 100%; 
+} 
+.wrapper { 
+  display: grid; 
+  grid-template-columns: 1fr 2fr; 
   width: 100%;
-  height: 100%
-}
+  height: 100% 
+ } 
 .editor{
-  resize: vertical;
+  resize: both;
   overflow: auto;
 }
 .files {

@@ -37,7 +37,13 @@ export function setMonacoTypeScriptDefaults() {
 }
 const editors: monaco.editor.ICodeEditor[] = []
 
-export const emitter = new EventEmitter()
+export const emitter: MonacoRegisterEmitter = new EventEmitter()
+export const editorRegister = emitter
+export interface MonacoRegisterEmitter extends EventEmitter {
+  on(name: 'editorRegistered', listener: (editor: monaco.editor.ICodeEditor) => void): this
+  on(name: 'modelRegistered', listener: (model: monaco.editor.ITextModel, file: AbstractFile) => void): this
+}
+
 export function registerEditor(editor: monaco.editor.ICodeEditor) {
   if (!editors.find(ed => ed === editor)) {
     editors.push(editor)
@@ -45,7 +51,7 @@ export function registerEditor(editor: monaco.editor.ICodeEditor) {
   }
 }
 // TODO: find a way of restarting tsserver
-export function resetMonacoModelsAndEditors():void {
+export function resetMonacoModelsAndEditors(): void {
   getMonaco().editor.getModels().forEach(model => model.dispose())
   editors.forEach(editor => editor.dispose())
 }
