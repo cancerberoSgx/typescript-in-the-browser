@@ -1,12 +1,11 @@
-import * as monaco from 'monaco-editor';
-import { AbstractFile, AbstractProject, cdnAmdLoader, monacoEditorEmitter, uriToFileName, Workspace } from 'monaco-typescript-project-util';
+import { AbstractFile, AbstractProject, Workspace, loadMonacoAmdFromExternalCdn } from 'monaco-typescript-project-util';
 import ReactDOM from 'react-dom';
 import { getDummyProject } from './dummyProject';
 import layout from './layout';
 
 // first of all, we load monaco-editor scripts and css. In this example we use an external CDN using its AMD
 // bundled. The following call will load all required monaco-editor .js and .css:
-cdnAmdLoader('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.13.1/min/')
+loadMonacoAmdFromExternalCdn('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.13.1/min/')
 
 // we will implement a Workspace class to handle the the editor events. 
 class OurAwesomeProjectEditor extends Workspace {
@@ -38,28 +37,12 @@ class OurAwesomeProjectEditor extends Workspace {
     ReactDOM.render(layout(this.project, this.selectedFile), this.container)
   }
 
-  // this method will be called when users click a file from the left menu (see `projectFiles.tsx`)
-  selectFile(fileName: string) {
+  // We override this method to react when the framework automatically handle the change of the current
+  // document. This happens for example when the user navigates to another file with ctrl-click (handled by
+  // the framework) or when the user select a file from the left menu (see `projectFiles.tsx`) (handled by us)
+  public selectedFileChanged(fileName: string): void {
     this.selectedFile = this.project.files.find(file => file.fileName === fileName) || this.selectedFile
     this.render()
-  }
-
-  // This method will be called when the user navigates a different file using ctrl+click on references. In
-  // this example we just change the `this.selectedFile` and re-render so visually it will be shown in the
-  // same editor but others could do differently like opening a new editor in a new tab, etc
-  protected willNavigateToOtherFile(oldEditor: monaco.editor.ICodeEditor, model: monaco.editor.IModel,
-    def: monaco.languages.Location): void {
-
-    monacoEditorEmitter.once('editorRegistered', editor => {
-      // after user navigates to another file we want to select the code of the definition of what he clicked
-      // and scroll to that position, this is why use `monacoEditorEmitter.once('editorRegistered' to be
-      // notified when a new editor is created and use that one instead of using `oldEditor` since each time
-      // user change file the monaco editor instance is created. TODO: maybe we leave this for a second (more
-      // complex example)
-      editor.revealPositionInCenter({ column: def.range.startColumn, lineNumber: def.range.startLineNumber })
-      editor.setSelection(def.range)
-    })
-    this.selectFile(uriToFileName(model.uri))
   }
 }
 

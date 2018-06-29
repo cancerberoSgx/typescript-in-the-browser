@@ -1,6 +1,6 @@
 # monaco-typescript-project-util example project 1
 
-This is an example of using monaco-typescript-project-util. Most of the implementation resides in [index.ts](https://github.com/cancerberoSgx/typescript-in-the-browser/blob/master/monaco-typescript-project-util-sample-project/src/index.ts) file. 
+This is an example of using [monaco-typescript-project-util](https://github.com/cancerberoSgx/typescript-in-the-browser/tree/master/monaco-typescript-project-util). Most of the implementation resides in [index.ts](https://github.com/cancerberoSgx/typescript-in-the-browser/blob/master/monaco-typescript-project-util-sample-project/src/index.ts) file. 
 
 More complex / variation examples to come. 
 

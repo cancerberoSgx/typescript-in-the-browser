@@ -22,6 +22,7 @@
     "all": "npm run build && npm run minify-src && mkdir -p ../docs && rm -rf ../docs/candombed  && mv static ../docs/candombed",
     "all-no-minify": "npm run build && mkdir -p ../docs && rm -rf ../docs/candombed && mv static ../docs/candombed"
   },
+  "repository": "https://github.com/cancerberoSgx/typescript-in-the-browser/tree/master/candombed",
   "keywords": [
     "monaco-editor",
     "monaco editor",

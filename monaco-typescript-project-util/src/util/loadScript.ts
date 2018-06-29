@@ -17,7 +17,6 @@ export interface ResourceLoadDefinition {
   callback?: (arg: any[]) => void
 }
 
-
 export function loadScript(opts: ScriptLoadDefinition): Promise<any[]> {
   return new Promise((resolve, reject) => {
     opts.container = opts.container || document.getElementsByTagName("head")[0]
@@ -89,6 +88,14 @@ export function loadCSS(opts: StyleLoadDefinition): Promise<any[]> {
 }
 
 
+export async function loadSeries(opts: (ScriptLoadDefinition | StyleLoadDefinition)[]): Promise<any[][]> {
+  const result: any[][] = []
+  for (let i = 0; i < opts.length; i++) {
+    result.push(await load(opts[i]))
+  }
+  return result
+}
+
 export function load(opts: ScriptLoadDefinition | StyleLoadDefinition): Promise<any[]> {
   if ((opts as any).href || (opts as any).styleBody) {
     return loadCSS(opts as StyleLoadDefinition)
@@ -99,14 +106,20 @@ export function load(opts: ScriptLoadDefinition | StyleLoadDefinition): Promise<
 }
 
 
-export function render(opts: ScriptLoadDefinition | StyleLoadDefinition): string {
-  if ((opts as any).href || (opts as any).styleBody) {
-    return renderStyleLoadDefinition(opts as StyleLoadDefinition)
+export function render(opts: (ScriptLoadDefinition | StyleLoadDefinition) | (ScriptLoadDefinition | StyleLoadDefinition)[]): string {
+  if (!Array.isArray(opts)) {
+    opts = [opts]
   }
-  else {
-    return renderScriptLoadDefinition(opts as ScriptLoadDefinition)
-  }
+  return opts.map(opts => {
+    if ((opts as any).href || (opts as any).styleBody) {
+      return renderStyleLoadDefinition(opts as StyleLoadDefinition)
+    }
+    else {
+      return renderScriptLoadDefinition(opts as ScriptLoadDefinition)
+    }
+  }).join('\n\n')
 }
+
 export function renderStyleLoadDefinition(opts: StyleLoadDefinition): string {
   if (opts.href) {
     return `<link rel="stylesheet" type="text/css" href="${opts.href}">`

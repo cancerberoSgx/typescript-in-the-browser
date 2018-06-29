@@ -1,0 +1,24 @@
+{
+  "name": "monaco-typescript-project-util-cli",
+  "version": "1.0.0",
+  "description": "example on using monaco-typescript-project-util just to see how easy it is",
+  "main": "dist/src/index.js",
+  "typings": "dist/src/index.d.ts",
+  "scripts": {
+    "build": "tsc", 
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "monaco-editor",
+    "typescript"
+  ],
+  "author": "Sebastian Gurin",
+  "license": "MIT",
+  "dependencies": {
+    "shelljs": "^0.8.2"
+  },
+  "devDependencies": {
+    "@types/node": "^10.5.1",
+    "@types/shelljs": "^0.8.0"
+  }
+}

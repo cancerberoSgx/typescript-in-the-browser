@@ -1,6 +1,6 @@
 # typescript-project-monaco-editor-browser-utils
 
-Utilities and easy to use APIs to quickly implement a TypeScript **project** editor, 100% in the browser using monaco-editor.
+Easy to use APIs and tools to quickly implement and launch a TypeScript **project** editor based on monaco-editor, 100% in the browser.
 
 Features and objectives: 
 

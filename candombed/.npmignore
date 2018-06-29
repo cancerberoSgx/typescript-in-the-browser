@@ -1,0 +1,6 @@
+/docs
+node_modules
+/src
+/dist*
+/examples
+/tsconfig*

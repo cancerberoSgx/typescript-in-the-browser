@@ -4,6 +4,10 @@
     "path": "monaco-typescript-project-util"
   }, 
   {
+    "name": "monaco-typescript-project-util-cli",
+    "path": "monaco-typescript-project-util-cli"
+  }, 
+  {
     "name": "monaco-typescript-project-util-sample-project",
     "path": "monaco-typescript-project-util-sample-project"
   },

@@ -4,7 +4,7 @@ import { AbstractFile } from '../types';
 export interface TreeNode {
   isDirectory: boolean
   children: TreeNode[]
-  title: string
+  title?: string
   fileName?: string,
   expanded?: boolean
 }

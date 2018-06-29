@@ -2,7 +2,6 @@ import { AbstractFile, AbstractProject } from 'monaco-typescript-project-util';
 import React, { MouseEvent } from 'react';
 import { ourAwesomeEditor } from '.';
 
-
 export default (project: AbstractProject, selectedFile: AbstractFile) =>
   <div className="files">
     <p>{project.name}'s' files: </p>
@@ -15,9 +14,8 @@ export default (project: AbstractProject, selectedFile: AbstractFile) =>
     </ul>
   </div>
 
-
 function onFileListClicked(e: MouseEvent<HTMLUListElement>) {
   const clickedLink = e.target as HTMLAnchorElement
   const fileName = clickedLink.getAttribute('data-filename')
-  ourAwesomeEditor.selectFile(fileName)
+  ourAwesomeEditor.selectedFileChanged(fileName)
 }
