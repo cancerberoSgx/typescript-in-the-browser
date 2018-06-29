@@ -4,6 +4,7 @@ import { AbstractState } from '../types';
 import { filesToTreeNodes, TreeNode } from '../ui-util/fileTreeUtil';
 const FileExplorerTheme  = require('react-sortable-tree-theme-file-explorer');
 
+// TODO : for performance move the onClick on the parent div (event delegation)
 export class FileTree<T extends AbstractState> extends Component<{ state:T }> {
   render() {
     if (!this.props.state.project) {
@@ -30,7 +31,6 @@ export class FileTree<T extends AbstractState> extends Component<{ state:T }> {
     return filesToTreeNodes(this.props.state.project.files)
   }
   nodeClicked(event: MouseEvent, rowInfo: ExtendedNodeData): any {
-    console.log(event.button)
     this.setSelectedFile(rowInfo.node as TreeNode)
   }
   onContextMenu(e: MouseEvent<Element>, rowInfo: ExtendedNodeData, state: AbstractState){

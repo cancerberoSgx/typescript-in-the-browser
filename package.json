@@ -8,13 +8,18 @@
   },
   "scripts": {
     "all": "export NODE_ENV=\"production\" && rm -rf docs && yamat run npm run all",
-    "all-no-minify": "rm -rf docs && yamat run npm run all-no-minify"
+    "all-no-minify": "rm -rf docs && yamat run npm run all-no-minify",
+    "clean": "find . -name \"node_modules\" -exec rm -rf '{}' +; find . -name \"package-lock.json\" -exec rm -rf '{}' +; "
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cancerberoSgx/typescript-in-the-browser.git"
   },
   "keywords": [
+    "monaco-editor",
+    "monaco editor",
+    "monaco",
+    "online editor",
     "TypeScript",
     "TypeScript Compiler",
     "TypeScript API"

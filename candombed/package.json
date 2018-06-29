@@ -35,7 +35,7 @@
   "license": "MIT",
   "dependencies": {
     "bootstrap": "^4.1.1",
-    "folder-drop-manager": "0.0.2",
+    "folder-drop-manager": "0.1.3",
     "jquery": "^3.3.1",
     "jsonc-parser": "^2.0.0",
     "monaco-editor": "^0.13.1",

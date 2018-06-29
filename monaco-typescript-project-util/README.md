@@ -41,3 +41,6 @@ http-server static && firefox localhost:8080
 # TODO
  * export the 'monaco' namespace so users doesn't have to install it and also we amke sure they use the same version as us.
  * provide html loader snippets for : external CDN and local node_modules. Also using AMD and ESM bundled monacos
+ * an example using monaco loader local - an example uusing monaco loaders getString to generate the html as template at compile-time. 
+ * and example u sing listfile (treeview)
+ * umd distro so existing apps that doesnt use browserify/typescript can use me. and an example of this.
