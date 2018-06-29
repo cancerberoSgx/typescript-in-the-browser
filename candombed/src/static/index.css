@@ -18,6 +18,27 @@
 #candombed-main .container-fluid{
   padding: 0
 }
+
+/* navbar in mobile menu inline and dropdown floating so editor is not pushed to the bottom when user actionate the menu */
+@media (max-width: 768px) {
+    .navbar-nav,  .navbar-nav .nav-link, .navbar-nav .nav-item,  .navbar-nav .dropdown {
+      display: inline;
+    }
+    .navbar-collapse {
+      flex-basis: auto;
+    }
+    .navbar-nav .nav-link{
+      padding-right: .5rem;
+      padding-left: .5rem;
+    }
+    .navbar-nav .dropdown-menu{
+      position: absolute; 
+      float: left
+    }
+ }  
+
+
+
 .rstcustom__rowWrapper{
 cursor: pointer
 }

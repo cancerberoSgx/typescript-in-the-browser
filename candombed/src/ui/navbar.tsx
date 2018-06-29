@@ -6,8 +6,8 @@ import { State } from '../actions/State';
 import { getEmitOutput } from '../projectActions';
 
 export default (state: State) =>
-  <nav className={"navbar navbar-expand-lg navbar-dark bg-dark"}>
-    <button className={"navbar-toggler"} type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
+  <nav className={"navbar navbar-expand-md navbar-dark bg-dark"}>
+    <button className={"navbar-toggler"} type="button" data-toggle="collapse" tabIndex={1} data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
       <span className={"navbar-toggler-icon"}></span>
     </button>
 
