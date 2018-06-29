@@ -1,8 +1,9 @@
 import { getMonacoModelFor } from 'monaco-typescript-project-util'
-import { getTsWorker } from'monaco-typescript-project-util'
+import { getTsWorker } from 'monaco-typescript-project-util'
 import { dispatchAddFile } from './actions/addFile';
 import { getSelectedFile, State } from './actions/State';
 import { filesToTreeNodes, TreeNode } from 'monaco-typescript-project-util'
+
 import { ProjectFile } from './types';
 //TODO: move to util/actionManager
 export async function getEmitOutput(state: State) {

@@ -3,12 +3,13 @@ import React from 'react';
 import projectFiles from './projectFiles';
 
 
-export default (project:AbstractProject, file: AbstractFile, height: string='800px')=>
+export default (project:AbstractProject, file: AbstractFile)=>
 <div>
   <div className="wrapper">
-    {projectFiles(project)}
+    {projectFiles(project, file)}
     <div className="editor">
-      <Editor file={file} width="100%" height={height} />
+    {console.log('file: '+file.fileName)||''}
+      <Editor file={file} width="100%" height={'800px'} />
     </div>
   </div>
 </div> 

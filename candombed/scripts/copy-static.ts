@@ -1,5 +1,9 @@
 
 const copies = [
+  { source: 'src/static/*', dest: 'static' },
+  { source: 'node_modules/bootstrap/dist/css/bootstrap.min.css', dest: 'static' },
+  { source: 'node_modules/jquery/dist/jquery.slim.min.js', dest: 'static' },
+  { source: 'node_modules/bootstrap/dist/js/bootstrap.min.js', dest: 'static' },
   { source: 'node_modules/monaco-editor/min/vs/base/*', dest: 'static/monaco-editor/min/vs/base' },
   { source: 'node_modules/monaco-editor/min/vs/editor/*', dest: 'static/monaco-editor/min/vs/editor' },
   { source: 'node_modules/monaco-editor/min/vs/language/typescript/*', dest: 'static/monaco-editor/min/vs/language/typescript' },

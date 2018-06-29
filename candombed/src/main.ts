@@ -21,7 +21,13 @@ let oldState: State = initialState
 
 
 class CandombeWorkspace extends Workspace {
-  workspaceReady() {
+
+  protected willNavigateToOtherFile(editor: monaco.editor.ICodeEditor, model: monaco.editor.IModel, def: monaco.languages.Location) {
+    console.log('User navigate to other document with ctrl+click');
+    return super.willNavigateToOtherFile(editor, model, def) // we are fine with the default implementation
+  }
+
+  startCandombed() {
     store.subscribe(() => {
       const newState = store.getState()
       if (oldState && oldState.project.name != newState.project.name) {
@@ -34,11 +40,7 @@ class CandombeWorkspace extends Workspace {
       dispatchSelectExample('yamat')
     }, 500);
   }
-  protected willNavigateToOtherFile(editor: monaco.editor.ICodeEditor, model: monaco.editor.IModel, def: monaco.languages.Location) {
-    return super.willNavigateToOtherFile(editor ,model, def) // we are fine with the default implementation
-    console.log('User navigate to other document with ctrl+click');
-    
-  }
 }
+
 const workspace = new CandombeWorkspace()
-workspace.start()
+workspace.start().then(() => workspace.startCandombed())

@@ -16,3 +16,9 @@ export const requireMonaco = function(fn: () => void):void{
     (window as any).RequireMonaco(fn)
   }
 }
+
+export const monacoLoaded = ():Promise<typeof _monaco> => {
+  return new Promise(resolve=>{
+    requireMonaco(()=>resolve(getMonaco()))
+  })
+}

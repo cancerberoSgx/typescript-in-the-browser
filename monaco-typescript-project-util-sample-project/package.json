@@ -6,11 +6,14 @@
   "scripts": {
     "cp-static": "mkdir -p static &&  cp -r src/static/* static && mkdir -p dist/static && cp -r src/static/* dist/static",
     "tsc": "tsc",
-    "umd": "browserify dist/index.js -s awesomeSampleProject1 -o static/awesomeSampleProject1.js",
+    "umd": "browserify dist/index.js -s awesomeSampleProject1 -o static/src.js",
     "build": "npm run cp-static && npm run tsc && npm run umd",
-    "serve": "http-server static",
     "watch": "watch -p \"src/**/*\" -c \"npm run build\"",
-    "dev": "npm run build && concurrently --kill-others \"npm run watch\" \"npm run serve\""
+    "browser-sync": "browser-sync start -s static -w -f \"static/*\"",
+    "dev": "npm run build && concurrently --kill-others \"npm run watch\" \"npm run browser-sync\"",
+    "minify-src": "google-closure-compiler --js=static/src.js --js_output_file=static/src.min.js && mv static/src.min.js static/src.js",
+    "build-production": "npm run build && npm run minify-src",
+    "all": "npm run build-production && rm -rf ../docs/monaco-typescript-project-util-sample-project && mv static ../docs/monaco-typescript-project-util-sample-project"
   },
   "keywords": [
     "monaco-editor",
@@ -26,9 +29,10 @@
   "devDependencies": {
     "@types/react": "^16.4.4",
     "@types/react-dom": "^16.0.6",
+    "browser-sync": "^2.24.4",
     "concurrently": "^3.6.0",
+    "google-closure-compiler": "^20180610.0.2",
     "handlebars": "^4.0.11",
-    "http-server": "^0.11.1",
     "monaco-editor": "^0.13.1",
     "watch-cli": "^0.2.3"
   }

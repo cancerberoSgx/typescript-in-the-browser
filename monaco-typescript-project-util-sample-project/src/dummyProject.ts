@@ -2,8 +2,8 @@ import { AbstractProject } from '../../monaco-typescript-project-util/dist/src';
 
 export function getDummyProject(): AbstractProject {
   return {
-    name: 'sample-project',
-    files: [
+    name: 'Dummy Project',
+    "files": [
       {
         "fileName": "package.json",
         "content": "{\n  \"name\": \"ts-sample-project\",\n  \"version\": \"1.0.0\",\n  \"description\": \"\",\n  \"main\": \"index.js\",\n  \"scripts\": {\n    \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\"\n  },\n  \"keywords\": [],\n  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"devDependencies\": {\n    \"typescript\": \"^2.9.2\"\n  }\n}\n"

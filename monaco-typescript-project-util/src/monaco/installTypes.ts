@@ -49,8 +49,8 @@ export function monacoAddExtraLibrary(lib: string, content: string): ResourceLoa
   let libResource: ResourceLoaded
   try {
     const fileName = `node_modules/typescript/lib/${lib}`
-    const url = `https://unpkg.com/typescript@2.9.2/lib/${lib}`
-    console.log(`addExtraLib url: ${url} . Filename: ${fileName}`);
+    const url = `https://unpkg.com/typescript@2.9.2/lib/lib.${lib}`
+    console.log(`addExtraLib url: ${url} . Filename: ${fileName}. libs value: ${lib}`);
     libResource = { fileName, url, content }
     getMonaco().languages.typescript.typescriptDefaults.addExtraLib(content, fileName)
   } catch (ex) {

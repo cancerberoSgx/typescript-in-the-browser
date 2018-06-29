@@ -15,7 +15,7 @@ export class Editor extends React.Component<Props> {
   monacoEditor: editor.IStandaloneCodeEditor;
   containerId: string;
   render() {
-    this.containerId = this.props.id || '_id_' + Date.now()
+    this.containerId = this.props.id || ('_id_' + Date.now())
     return (
       <div className="editor" id={this.containerId} style={{ width: this.props.width || '400px', height: this.props.height || '400px' }}></div>
     );
@@ -32,8 +32,9 @@ export class Editor extends React.Component<Props> {
   }
   protected installMonaco() {
     const model = getMonacoModelFor(this.props.file)
-    const monacoOptions = Object.assign({}, this.defaultMonacoOptions || {}, this.props.monacoEditorOptions || {}, { model })
+    const monacoOptions = Object.assign({}, this.defaultMonacoOptions, this.props.monacoEditorOptions || {}, { model })
     this.monacoEditor = getMonaco().editor.create(document.getElementById(this.containerId), monacoOptions)
+    console.log(monacoOptions)    
     registerEditor(this.monacoEditor)
   }
   protected uninstallMonaco() {

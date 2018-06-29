@@ -11,7 +11,7 @@ export function getMonacoUriFromFile(file: AbstractFile | string) {
   return getMonaco().Uri.file(typeof file === 'string' ? file : file.fileName)
 }
 export function uriToFileName(uri: monaco.Uri) {
-  return uri.fsPath
+  return uri.fsPath.startsWith('/') ? uri.fsPath.substring(1, uri.fsPath.length) : uri.fsPath
 }
 
 export function getMonacoModelFor(file: AbstractFile): monaco.editor.IModel {
