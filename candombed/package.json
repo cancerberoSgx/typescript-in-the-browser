@@ -11,7 +11,7 @@
     "tsc-watch": "tsc -w  --preserveWatchOutput ",
     "cp-static": "ts-node scripts/copy-static",
     "watch-static": "ts-node scripts/watch-static",
-    "bundle-src": "npm run tsc && npm run copy-projects-json  && browserify dist/src/main.js --debug -x typescript -x monaco-editor -t brfs -o static/src.js",
+    "bundle-src": "npm run tsc && npm run copy-projects-json && ts-node scripts/hack1.ts && browserify dist/src/main.js --debug -x typescript -x monaco-editor -t brfs -o static/src.js",
     "prepare": "npm run tsc",
     "minify-src": "google-closure-compiler --js=static/src.js --js_output_file=static/src.min.js && mv static/src.min.js static/src.js",
     "watchify": "watchify dist/src/main.js --debug -x typescript  -x monaco-editor -o static/src.js",
@@ -44,7 +44,7 @@
     "react-dom": "^16.4.1",
     "react-sortable-tree": "^2.2.0",
     "react-sortable-tree-theme-file-explorer": "^1.1.2",
-    "react-split-pane": "^0.1.77",
+    "react-split-pane": "^0.1.81",
     "redux": "^4.0.0",
     "tooltip.js": "^1.2.0",
     "vscode-languageserver-types": "^3.8.2"
@@ -67,7 +67,7 @@
     "i": "^0.3.6",
     "shelljs": "^0.8.2",
     "source-map-support": "^0.5.6",
-    "watchify": "^3.11.0",
-    "typescript": "^2.9.2"
+    "typescript": "^2.9.2",
+    "watchify": "^3.11.0"
   }
 }
