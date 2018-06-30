@@ -1,6 +1,6 @@
 {
   "name": "monaco-typescript-project-util",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "attempt to see if and how much we can run typescript compiler in the browser",
   "main": "dist/src/index.js",
   "typings": "dist/src/index.d.ts",
