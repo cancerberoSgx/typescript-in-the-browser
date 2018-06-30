@@ -6,7 +6,7 @@ import { PackageJson } from '../util/filesDefinitions';
 /**
  * get all @types dependencies from package.json and query https://unpkg.com/@types/... to download its index.d.ts
  * then instruct monaco to add them
- * 
+ *  
  * TODO: there could be dependencies that dont need @type we should query all by package.json and see its typing property
  */
 export function installTypes(project: AbstractProject, projectNature: ProjectNature): Promise<ProjectNature> {

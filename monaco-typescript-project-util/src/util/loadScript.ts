@@ -91,7 +91,8 @@ export function loadCSS(opts: StyleLoadDefinition): Promise<any[]> {
 export async function loadSeries(opts: (ScriptLoadDefinition | StyleLoadDefinition)[]): Promise<any[][]> {
   const result: any[][] = []
   for (let i = 0; i < opts.length; i++) {
-    result.push(await load(opts[i]))
+    const value = await load(opts[i])
+    result.push(value)
   }
   return result
 }

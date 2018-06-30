@@ -4,7 +4,7 @@
     "module": "commonjs", 
     "moduleResolution": "node",
     "jsx": "react",
-    "lib": ["es2017", "dom"],
+    "lib": ["es2018", "dom"],
     "outDir": "./dist", 
     "rootDir": "src",
     "strict": true, 

@@ -30,7 +30,7 @@ export class Editor extends React.Component<Props> {
     automaticLayout: true,
     lightbulb: { enabled: true }
   }
-  protected installMonaco() {
+  public installMonaco() {
     const model = getMonacoModelFor(this.props.file)
     const monacoOptions = Object.assign({}, this.defaultMonacoOptions, this.props.monacoEditorOptions || {}, { model })
     this.monacoEditor = getMonaco().editor.create(document.getElementById(this.containerId), monacoOptions)
@@ -67,6 +67,7 @@ export type EditorOptions = Props & { container: HTMLElement }
 export function renderEditor(options: EditorOptions): Editor {
   const editor = new Editor(options)
   ReactDOM.render([editor.render()], options.container)
+  editor.installMonaco()
   return editor
 }
 
