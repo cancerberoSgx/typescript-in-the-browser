@@ -14,7 +14,9 @@ export function installTypes(project: AbstractProject, projectNature: ProjectNat
 
     let pj: AbstractFile
     if (!project || !project.files || !(pj = project.files.find(f => f.fileName === 'package.json'))) {
-      return reject('No package.json')
+      projectNature.packageJson= projectNature.packageJson||{libs:[]}
+      projectNature.packageJson.exists=false
+      return resolve(projectNature)
     }
     const packageJSON: PackageJson = JSON.parse(pj.content)
     let deps: { name: string, version: string }[] = []
@@ -31,7 +33,11 @@ export function installTypes(project: AbstractProject, projectNature: ProjectNat
           getMonaco().languages.typescript.typescriptDefaults.addExtraLib(text, fileName)
         })
         resolve(projectNature)
-      }).catch(reject)
+      }).catch(e=>{
+        projectNature.packageJson.libsLoadingError = projectNature.packageJson.libsLoadingError||[]
+        projectNature.packageJson.libsLoadingError.push(e)        
+        resolve(projectNature)
+      })
   })
 }
 

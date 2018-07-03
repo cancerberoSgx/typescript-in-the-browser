@@ -1,5 +1,5 @@
 // move tis as a separate library
-
+ 
 export interface ScriptLoadDefinition extends ResourceLoadDefinition {
   scriptBody?: string
   src?: string,

@@ -6,8 +6,10 @@
   "typings": "dist/src/index.d.ts",
   "scripts": {
     "build": "tsc", 
-    "prepare": "npm run build"
+    "prepare": "npm run build", 
+    "all": "exit 0 "
   },
+  "repository": "https://github.com/cancerberoSgx/typescript-in-the-browser/tree/master/monaco-typescript-project-util-cli",
   "keywords": [
     "monaco-editor",
     "typescript"

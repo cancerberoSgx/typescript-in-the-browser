@@ -14,7 +14,7 @@ export class CompilerEditor extends Editor {
       )
     }
   }
-  protected installMonaco(){
+  installMonaco(){
     if (getUIConfig().editorKind === 'monaco') {
       return super.installMonaco()
     }

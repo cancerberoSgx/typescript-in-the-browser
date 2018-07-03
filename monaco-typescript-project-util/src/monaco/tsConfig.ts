@@ -113,7 +113,7 @@ export interface ProjectNature {
     exists?: boolean,
     errorLoadingPackageJson?: boolean
     libs: ResourceLoaded[]
-    libsLoadingError?: Error
+    libsLoadingError?: Error[]
   }
 }
 

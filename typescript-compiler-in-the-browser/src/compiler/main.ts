@@ -13,6 +13,9 @@ export function render() {
 
 
 class OurAwesomeProjectEditor extends Workspace {
+  selectedFileChanged(fileName: string): void {
+    throw new Error('Method not implemented.');
+  }
   start() {
     window.onhashchange = ()=>{dispatchExamples().then(render)}
     dispatchExamples().then(render)

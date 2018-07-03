@@ -46,7 +46,7 @@ const getResourcesToLoad = (baseUrl: string, container: HTMLElement = document.g
   {
     scriptBody: `
     var __monacoRequire = require;
-    window.RequireMonaco = function (fn) {
+    window.Re_quireMonaco = function (fn) {
       delete define.amd 
       if (window.monaco) {
         fn(monaco)
@@ -55,7 +55,7 @@ const getResourcesToLoad = (baseUrl: string, container: HTMLElement = document.g
         __monacoRequire(["vs/editor/editor.main"], function () { fn() })
       }
     }
-    RequireMonaco(function (monaco) {
+    window.Re_quireMonaco(function (monaco) {
       __Monaco = monaco
     })
     `,
