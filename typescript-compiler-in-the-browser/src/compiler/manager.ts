@@ -1,4 +1,6 @@
-import { createAllMonacoModelsFor, debugFactory, installTsConfig, ProjectNature, resetMonacoModelsAndEditors } from 'monaco-typescript-project-util';
+// this is the controller - dispatches actions
+
+import { createAllMonacoModelsFor, debugFactory, installTsConfig, ProjectNature, resetMonacoModelsAndEditors, setDebugEnabledFor } from 'monaco-typescript-project-util';
 import * as ts from 'typescript';
 import languageService1 from '../examples/languageService1';
 import loadProjectJsonTest1 from '../examples/loadProjectJsonTest1';
@@ -8,14 +10,18 @@ import tsSimpleAst1 from '../examples/tsSimpleAst1';
 import tsSimple1 from '../examples/tsSimple1';
 import tsTranspilingProject1 from '../examples/tsTranspilingProject1';
 import typeChecker1 from '../examples/typeChecker1';
+import tsSimpleAstAndTsQueryTogether from '../examples/tsSimpleAstAndTsQueryTogether'
 import { getDefaultLanguageServiceProvider } from './languageServiceProvider/languageServiceProviderFactory';
 import { ProgramFile } from './programProvider';
 import { getDefaultProgramProvider } from './programProvider/programProviderFactory';
 import { Example, ExampleExecutionResult } from './types';
 import { log, resetLog } from './util/uiUtil';
+import { DEBUG, render } from './main';
+import { buildProjectFromEditorModels } from './execute';
 
 
-const debug = debugFactory('examples')
+const debug = debugFactory('manager')
+setDebugEnabledFor('manager', DEBUG)
 
 const examples = [
   new tsSimple1(),
@@ -25,7 +31,8 @@ const examples = [
   new typeChecker1(),
   new languageService1(),
   new tsquery1(),
-  new loadProjectJsonTest1()
+  new loadProjectJsonTest1(),
+  new tsSimpleAstAndTsQueryTogether()
 ]
 export function getExamples(): Example[] {
   return examples
@@ -42,23 +49,21 @@ export function getCurrentExample(): Example {
   return currentExample
 }
 
-export function dispatchExamples(): Promise<ExampleExecutionResult> {
-  const defaultTest = examples[0].id
-  const exampleId = window.location.hash.split('example=')[1] || defaultTest
+export function dispatchExamples(exampleId: string = window.location.hash.split('example=')[1] || examples[0].id): Promise<ExampleExecutionResult> {
   const targetExample = getExamples().find(e => e.id === exampleId)
   if (targetExample === currentExample) {
     return
   }
   currentExample = targetExample
   if (!currentExample) {
-    alert('cannot execute test ' + exampleId + '. Executing default one ' + defaultTest)
-    currentExample = getExamples().find(e => e.id === defaultTest)
+    alert('cannot execute test ' + exampleId + '. Executing default one ' + examples[0].id)
+    currentExample = getExamples().find(e => e.id === examples[0].id)
   }
   return executeExample(currentExample)
 }
-
 export interface ExampleExecutionResult { projectNature: ProjectNature, executionResult: void | ExampleExecutionResult }
 let currentLanguageService: ts.LanguageService
+
 export function executeExample(example: Example): Promise<ExampleExecutionResult> {
   try {
     resetLog()
@@ -80,9 +85,8 @@ export function executeExample(example: Example): Promise<ExampleExecutionResult
     return new Promise(resolve => {
       installTsConfig(example)
         .then(projectNature => {
-          // /heads up: we want to create all monaco models for all files always no matter if the will be displayed or not
+          // heads up: we want to create all monaco models for all files always no matter if the will be displayed or not
           createAllMonacoModelsFor(currentExample)
-
           const executionResult = example.execute({ program: currentExampleProgram, languageService: currentLanguageService })
           lastExampleExecutionTime = performance.now() - t0
           resolve({ projectNature, executionResult })
@@ -98,4 +102,12 @@ export function executeExample(example: Example): Promise<ExampleExecutionResult
 let currentExampleProgram: ts.Program | undefined
 export function getCurrentExampleProgram(): ts.Program | undefined {
   return currentExampleProgram
+}
+
+export function dispatchExampleExecute() {
+  const project = buildProjectFromEditorModels()
+  currentExample = project || currentExample
+  executeExample(currentExample).then(render)
+}
+export function dispatchShareableUrl() {
 }

@@ -10,6 +10,7 @@ const files = [
     fileName: resolve('.') + '/dist/../src/examples/tsTranspilingProject1.ts',
     content: readFileSync(resolve('.') + '/dist/../src/examples/tsTranspilingProject1.ts').toString()
   },
+  
   {
     fileName: resolve('.') + '/dist/../src/examples/files/tsTranspilingProject1/someImpl.ts',
     content: readFileSync(resolve('.') + '/dist/../src/examples/files/tsTranspilingProject1/someImpl.ts').toString()
@@ -49,6 +50,11 @@ const files = [
   },
 
   {
+    fileName: resolve('.') + '/dist/../src/examples/tsSimpleAstAndTsQueryTogether.ts',
+    content: readFileSync(resolve('.') + '/dist/../src/examples/tsSimpleAstAndTsQueryTogether.ts').toString()
+  },
+  
+  {
     fileName: resolve('.') + '/dist/../src/examples/typeChecker1.ts',
     content: readFileSync(resolve('.') + '/dist/../src/examples/typeChecker1.ts').toString()
   },
@@ -73,6 +79,11 @@ const files = [
     content: readFileSync(resolve('.') + '/dist/../src/examples/loadProjectJsonTest1.ts').toString()
   },
 
+    // HEADS UP: we pack also ./tsconfig.json so we can transpile user edited code (that could require utilities from this project) using the same configuration to minimize risk when eval()
+  {
+    fileName: '__parent_project_tsconfig.json',
+    content: readFileSync(resolve('.') + '/dist/../tsconfig.json').toString()
+  },
 ]
   .map(f => Object.assign(f, { fileName: f.fileName.replace('//dist/../src/', '') }))
 

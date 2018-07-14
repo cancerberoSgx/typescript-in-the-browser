@@ -3,11 +3,14 @@ import * as ts from "typescript";
 import { LanguageServiceProvider } from '..';
 import { ProgramFile } from '../../programProvider';
 import { CompilerHostVeryDummy } from '../../programProvider/dummy1/programProviderVeryDummyImpl';
-import { debugFactory } from 'monaco-typescript-project-util';
+import { debugFactory, setDebugEnabledFor } from 'monaco-typescript-project-util';
 import { buildCompilerOptions } from 'monaco-typescript-project-util';
+import { DEBUG } from '../../main';
 
 
 const debug = debugFactory('LanguageServiceProviderDummyImpl')
+setDebugEnabledFor('LanguageServiceProviderDummyImpl', DEBUG)
+
 const fileVersions: { [name: string]: { version: number } } = {};
 const files: { [name: string]: ProgramFile } = {};
 

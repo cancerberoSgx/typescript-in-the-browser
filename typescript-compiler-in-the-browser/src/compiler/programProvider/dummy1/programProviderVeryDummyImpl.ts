@@ -1,12 +1,14 @@
 import { join } from 'path';
 import * as ts from "typescript";
-import { debugFactory } from 'monaco-typescript-project-util';
+import { debugFactory, setDebugEnabledFor } from 'monaco-typescript-project-util';
 import { ProgramFile, ProgramProvider } from '../index';
 import { getLibraries } from '../../util/libraries';
 import { buildCompilerOptions } from 'monaco-typescript-project-util';
+import { DEBUG } from '../../main';
 
 
 const debug = debugFactory('programProviderVeryDummyImpl')
+setDebugEnabledFor('programProviderVeryDummyImpl', DEBUG)
 
 /**
  * an in memory filesystem-based program provider. Very simple not ready for production just to see if we can run typescript tin the browsers

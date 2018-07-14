@@ -1,18 +1,20 @@
-import { setSelectedFile } from './../mainContentProjectEditor/projectState';
+import { FileTree, TreeNode } from 'monaco-typescript-project-util';
 import { render } from '../../main';
-import { AbstractProject, AbstractFile, AbstractState } from 'monaco-typescript-project-util';
+import { Example } from '../../types';
+import { setSelectedFile } from './projectState';
 
-import { FileTree } from 'monaco-typescript-project-util';
-
-import { TreeNode } from 'monaco-typescript-project-util';
-
-
-export class CompilerFileTree extends FileTree<{ project: AbstractProject }>  {
+export class CompilerFileTree extends FileTree<{ project: Example }>  {
+  private addExampleSource(){
+    this.props.state.project.files = [this.props.state.project.exampleSource].concat(this.props.state.project.files||[])
+  }
+  componentWillUpdate() {
+    this.addExampleSource()
+  }  
+  componentWillMount() {
+    this.addExampleSource()
+  }
   setSelectedFile(node: TreeNode) {
-
-    const f = this.props.state.project.files.find(f => node.fileName === f.fileName)
-    setSelectedFile(f)
+    setSelectedFile(this.props.state.project.files.find(f => node.fileName === f.fileName))
     render()
   }
-
 }

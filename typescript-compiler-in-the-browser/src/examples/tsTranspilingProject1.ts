@@ -25,7 +25,7 @@ export default class implements Example {
         jsxFactory: "React.createElement"
       }
     }
-    log('arg2: '+options.program.getCompilerOptions().project)
+    // log('arg2: '+options.program.getCompilerOptions().project)
     const text = options.program.getSourceFiles().map(f => {
       let result
       try {

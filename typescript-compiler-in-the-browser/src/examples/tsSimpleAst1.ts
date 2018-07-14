@@ -16,7 +16,6 @@ export default class implements Example {
       useVirtualFileSystem: true,
       compilerOptions: { target: ts.ScriptTarget.ES2018 }
     })
-    log('hello')
     options.program.getSourceFiles().forEach(f=>{
       const sourceFile = project.createSourceFile(f.fileName, f.getText())
       let d: T

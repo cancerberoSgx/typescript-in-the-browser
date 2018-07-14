@@ -61,7 +61,7 @@ const getResourcesToLoad = (baseUrl: string, container: HTMLElement = document.g
     crossorigin: true
   }
 ]
-
+ 
 /**
  * This will load scripts and css from given external cdn in the current document dinamically returning a
  * promise resolved when all necessary resources finish loading. It will use monaco-editor's AMD bundle. Usage

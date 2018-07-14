@@ -20,3 +20,8 @@ cursor: pointer
 .rstcustom__node .selected {
   background-color: #edaaaa
 }
+.examples-menu-item{
+  font-weight: bolder;
+  color: white !important;
+  text-decoration: underline
+}

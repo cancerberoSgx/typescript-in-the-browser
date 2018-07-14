@@ -1,23 +1,22 @@
+// this is the main project editor and is where all starts based on monaco-typescript-project-util
+
 import * as monaco from 'monaco-editor';
-import { monacoEditorEmitter, uriToFileName, Workspace } from 'monaco-typescript-project-util';
+import { monacoEditorEmitter, uriToFileName, Workspace, getMonacoModelFor, AbstractFile, buildCompilerOptions } from 'monaco-typescript-project-util';
 import ReactDOM from 'react-dom';
 import { dispatchExamples, getCurrentExample } from './manager';
 import layout from './ui/layout';
 import { setSelectedFile } from './ui/mainContentProjectEditor/projectState';
 
-
 export function render() {
-  ReactDOM.render(layout(), document.getElementById('typescript-in-the-browser-main'), () => {})
+  ReactDOM.render(layout(), document.getElementById('typescript-in-the-browser-main'), () => { })
 }
-
-
 
 class OurAwesomeProjectEditor extends Workspace {
   selectedFileChanged(fileName: string): void {
     throw new Error('Method not implemented.');
   }
   start() {
-    window.onhashchange = ()=>{dispatchExamples().then(render)}
+    window.onhashchange = () => { dispatchExamples().then(render) }
     dispatchExamples().then(render)
   }
   selectFile(fileName: string) {
@@ -37,5 +36,7 @@ class OurAwesomeProjectEditor extends Workspace {
   }
 }
 
-export const ourAwesomeEditor = new OurAwesomeProjectEditor()
-ourAwesomeEditor.setup().then(() => ourAwesomeEditor.start())
+export const DEBUG = false
+
+export const editor = new OurAwesomeProjectEditor()
+editor.setup().then(() => editor.start())
