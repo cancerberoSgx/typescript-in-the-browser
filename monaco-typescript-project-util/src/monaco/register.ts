@@ -16,7 +16,10 @@ export function uriToFileName(uri: monaco.Uri) {
 
 export function getMonacoModelFor(file: AbstractFile): monaco.editor.IModel {
   if (!file) {
-    return getMonaco().editor.createModel('', 'typescript', getMonacoUriFromFile('_black.ts'))
+    const uri = getMonacoUriFromFile('_black.ts')
+    return getMonaco().editor.getModels().find(m=>m.uri.toString()===uri.toString())|| getMonaco().editor.createModel('', 'typescript', uri);
+
+    // return getMonaco().editor.createModel('', 'typescript', getMonacoUriFromFile('_black.ts'))
   }
   const uri = getMonacoUriFromFile(file)
   let model = getMonaco().editor.getModels().find(m => m.uri.toString() === uri.toString() && !m.isDisposed())

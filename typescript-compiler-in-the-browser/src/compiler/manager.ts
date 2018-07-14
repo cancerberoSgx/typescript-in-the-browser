@@ -4,6 +4,7 @@ import languageService1 from '../examples/languageService1';
 import loadProjectJsonTest1 from '../examples/loadProjectJsonTest1';
 import transformation1 from '../examples/transformation1';
 import tsquery1 from '../examples/tsquery1';
+import tsSimpleAst1 from '../examples/tsSimpleAst1';
 import tsSimple1 from '../examples/tsSimple1';
 import tsTranspilingProject1 from '../examples/tsTranspilingProject1';
 import typeChecker1 from '../examples/typeChecker1';
@@ -20,7 +21,7 @@ const examples = [
   new tsSimple1(),
   new tsTranspilingProject1(),
   new transformation1(),
-  // new tsSimpleAst1()
+  new tsSimpleAst1(),
   new typeChecker1(),
   new languageService1(),
   new tsquery1(),

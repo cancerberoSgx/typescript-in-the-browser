@@ -10,7 +10,7 @@ const getResourcesToLoad = (baseUrl: string, container: HTMLElement = document.g
   },
 
   {
-    scriptBody: `var require = { paths: { 'vs': '${baseUrl}vs' } };
+    scriptBody: `window["req"+"ui"+"re"] = { paths: { 'vs': '${baseUrl}vs' } };
       // Before loading vs/editor/editor.main, define a global MonacoEnvironment that overwrites
       // the default worker url location (used when creating WebWorkers). The problem here is that
       // HTML5 does not allow cross-domain web workers, so we need to proxy the instantiation of
@@ -45,14 +45,13 @@ const getResourcesToLoad = (baseUrl: string, container: HTMLElement = document.g
 
   {
     scriptBody: `
-    var __monacoRequire = require;
     window.Re_quireMonaco = function (fn) {
       delete define.amd 
       if (window.monaco) {
         fn(monaco)
       }
       else {
-        __monacoRequire(["vs/editor/editor.main"], function () { fn() })
+        window["req"+"ui"+"re"](["vs/editor/editor.main"], function () { fn() })
       }
     }
     window.Re_quireMonaco(function (monaco) {

@@ -14,8 +14,6 @@
   <div id="candombed-main"></div>
 
   <script src="jquery.slim.min.js"></script>
-  
-  <!-- <script src="popper.js/popper.min.js"></script> -->
   <script src="bootstrap.min.js"></script>
 
   <script>require = { paths: { "vs": "monaco-editor/min/vs" } } </script>
@@ -26,7 +24,7 @@
 
   <script>
     var __monacoRequire = require
-    RequireMonaco = function (fn) {
+    window.Re_quireMonaco = function (fn) {
       delete define.amd // monaco redefines global require as amd. And there is a UMD library that will fail esquery, required by tsquery. With this hack UMD snippet will think it's commonsjs. The fault is monaco's - it should provide a 100% commonsjs distribution. 
       if (window.monaco) {
         fn(monaco)
@@ -35,7 +33,7 @@
         __monacoRequire(["vs/editor/editor.main"], function () { fn() })
       }
     }
-    RequireMonaco(function (monaco) {
+    window.Re_quireMonaco(function (monaco) {
       __Monaco = monaco
     })
   </script>
