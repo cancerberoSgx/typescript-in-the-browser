@@ -61,7 +61,8 @@ These are self contained examples that uses typescript without processing or cha
 
 
 # TODO: 
- * add a Execute button
+ * add a Execute button - WIP
+ * shareable url for user's coe
  * make a new implementation of CompilerHost and LanguageServiceHost based on ts-simple-ast - just create a tsa program and use the compilerNodes 1
  * development - sourcemaps
  * try webpack ? 

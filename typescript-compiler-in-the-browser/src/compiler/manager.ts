@@ -1,4 +1,4 @@
-// this is the controller - dispatches actions
+// this is the controller - responsible of implementing / dispatches actions of the user and browser, like example selection or execution (which delegate in execute.ts)
 
 import { createAllMonacoModelsFor, debugFactory, installTsConfig, ProjectNature, resetMonacoModelsAndEditors, setDebugEnabledFor } from 'monaco-typescript-project-util';
 import * as ts from 'typescript';
@@ -17,7 +17,7 @@ import { getDefaultProgramProvider } from './programProvider/programProviderFact
 import { Example, ExampleExecutionResult } from './types';
 import { log, resetLog } from './util/uiUtil';
 import { DEBUG, render } from './main';
-import { buildProjectFromEditorModels } from './execute';
+import { buildExampleProjectFromEditors } from './execute';
 
 
 const debug = debugFactory('manager')
@@ -105,7 +105,7 @@ export function getCurrentExampleProgram(): ts.Program | undefined {
 }
 
 export function dispatchExampleExecute() {
-  const project = buildProjectFromEditorModels()
+  const project = buildExampleProjectFromEditors()
   currentExample = project || currentExample
   executeExample(currentExample).then(render)
 }
