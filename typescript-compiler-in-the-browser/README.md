@@ -72,6 +72,7 @@ These are self contained examples that uses typescript without processing or cha
  * monaco + plugins + compiler 100% in client would be awesome
  * large projects ? support .zip file with ts project drag and drop
  * loading the big typescript.js file, perhaps typeScriptServices.js is better ?
+ * execution errors / ExampleExecutionResult - now empty - when user mistakes syntax error - use that interface and show something
 
 ## DONE
 
